@@ -88,7 +88,7 @@
         //팝업창 안에서의 HTML/CSS
         popup.document.write('<div id="video-container" style="width: 100%; height: 650px; display: flex;">');
         var chapterHtml = '<div id="chapter-container" style="flex: 0.7; overflow-y:auto; background-color: #fffbfb; border-right: 1px solid #B8B8B8; margin-right: 2px; height: 750px;">';
-        chapterHtml += '<h1>챕터 목록</h1>';
+        chapterHtml += '<div style="    height: 50px; font-size: 15px; margin-left: 10px; font-weight: bolder; font-family: monospace; align-content: center;">챕터 목록</div>';
         chapterHtml += '<div id="chapterList" style="margin-right: 20px">';
         for (var i = 0; i < chapters.length; i++) {
             chapterHtml += '<div class="chapterItem" style="border: 1px solid #ddd; background-color: #ffffff; height: 70px; padding: 8px; margin-bottom: 10px; border-radius: 10px; cursor: pointer;" onclick="opener.seekToChapter(\'' + chapters[i].chapStartTime + '\')">' + chapters[i].chapName + ' (' + chapters[i].chapStartTime + ')</div>';
