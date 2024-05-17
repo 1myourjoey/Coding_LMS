@@ -93,32 +93,6 @@ public class QnaController {
 
 
 
-//	@RequestMapping("/qna/openQnaDetail.do")
-//	public ModelAndView openQnaDetail(@RequestParam int qNum, HttpServletRequest request, Model model) throws Exception {
-//		ModelAndView mv = new ModelAndView("qnaDetail");
-//
-//		// 댓글 조회
-//		List<QnaDto> qnalist1 = qnaService.selectQnaDetail(qNum);
-//		model.addAttribute("qnalist1", qnalist1);
-//
-//		// 댓글의 대댓글 조회
-//		List<CommentDTO> comlist = commentService.getParentComments(qNum);
-//		for (CommentDTO comment : comlist) {
-//			List<CommentDTO> replies = commentService.getReplies(comment.getCommentNum());
-//			List<CommentDTO> connectedReplies = new ArrayList<>();
-//			for (CommentDTO reply : replies) {
-//				if (reply.getPCommentNum() != null && reply.getPCommentNum() == comment.getCommentNum()) {
-//					connectedReplies.add(reply);
-//				}
-//			}
-//			comment.setRepliesList(connectedReplies); // 대댓글 리스트를 댓글 객체에 추가
-//		}
-//
-//		model.addAttribute("comlist", comlist);
-//
-//		return mv;
-//	}
-
 	//댓글 대댓글 보기
 	@RequestMapping("/qna/openQnaDetail.do")
 	public ModelAndView openQnaDetail(@RequestParam int qNum, HttpServletRequest request, HttpSession session, Model model,

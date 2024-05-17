@@ -16,12 +16,6 @@ public class PostController {
     @Autowired
     PostService postService;
 
-//    @GetMapping("/post")
-//    public String po(Model model) {
-//        List<PostDto> plist = postService.postilsts();
-//        model.addAttribute("plist", plist);
-//        return "post";
-//    }
 
     @GetMapping("/post")
     public String po(Model model, HttpSession session) {
