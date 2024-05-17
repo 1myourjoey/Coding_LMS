@@ -1,7 +1,9 @@
 package com.sky.mapper;
 
+import com.sky.dto.BoardFileDto;
 import com.sky.dto.QnaDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

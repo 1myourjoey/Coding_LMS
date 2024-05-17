@@ -2,12 +2,15 @@ package com.sky.controller;
 
 
 import com.sky.dto.PostDto;
+import com.sky.dto.UserDto;
 import com.sky.service.PostService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 

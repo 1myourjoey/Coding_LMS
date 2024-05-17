@@ -2,16 +2,19 @@ package com.sky.controller;
 
 import com.sky.dto.CommentDTO;
 import com.sky.dto.QnaDto;
+import com.sky.dto.UserDto;
 import com.sky.service.CommentService;
 import com.sky.service.QnaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -92,8 +95,6 @@ public class QnaController {
 	}
 
 
-
-	//댓글 대댓글 보기
 	@RequestMapping("/qna/openQnaDetail.do")
 	public ModelAndView openQnaDetail(@RequestParam int qNum, HttpServletRequest request, HttpSession session, Model model,
 																		@ModelAttribute("CommentDTO") CommentDTO commentDTO) throws Exception {
@@ -117,6 +118,7 @@ public class QnaController {
 
 		return mv;
 	}
+
 
 
 
@@ -153,7 +155,6 @@ public  String submitReply(CommentDTO commentDTO) {
 
 	return "redirect:/qna/openQnaDetail.do?qNum=" + qNum;
 
-//		return "/qna/openQnaDetail.do";
 }
 	@GetMapping("/deleteReply")
 	public String delrep(@RequestParam("commentNum") int commentNum, @RequestParam("qNum") int qNum) {

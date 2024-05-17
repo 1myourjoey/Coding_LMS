@@ -269,23 +269,16 @@
                     <a href="#">서브메뉴2-2</a>
                 </div>
             </div>
-        </div> <!-- 여기가 누락된 부분입니다. -->
+        </div>
 
         <div style="margin-top: 0px; text-align: right; padding-right: 0px;">
-
-               <a href="/">로그아웃</a>
-
+          <a href="/logout">로그아웃</a>
         </div>
     </div>
 </nav>
 
 
-<div style="margin-top: 100px; text-align: right; padding-right: 120px;">
-    <button title="돌아가기" class="btn btn-primary" id="btn_rtn" value="null" onclick="fn_rtn_onclick(this)" style="background-color: #333; color: #fff;">
-        <i class="bi bi-arrow-left"></i> 돌아가기
-    </button>
 
-</div>
 
 
 <!-- 값 보여주는 란 -->
@@ -295,21 +288,6 @@
             <h3>공지사항</h3>
         </div>
     </div>
-
-    <!-- board seach area -->
-    <!-- <div id="board-search">
-        <div class="container">
-            <div class="search-window">
-                <form action="">
-                    <div class="search-wrap">
-                        <label for="search" class="blind">공지사항 내용 검색</label>
-                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" class="btn btn-dark">검색</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
 
 
     <div id="board-list">
@@ -375,10 +353,5 @@
 
 <!-- 부트스트랩 자바스크립트 CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.getElementById("btn_rtn").addEventListener("click", function() {
-        history.back();
-    });
-</script>
 </body>
 </html>

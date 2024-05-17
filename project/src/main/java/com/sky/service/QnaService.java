@@ -1,6 +1,9 @@
 package com.sky.service;
 
+import com.sky.dto.BoardDto;
+import com.sky.dto.BoardFileDto;
 import com.sky.dto.QnaDto;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 

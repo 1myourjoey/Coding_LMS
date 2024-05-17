@@ -24,7 +24,7 @@ public class CommentDTO {
     private Timestamp commentCreated;
 
 
-//    private List<CommentDTO> repliesList; 대댓글용
+    private List<CommentDTO> repliesList;
 
 
 

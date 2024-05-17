@@ -25,7 +25,9 @@
 </head>
 <body>
 <div class="container">
-	<h2>Q&A 등록</h2>
+	<a href="index">
+                            <h1>LMS</h1>
+                        </a>
 	<form id="frm" name="frm" method="post" action="/qna/insertQna.do" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="qnaTitle">제목</label>

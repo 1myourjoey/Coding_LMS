@@ -39,12 +39,12 @@
                     <tr>
                         <th scope="row">제목</th>
                         <td colspan="3">
-                           <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qna.qnaTitle}" <c:if test="${sessionScope.loggedInUser != null && (sessionScope.loggedInUser.userNo eq qna.userNo || sessionScope.loggedInUser.adminYn eq 'Y')}">readonly</c:if> />
+                           <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qna.qnaTitle}" <c:if test="${sessionScope.loggedInUser != null && (sessionScope.loggedInUser.userNo eq qna.userNo)}">readonly</c:if> />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="view_text">
-                           <textarea class="form-control" title="내용" id="qnaContents" name="qnaContents" <c:if test="${(sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y') || (sessionScope.loggedInUser != null && sessionScope.loggedInUser.userNo eq qna.userNo)}">readonly</c:if>>${qna.qnaContents}</textarea>
+                           <textarea class="form-control" title="내용" id="qnaContents" name="qnaContents">${qna.qnaContents}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,6 @@
                         </td>
                     </tr>
                 </form>
-                </c:forEach>
 <c:forEach items="${comlist}" var="comment">
     <!-- 댓글 출력 -->
     <tr>
@@ -81,7 +80,6 @@
              <form id="editForm_${comment.commentNum}_form" action="/updateReply" method="post">
                  <input type="hidden" name="commentNum" id="commentNum" value="${comment.commentNum}">
                  <input type="hidden" name="qNum" id="qNum" value="${qna.qNum}">
-
                  <textarea name="commentContents" id="commentContents" rows="5" cols="50">${comment.commentContents}</textarea><br>
                  <input type="submit" value="수정 완료">
              </form>
@@ -102,24 +100,6 @@
                </form>
            </td>
        </tr>
-
-
-    <!-- 대댓글 목록 출력
-    <c:forEach items="${comment.repliesList}" var="reply">
-        <tr>
-            <td colspan="4" class="bg-light">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${reply.userNo}</strong> (${reply.commentContents}): ${reply.commentCreated}:
-            </td>
-        </tr>
-    </c:forEach>
-</c:forEach>-->
-
-
-
-
-
-
-
 
  <!-- 답글 입력 폼 -->
                 <c:if test="${sessionScope.loggedInUser != null}">
