@@ -272,9 +272,9 @@
         </div> <!-- 여기가 누락된 부분입니다. -->
 
         <div style="margin-top: 0px; text-align: right; padding-right: 0px;">
-            <button title="로그아웃" class="btn btn-primary" id="btn_qwe">
-                로그아웃
-            </button>
+
+               <a href="/">로그아웃</a>
+
         </div>
     </div>
 </nav>

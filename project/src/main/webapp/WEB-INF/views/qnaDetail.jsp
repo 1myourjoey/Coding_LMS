@@ -56,6 +56,7 @@
                         </td>
                     </tr>
                 </form>
+                </c:forEach>
 <c:forEach items="${comlist}" var="comment">
     <!-- 댓글 출력 -->
     <tr>
