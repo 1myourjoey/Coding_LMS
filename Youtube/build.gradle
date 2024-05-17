@@ -1,0 +1,59 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.ks'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok' // 테스트를 위한 세팅 @Slf4j
+    testImplementation 'org.projectlombok:lombok' // 테스트를 위한 세팅 @Slf4j
+    implementation 'com.google.code.gson:gson'
+    testImplementation 'junit:junit'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'ch.qos.logback:logback-classic'
+    runtimeOnly 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
+    implementation 'javax.servlet:jstl'
+    runtimeOnly 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    //implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.aspectj:aspectjweaver'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'com.oracle.database.jdbc:ojdbc10:19.8.0.0'
+
+
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.3.3'
+
+    implementation 'com.google.api-client:google-api-client:1.33.0'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20230816-2.0.0'
+    implementation 'com.google.http-client:google-http-client-jackson2:1.39.2'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+bootJar {
+    launchScript()
+}
