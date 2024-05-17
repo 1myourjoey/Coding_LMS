@@ -11,7 +11,9 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <h1>LMS</h1>
+        <a href="index">
+                        <h1>LMS</h1>
+                    </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -51,15 +53,16 @@
                     <input type="hidden" name="postNum" value="${post.postNum}">
                     <tr>
                         <th scope="row">제목</th>
-                        <td><input type="text" id="postTitle" name="postTitle" class="form-control" value="${post.postTitle}"></td>
+                        <td><input type="text" id="postTitle" name="postTitle" class="form-control" value="${post.postTitle}" ${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y' ? '' : 'readonly'}></td>
                     </tr>
                     <tr>
                         <th scope="row">내용</th>
                         <td colspan="3" class="view_text">
                             <!-- 수정할 내용을 입력하는 textarea -->
-                            <textarea title="내용" id="postContents" name="postContents" class="form-control">${post.postContents}</textarea>
+                            <textarea title="내용" id="postContents" name="postContents" class="form-control" ${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y' ? '' : 'readonly'}>${post.postContents}</textarea>
                         </td>
                     </tr>
+
                     <tr>
                         <td colspan="4">
                             <c:if test="${sessionScope.loggedInUser != null}">
