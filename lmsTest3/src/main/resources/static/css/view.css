@@ -1,0 +1,36 @@
+/* 테이블 스타일 */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 테이블 헤더 스타일 */
+.table th {
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 테이블 셀 스타일 */
+.table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 썸네일 이미지 스타일 */
+.thumbnail {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+/* 챕터 정보 리스트 스타일 */
+.chapter-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 챕터 항목 스타일 */
+.chapter-item {
+    margin-bottom: 5px;
+}

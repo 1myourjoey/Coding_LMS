@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yong.lmstest.repository.ChapterMapper">
+
+    <select id="findAllChapters" resultType="com.yong.lmstest.model.ChapterDto">
+        SELECT * FROM chapter
+    </select>
+
+    <insert id="saveChapter" parameterType="com.yong.lmstest.model.ChapterDto">
+        INSERT INTO chapter (con_num, chap_name, chap_start_time)
+        VALUES ( #{chapDto.conNum}, #{chapDto.chapName}, #{chapDto.chapStartTime});
+    </insert>
+
+</mapper>
