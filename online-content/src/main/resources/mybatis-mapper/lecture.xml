@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ks.youtube.mapper.LectureMapper">
+
+    <select id="lectureList" resultType="com.ks.youtube.entity.lecture_info">
+        <![CDATA[
+        select
+        lec_num,
+        lec_start_date,
+        lec_end_date,
+        lec_name,
+        lec_ex
+        from lecture_info
+        ]]>
+    </select>
+
+    <select id="selectLecture" resultType="com.ks.youtube.entity.lecture_info">
+        SELECT *
+        FROM lecture_info
+        WHERE lec_num = #{lecNum}
+    </select>
+
+    <insert id="insertLectureInfo" parameterType="com.ks.youtube.entity.lecture_info">
+        INSERT INTO lecture_info (lec_num, lec_start_date, lec_end_date, lec_name, lec_ex)
+        SELECT
+        CONCAT('S', LPAD(IFNULL(SUBSTRING_INDEX(MAX(lec_num), 'S', -1) + 1, 0), 6, '0')) AS lec_num,
+        #{lecStartDate},
+        #{lecEndDate},
+        #{lecName},
+        #{lecEx}
+        FROM lecture_info
+    </insert>
+
+    <update id="updateLectureInfo" parameterType="com.ks.youtube.entity.lecture_info">
+        <![CDATA[
+	    UPDATE lecture_info SET
+		lec_start_date = #{lecStartDate},
+		lec_end_date = #{lecEndDate},
+		lec_name = #{lecName},
+		lec_ex = #{lecEx}
+		where lec_num = #{lecNum};
+	    ]]>
+    </update>
+
+    <select id="getContentByNum" parameterType="String" resultType="com.ks.youtube.entity.lecture_info">
+        <![CDATA[
+            SELECT * FROM lecture_info WHERE lec_num = #{lecNum}
+        ]]>
+    </select>
+
+</mapper>
