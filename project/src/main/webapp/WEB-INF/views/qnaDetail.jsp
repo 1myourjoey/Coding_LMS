@@ -4,13 +4,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자료실</title>
-    <!-- 부트스트랩 CDN 추가 -->
+    <title>Q&A</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
-    <h2>자료실</h2>
+    <a href="/">
+              <h1>LMS</h1>
+              </a>
     <div class="table-responsive">
         <table class="table">
             <colgroup>
@@ -22,7 +23,7 @@
             <tbody>
             <c:forEach items="${qnalist1}" var="qna">
                 <form id="frm-${qna.qNum}" method="post" action="/qna/updateQna.do">
-                    <input type="hidden" name="qNum" value="${qna.qNum}" />
+                    <input type="hidden" name="qNum" value="${qna.qNum}"/>
                     <tr>
                         <th scope="row">글 번호</th>
                         <td>${qna.qNum}</td>
@@ -38,20 +39,20 @@
                     <tr>
                         <th scope="row">제목</th>
                         <td colspan="3">
-                            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qna.qnaTitle}"<c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'N'}"> readonly</c:if> />
+                           <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qna.qnaTitle}" <c:if test="${sessionScope.loggedInUser != null && (sessionScope.loggedInUser.userNo eq qna.userNo || sessionScope.loggedInUser.adminYn eq 'Y')}">readonly</c:if> />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="view_text">
-                            <textarea class="form-control" title="내용" id="qnaContents" name="qnaContents"<c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'N'}"> readonly</c:if>>${qna.qnaContents}</textarea>
+                           <textarea class="form-control" title="내용" id="qnaContents" name="qnaContents" <c:if test="${(sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y') || (sessionScope.loggedInUser != null && sessionScope.loggedInUser.userNo eq qna.userNo)}">readonly</c:if>>${qna.qnaContents}</textarea>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
-                                <button type="submit" form="frm-${qna.qNum}" class="btn btn-primary">수정하기</button>
-                                <a href="/qna/deleteQna.do?qNum=${qna.qNum}" class="btn btn-primary">삭제하기</a>
-                            </c:if>
+                           <c:if test="${sessionScope.loggedInUser != null && (sessionScope.loggedInUser.adminYn eq 'Y' || sessionScope.loggedInUser.userNo eq qna.userNo)}">
+                               <button type="submit" form="frm-${qna.qNum}" class="btn btn-primary">수정하기</button>
+                               <a href="/qna/deleteQna.do?qNum=${qna.qNum}" class="btn btn-primary">삭제하기</a>
+                           </c:if>
                         </td>
                     </tr>
                 </form>
@@ -61,8 +62,15 @@
         <td colspan="4" class="bg-light">
             <strong>${comment.userNo}</strong> (${comment.commentContents}): ${comment.commentCreated}:
             <a href="javascript:void(0)" onclick="toggleReplyForm(${comment.commentNum})">답글달기</a>
-             <button onclick="showEditForm(${comment.commentNum})">수정하기</button>
-            <a href="/deleteReply?commentNum=${comment.commentNum}&qNum=${qna.qNum}">삭제하기</a>
+
+            <!-- 세션 사용자와 댓글 작성자가 같은 경우에만 수정하기, 삭제하기 버튼 보이기 -->
+            <c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y' || sessionScope.loggedInUser.userNo eq comment.userNo}">
+                <button onclick="showEditForm(${comment.commentNum})"
+                    style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">
+                    수정하기
+                </button>
+                <a href="/deleteReply?commentNum=${comment.commentNum}&qNum=${qna.qNum}">삭제하기</a>
+            </c:if>
         </td>
     </tr>
 
@@ -164,36 +172,6 @@
         xhr.send('parentCommentId=' + encodeURIComponent(parentCommentId) + '&replyContent=' + encodeURIComponent(replyContent));
     }
 </script>
-
-<!--댓글 수정 js
-<script>
-function submitEdit(commentNum) {
-    var form = document.getElementById('editForm_' + commentNum + '_form');
-    var formData = new FormData(form);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/updateReply', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // 서버에서 성공적인 응답을 받았을 때의 처리
-            window.location.reload();
-        } else {
-            // 서버에서 오류 응답을 받았을 때의 처리
-            console.error('서버 오류:', xhr.statusText);
-            alert('서버 오류가 발생했습니다. 다시 시도해주세요.');
-        }
-    };
-    xhr.onerror = function () {
-        // 네트워크 오류가 발생했을 때의 처리
-        console.error('네트워크 오류');
-        alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    };
-    xhr.send(formData);
-}
-
-</script>-->
-
-
 
 <script>
 function toggleReplyForms(commentNum) {

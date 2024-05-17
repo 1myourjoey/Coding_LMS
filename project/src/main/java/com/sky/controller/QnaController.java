@@ -121,8 +121,16 @@ public class QnaController {
 
 	//댓글 대댓글 보기
 	@RequestMapping("/qna/openQnaDetail.do")
-	public ModelAndView openQnaDetail(@RequestParam int qNum, HttpServletRequest request, Model model,
-																		@ModelAttribute("CommentDTO")CommentDTO commentDTO) throws Exception {
+	public ModelAndView openQnaDetail(@RequestParam int qNum, HttpServletRequest request, HttpSession session, Model model,
+																		@ModelAttribute("CommentDTO") CommentDTO commentDTO) throws Exception {
+		// 세션에서 로그인된 사용자 정보를 확인합니다.
+		Object loggedInUser = session.getAttribute("loggedInUser");
+
+		// 로그인된 사용자 정보가 없으면 로그인 페이지로 리디렉션합니다.
+		if (loggedInUser == null) {
+			return new ModelAndView("redirect:/login"); // 로그인 페이지의 URL로 변경
+		}
+
 		ModelAndView mv = new ModelAndView("qnaDetail");
 
 
@@ -132,8 +140,7 @@ public class QnaController {
 
 		List<CommentDTO> comlist = commentService.getParentComments(qNum);
 		model.addAttribute("comlist", comlist);
-//		List<CommentDTO> pcomlist = commentService.getReplies();
-//		model.addAttribute("pcomlist", pcomlist);
+
 		return mv;
 	}
 
