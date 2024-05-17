@@ -1,0 +1,13 @@
+
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(£í®øÿÿÿÿ8‡–°÷1J$7afb1fee-5524-4e6c-9628-2d8eb7d3abc9
+n
+java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8³ŠáÚ÷1J$b98a8cb7-5f16-470a-b9d4-8af46817ff47
+z
+java:S1128"7Remove this unused import 'com.sky.dto.SugangRegister'.(ªµÎÃ8³ŠáÚ÷1J$4cf770e9-238e-424d-a0de-97898a5aff14
+…
+java:S1128
+"BRemove this unused import 'com.sky.service.SugangRegisterService'.(‘ĞÕÊ8ƒ˜©¡ø1J$45e90bac-8057-4c62-ad24-5201a7e2a8a4
+Œ
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8³ŠáÚ÷1J$8d259f2b-28c2-4f9c-8d48-38284a8063b6
+z
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8³ŠáÚ÷1J$a3baeb42-f74b-4554-8552-2fd846ea0437

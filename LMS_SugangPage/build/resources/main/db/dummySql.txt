@@ -1,0 +1,44 @@
+INSERT INTO `lecture_info` (`lec_num`, `lec_start_date`, `lec_end_date`, `lec_name`, `lec_ex`)
+VALUES
+('LEC001', '2024-05-15', '2024-05-30', 'Introduction to Programming', 'This course covers the basics of programming.'),
+('LEC002', '2024-06-01', '2024-06-20', 'Data Structures and Algorithms', 'This course covers various data structures and algorithms.'),
+('LEC003', '2024-07-01', '2024-07-15', 'Web Development Fundamentals', 'This course covers the fundamentals of web development.'),
+('LEC004', '2024-08-01', '2024-08-30', 'Machine Learning Basics', 'This course covers the basics of machine learning techniques.'),
+('LEC005', '2024-09-01', '2024-09-30', 'Database Management Systems', 'This course covers relational database management systems.'),
+('LEC006', '2024-10-01', '2024-10-15', 'Computer Networks', 'This course covers the fundamentals of computer networking.'),
+('LEC007', '2024-11-01', '2024-11-30', 'Software Engineering Principles', 'This course covers software engineering principles and practices.'),
+('LEC008', '2024-12-01', '2024-12-20', 'Operating Systems', 'This course covers the basics of operating systems concepts.'),
+('LEC009', '2025-01-01', '2025-01-15', 'Cybersecurity Fundamentals', 'This course covers the fundamentals of cybersecurity.'),
+('LEC010', '2025-02-01', '2025-02-28', 'Introduction to Artificial Intelligence', 'This course covers the basics of artificial intelligence.');
+
+
+INSERT INTO `user` (`login_id`, `user_name`, `pw`, `admin_yn`, `email`) VALUES
+('joey', 'CHOI', '1111', 'N','joey@korea.com'),
+('admin', 'Admin User', '1111', 'Y','admin@korea.com'),
+('test', 'User Two', '1111', 'N','test@korea.com');
+
+INSERT INTO `sugang_reg` (`lec_num`, `user_no`, `lec_sub_date`, `complete_yn`) VALUES
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC001'), 1, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC002'), 1, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC003'), 1, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC001'), 2, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC002'), 2, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC008'), 3, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC009'), 3, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC010'), 1, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC008'), 1, NOW(), 'N'),
+((SELECT `lec_num` FROM `lecture_info` WHERE `lec_num` = 'LEC010'), 2, NOW(), 'N');
+
+INSERT INTO contents_manage (con_num, lec_num, con_name, description, video_id, con_play_time, lec_name, thumb_url)
+SELECT
+    CONCAT('CM', LPAD(ROW_NUMBER() OVER (), 3, '0')),
+    lec_num,
+    CONCAT('Content ', ROW_NUMBER() OVER ()),
+    CONCAT('Description of Content ', ROW_NUMBER() OVER ()),
+    CONCAT('video', LPAD(ROW_NUMBER() OVER (), 3, '0')),
+    CONCAT(FLOOR(RAND() * 100), ':', LPAD(FLOOR(RAND() * 60), 2, '0')),
+    lec_name,
+    CONCAT('http://example.com/thumbnail', LPAD(ROW_NUMBER() OVER (), 3, '0'), '.jpg')
+FROM lecture_info
+CROSS JOIN (SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) AS t
+LIMIT 30;

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.mapper.UserMapper">
+	<select id="selectCount" resultType="Integer">
+		select count(*) from user
+	</select>
+
+	<select id="selectUserList" resultType="com.sky.dto.User">
+		<![CDATA[
+			SELECT user_no,
+			login_id,
+			pw,
+			user_name,
+			admin_yn,
+			email
+
+        	FROM user
+        	ORDER BY user_no DESC
+		]]>
+	</select>
+
+	<select id="getUserById" resultType="com.sky.dto.User"
+		parameterType="String">
+		SELECT * FROM user WHERE login_id = #{loginId};
+	</select>
+
+	<select id="getUserByUserNo" resultType="com.sky.dto.User"
+			parameterType="Integer">
+		SELECT * FROM user WHERE user_no = #{userNo};
+	</select>
+
+	<insert id="insertUser" parameterType="com.sky.dto.User" useGeneratedKeys="true" keyProperty="userNo">
+		<![CDATA[
+        INSERT INTO user
+        (
+            login_id, pw, user_name, email, admin_yn
+        )
+        VALUES
+        (
+            #{loginId},
+            #{pw},
+            #{userName},
+            #{email},
+            'N'
+        )
+    ]]>
+	</insert>
+
+	<delete id="deleteUser" parameterType="com.sky.dto.User">
+		delete from user where login_id = #{loginId}
+	</delete>
+
+	<update id="updateUser" parameterType="com.sky.dto.User">
+		<![CDATA[
+        update user set
+        	user_name = #{userName},
+            pw = #{pw},
+            email = #{email}
+        where user_no = #{userNo}
+    ]]>
+	</update>
+
+	<update id="updateUserAdmin" parameterType="map">
+		<![CDATA[
+        UPDATE user
+        SET admin_yn = #{adminYn}
+        WHERE login_id = #{loginId}
+    ]]>
+	</update>
+
+
+</mapper>

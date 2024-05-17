@@ -1,0 +1,11 @@
+
+
+java:S1192("MDefine a constant instead of duplicating this literal "loggedInUser" 3 times.(äÀ8ÔşàÛ÷1J$684bfe7d-22e4-44ef-b1d7-65b110fdf966
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(£í®øÿÿÿÿJ$f8c1b106-b627-4078-b593-8640c74915c2
+¦
+java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿJ$0987e4f6-7301-4be9-ac49-631fee7cec0c
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$dbc22b58-8cd5-41dc-b848-a377a4ced4a2
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$f3c32819-f361-43ed-ac53-7f5254a9bce3
+}	java:S125 "<This block of commented-out lines of code should be removed.(œ¯ÿy8’•áÛ÷1J$cc8e0a08-1fea-4da0-95f7-2e08fe805607
