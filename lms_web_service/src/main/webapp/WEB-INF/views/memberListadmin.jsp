@@ -1,4 +1,4 @@
-<%@page import="com.sky.dto.UserDto"%>
+<%@page import="com.sky.lms_web_service.dto.User"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
