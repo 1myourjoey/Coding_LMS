@@ -1,12 +1,17 @@
 package com.sky.lms_web_service.controller;
 
 import com.sky.lms_web_service.dto.Contents_Manage;
+import com.sky.lms_web_service.dto.User;
 import com.sky.lms_web_service.service.ContentService;
 import com.sky.lms_web_service.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ContentController {
@@ -23,7 +28,16 @@ public class ContentController {
     }
 
     @GetMapping("content")
-    public String content(Model model){
+    public String content(Model model, HttpServletRequest request)throws Exception{
+
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+        // 로그인한 사용자가 없으면 로그인 페이지로 리다이렉트
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("contentList",contentService.selectAll());
         model.addAttribute("formatTime",contentService.formatTime());
         model.addAttribute("lectureList",lectureService.lectureList());

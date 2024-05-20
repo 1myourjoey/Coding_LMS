@@ -211,7 +211,6 @@
 
                     <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
                     <input type="submit" class="btn btn-primary" value="검색">
-                    <input type="button" class="btn btn-primary" value="초기화" id="resetButton">
                 </div>
             </div>
               </form>
@@ -661,9 +660,10 @@ $(document).ready(function() {
                 success: function(response) {
                     // 성공적으로 요청을 보냈을 때의 처리
                     console.log("검색 요청 성공");
-
                     // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
                     var newTableBodyContent = $(response).find('tbody').html();
+                    $('#firstName').val('');
+                    $('#lastName').val('');
 
                     // 검색 결과를 업데이트합니다.
                     $('#tableBody').html(newTableBodyContent);
@@ -688,6 +688,7 @@ $(document).ready(function() {
         loadInitialContent();
     });
 });
+
 
 
 
