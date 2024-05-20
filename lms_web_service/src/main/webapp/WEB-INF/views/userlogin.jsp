@@ -31,7 +31,7 @@
                  success: function(response) {
                      if (response === "user") {
                          // 사용자 로그인 성공 시 사용자 페이지로 이동
-                         window.location.href = "/index";
+                         window.location.href = "/";
                      } else if (response === "admin") {
                          // 관리자 로그인 성공 시 관리자 페이지로 이동
                          window.location.href = "/indexadmin";

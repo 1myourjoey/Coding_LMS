@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,19 +16,25 @@
         <h1><a href="#">Coding</a></h1>
 
         <ul id="gnb">
-            <li><a href="#">센터소개</a></li>
-            <li><a href="#">모집안내</a></li>
-            <li><a href="content">교육과정</a></li>
-            <li><a href="sugangReg">수강신청</a></li>
-            <li><a href="#">커뮤니티</a></li>
+            <li><a href="/content">교육과정</a></li>
+            <li><a href="/sugangList">수강신청</a></li>
+            <li> <a href="/boardlistuser">자료실</a></li>
+            <li><a href="/post">공지사항</a></li>
+            <li><a href="/qna/openQnaList.do">질문사항</a></li>
         </ul>
 
         <ul class="util">
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Join</a></li>
-            <li><a href="#">Sitemap</a></li>
-            <li><a href="login">Login</a></li>
+            <c:choose>
+                <c:when test="${sessionScope.loggedInUser != null}">
+                    <li><p>${sessionScope.loggedInUser.loginId}님</p></li>
+                    <li><a href="${pageContext.request.contextPath}/logout" class="button">로그아웃</a></li>
+                    <li><a href="${pageContext.request.contextPath}/memberList">회원정보수정</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageContext.request.contextPath}/join" class="button">회원가입</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login" class="button">로그인</a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </header>
@@ -116,45 +123,6 @@
     </div>
 
 </div>
-
-
-<!-- modal -->
-<section id="modal_sample_03" class="modal fade" aria-hidden="true" role="dialog" aria-labelledby="tit_modal_sample_03">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- modal title -->
-            <div class="modal-header">
-                <h2 id="tit_modal_sample_03" class="modal-title">
-                    로그인
-                </h2>
-            </div>
-            <!-- //modal title -->
-            <!-- modal contents -->
-            <div class="modal-conts">
-                <div class="conts-area">
-                    시작 <br>
-                    대화 상자는 사용자에게 작업에 대해 알리고 중요한 정보를 포함하거나 결정이 필요하거나 여러 작업을 포함할 수 있습니다.
-                    <br>
-                    ...
-                    <br>
-                    끝
-                </div>
-            </div>
-            <!-- //modal contents -->
-            <!-- modal btn -->
-            <div class="modal-btn btn-wrap">
-                <button type="button" class="btn tertiary md close-modal">아니요</button>
-                <button type="button" class="btn primary md close-modal">예</button>
-            </div>
-            <!-- //modal btn -->
-            <!-- close button -->
-            <button type="button" class="btn-close close-modal"><span class="sr-only">닫기</span></button>
-            <!-- //close button -->
-        </div>
-    </div>
-    <div class="modal-back"></div>
-</section>
-<!-- //modal -->
 
 <footer id="footer">
     <div class="foot-quick">

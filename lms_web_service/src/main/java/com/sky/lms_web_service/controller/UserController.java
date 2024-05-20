@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/memberlist")
+	@GetMapping("/memberList")
 	public String listMembers(HttpServletRequest request, Model model) {
 
 		HttpSession session = request.getSession();
