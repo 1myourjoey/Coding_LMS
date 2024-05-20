@@ -49,4 +49,11 @@
         ]]>
     </select>
 
+
+    <select id="searchLecture" resultType="com.ks.youtube.entity.lecture_info" parameterType="hashMap">
+        SELECT *
+        FROM lecture_info
+        WHERE lec_name LIKE CONCAT('%', #{lecName}, '%')
+    </select>
+
 </mapper>

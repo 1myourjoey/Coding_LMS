@@ -135,95 +135,13 @@
             cursor: pointer; /* 마우스 커서를 포인터로 변경 */
            }
 
-    .modal {
-        display: none; /* 기본적으로 숨겨진 상태 */
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4); /* 배경에 어둡게 */
-    }
 
-    /* 모달 콘텐츠 스타일 */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #ddd; /* 테두리 추가 */
-        max-width: 1000px; /* 최대 너비 제한 */
-        width: 80%; /* 화면 폭의 80%로 설정 */
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* 그림자 추가 */
-        position: relative; /* x 버튼을 위치시킬 때 상대적으로 위치 설정 */
-    }
-
-
-    /* 닫기 버튼 스타일 */
-    .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        position: absolute; /* 상대적으로 위치 설정 */
-        top: 10px; /* 위쪽 여백 */
-        right: 10px; /* 오른쪽 여백 */
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    /* 검색 입력 필드 스타일 */
-    .search-input {
-        width: 75%; /* 너비 조정 */
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd; /* 테두리 추가 */
-        border-radius: 5px; /* 모서리 둥글게 */
-        box-sizing: border-box; /* 패딩과 테두리 포함 */
-    }
-
-    /* 검색 버튼 스타일 */
-    .search-button, .select-button {
-        width: 10%; /* 너비 조정 */
-        padding: 10px;
-        background-color: #007bff; /* 파란색 배경 */
-        color: white;
-        border: none;
-        border-radius: 5px; /* 모서리 둥글게 */
-        cursor: pointer;
-    }
-
-    /* 검색 버튼 호버 스타일 */
-    .search-button:hover, .select-button:hover {
-        background-color: #0056b3; /* 파란색 더 진한 배경 */
-    }
-
-    /* 테이블 스타일 */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #f2f2f2; /* 테이블 헤더 배경색 */
-    }
 
     </style>
     <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
         <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
 
@@ -264,13 +182,8 @@
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                     강좌정보
                 </a>
-
-
             </li>
-
-
         </ul>
-
 
         <button id="btn-hide" class="btn btn-primary" style="margin-top: 500px;">메뉴숨기기</button>
 </div>
@@ -283,9 +196,9 @@
     </button>
 </div>
     <div class="container-fluid">
-        <div class="row g-3 border p-3" style="margin-top: 10px; border-radius: 10px;">
+        <div class="row g-3 border p-3"  style="margin-top: 10px; border-radius: 10px;">
             <div class="col-sm-6">
-                <form action="selectSearch" method="post">
+                <form id="searchForm" action="selectSearch" method="post">
                     <div class="form-group" style="margin-left: 40px;">
                         <label for="firstName">콘텐츠명</label>
 
@@ -297,7 +210,8 @@
                     <label for="lastName">교과목명</label>
 
                     <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
-                    <input type="submit"class="btn btn-primary" value="검색"></input>
+                    <input type="submit" class="btn btn-primary" value="검색">
+                    <input type="button" class="btn btn-primary" value="초기화" id="resetButton">
                 </div>
             </div>
               </form>
@@ -318,36 +232,33 @@
                     </tr>
                     </thead>
 
-                <c:choose>
-                    <c:when test="${empty selectSearch}">
-                    <tbody id="tableBody">
-                        <c:forEach var="contents" items="${contentList}" varStatus="loop">
-                                <tr>
-                                    <td><input type="checkbox" onclick="handleClick('${contents.getConNum()}')"></td>
-                                    <td onclick="handleClick('${contents.getConNum()}'); return false;">${contents.getLecName()}</td>
-                                    <td onclick="handleClick('${contents.getConNum()}'); return false;">${contents.getConName()}</td>
-                                    <td onclick="handleClick('${contents.getConNum()}'); return false;">${contents.getVideoId()}</td>
-                                    <td onclick="handleClick('${contents.getConNum()}'); return false;">${contents.durationTime}</td>
-                                </tr>
-                        </c:forEach>
-                    </tbody>
-                    </c:when>
+<tbody id="tableBody">
+    <c:choose>
+        <c:when test="${empty selectSearch}">
+            <c:forEach var="contents" items="${contentList}" varStatus="loop">
+                <tr>
+                    <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
+                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.lecName}</td>
+                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.conName}</td>
+                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.videoId}</td>
+                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.durationTime}</td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="search" items="${selectSearch}" varStatus="loop">
+                <tr>
+                    <td><input type="checkbox" onclick="handleClick('${search.conNum}')"></td>
+                    <td onclick="handleClick('${search.conNum}'); return false;">${search.lecName}</td>
+                    <td onclick="handleClick('${search.conNum}'); return false;">${search.conName}</td>
+                    <td onclick="handleClick('${search.conNum}'); return false;">${search.videoId}</td>
+                    <td onclick="handleClick('${search.conNum}'); return false;">${search.durationTime}</td>
+                </tr>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
+</tbody>
 
-
-                    <c:otherwise>
-                        <c:forEach var="search" items="${selectSearch}" varStatus="loop">
-                            <tbody id="tableBody">
-                                <tr>
-                                    <td><input type="checkbox" onclick="handleClick('${contents.getConNum()}')"></td>
-                                    <td onclick="handleClick('${search.getConNum()}'); return false;">${search.getLecName()}</td>
-                                    <td onclick="handleClick('${search.getConNum()}'); return false;">${search.getConName()}</td>
-                                    <td onclick="handleClick('${search.getConNum()}'); return false;">${search.getVideoId()}</td>
-                                    <td onclick="handleClick('${search.getConNum()}'); return false;">${search.durationTime}</td>
-                                </tr>
-                            </tbody>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
 
 
                 </table>
@@ -372,7 +283,7 @@
 
                         <table class="table table border">
 
-                        <form action="updateContent">
+                        <form action="updateContent" id="updateContent">
                             <tbody>
                             <tr>
                                 <td class="table-light">콘텐츠관리번호</td>
@@ -397,39 +308,7 @@
                                 <img id="openModalButton" src="img/search.svg" style="width: 16px; height: 16px; cursor: pointer;">
                             </div>
 
-                            <div id="myModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <div>
-                                    <input type="text" class="search-input" placeholder="교과목을 검색하세요...">
-                                    <button class="search-button">검색</button>
-                                    <button class="select-button">선택</button>
-                                    </div>
-                                    <!-- 테이블 데이터 -->
-                                    <table id="dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>강좌번호</th>
-                                                <th>시작날짜</th>
-                                                <th>종료날짜</th>
-                                                <th>강의이름</th>
-                                                <th>강의설명</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="lecture" items="${lectureList}" varStatus="loop">
-                                            <tr>
-                                                <td>${lecture.getLecNum()}</td>
-                                                <td>${lecture.getLecStartDate()}</td>
-                                                <td>${lecture.getLecEndDate()}</td>
-                                                <td>${lecture.getLecName()}</td>
-                                                <td>${lecture.getLecEx()}</td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+
                                 </td>
 
                             </tr>
@@ -470,26 +349,70 @@
                             <input type="submit" value="저장" class="btn btn-primary" style="float: right; margin-right: 0px;">
                             </form>
 
-                            <form action="deleteContent">
+                            <form action="deleteContent" id="deleteContentForm">
                             <input type="hidden" name="conNum" id="deleteBtn"  value="${selectContent.conNum}">
                             <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="삭제">
                             </form>
 
 
-                            <form action="insertContent" method="post">
-                                <input type="hidden" class="form-control" name="conNum">
-                                <input type="hidden" class="form-control" name="conName">
-                                <input type="hidden" class="form-control" name="lecName">
-                                <input type="hidden" class="form-control" name="lecNum">
-                                <input type="hidden" class="form-control" name="description">
-                                <input type="hidden" class="form-control" name="videoId">
-                                <input type="hidden" class="form-control" name="conPlayTime">
-                                <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="신규">
+
                                 <input type="button" onclick="addEmptyRowBelow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
 
-                            </form>
                             </div>
                     </div>
+
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div>
+                                <form id="modalSearchForm" action="modalSearch" method="post">
+                                    <input type="text" class="search-input" id="modalSearchInput" name="lecName" placeholder="교과목을 검색하세요...">
+                                    <input type="submit" class="search-button" value="검색">
+                                    <button class="select-button">선택</button>
+                                </form>
+
+                            </div>
+                            <!-- 테이블 데이터 -->
+                            <table id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>강좌번호</th>
+                                        <th>시작날짜</th>
+                                        <th>종료날짜</th>
+                                        <th>강의이름</th>
+                                        <th>강의설명</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalSearchResults">
+                                    <c:choose>
+                                        <c:when test="${empty modalSearch}">
+                                            <c:forEach var="lecture" items="${lectureList}" varStatus="loop">
+                                                <tr>
+                                                    <td>${lecture.lecNum}</td>
+                                                    <td>${lecture.lecStartDate}</td>
+                                                    <td>${lecture.lecEndDate}</td>
+                                                    <td>${lecture.lecName}</td>
+                                                    <td>${lecture.lecEx}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach var="modal" items="${modalSearch}" varStatus="loop">
+                                                <tr>
+                                                    <td>${modal.lecNum}</td>
+                                                    <td>${modal.lecStartDate}</td>
+                                                    <td>${modal.lecEndDate}</td>
+                                                    <td>${modal.lecName}</td>
+                                                    <td>${modal.lecEx}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
 
                     <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 200px;">
                         <table class="table table-striped table-bordered table-hover">
@@ -545,10 +468,10 @@
 <script src="js/sidebar.js"></script>
 <script src="js/tabMenu.js"></script>
 <script src="js/selectAjax.js"></script>
-<script src="js/search.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/videoTime.js"></script>
 <script src="js/grid.js"></script>
+
 <script src="js/checkBox.js"></script>
 
 <script>
@@ -568,6 +491,9 @@ $(document).ready(function() {
 
         // 숨김 상태를 로컬 스토리지에 저장합니다.
         localStorage.setItem('isContainerHidden', false);
+
+        // 강좌 정보 폼의 submit 이벤트 제거
+        $('#lectureForm').off('submit');
     });
 
     // 강좌정보 링크 클릭 시
@@ -588,6 +514,11 @@ $(document).ready(function() {
                 // 컨텐츠 정보를 숨기고 강좌 정보 폼을 표시합니다.
                 $('.container-fluid').hide();
                 $('#lectureForm').show();
+
+                // 강좌 정보 폼의 submit 이벤트 추가
+                $('#lectureForm').submit(function(e) {
+                    // 필요한 작업 수행
+                });
             },
             error: function(xhr, status, error) {
                 // 에러가 발생했을 때의 처리
@@ -598,10 +529,164 @@ $(document).ready(function() {
 
     // 페이지 로드 시 저장된 숨김 상태를 확인하고 적용합니다.
     if (isContainerHidden === 'true') {
-        $('.container-fluid').hide();
+        // 강좌 정보 폼을 숨깁니다.
+        $('#lectureForm').hide();
     } else {
-        $('.container-fluid').show();
+        // 컨텐츠 정보를 숨기고 강좌 정보 폼을 표시합니다.
+        $('.container-fluid').hide();
+        $('#lectureForm').show();
     }
+});
+
+
+$(document).ready(function() {
+    // 폼 전송 이벤트를 가로챕니다.
+    $('#updateContent').submit(function(e) {
+        e.preventDefault(); // 기본 전송 이벤트를 막습니다.
+
+        // 폼 데이터를 가져옵니다.
+        var formData = $(this).serialize();
+
+        // AJAX 요청을 보냅니다.
+        $.ajax({
+            url: 'updateContent', // 서버의 엔드포인트 URL
+            method: 'POST', // HTTP 메서드
+            data: formData, // 폼 데이터
+            success: function(response) {
+                // 성공적으로 요청을 보냈을 때의 처리
+                console.log('요청 성공');
+
+                // 업데이트된 데이터를 받아서 목록을 업데이트하는 함수를 호출
+                updateContentList();
+            },
+            error: function(xhr, status, error) {
+                // 요청이 실패했을 때의 처리
+                console.error('요청 실패');
+                console.error(error);
+                // 실패 메시지 또는 오류 처리를 수행할 수 있습니다.
+            }
+        });
+    });
+
+
+    $('#deleteContentForm').submit(function(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        // 폼 데이터를 가져옵니다.
+        var formData = $(this).serialize();
+
+        // AJAX 요청을 보냅니다.
+        $.ajax({
+            url: $(this).attr('action'),
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                // 성공적으로 요청을 보냈을 때의 처리
+                console.log("삭제 요청 성공");
+
+                // 삭제 후 업데이트된 목록을 불러옵니다.
+                updateContentList();
+            },
+            error: function(xhr, status, error) {
+                // 요청이 실패했을 때의 처리
+                console.error("요청 실패");
+                console.error(error);
+            }
+        });
+    });
+
+    // 목록을 업데이트하는 함수
+    function updateContentList() {
+        $.ajax({
+            url: 'content', // 서버의 엔드포인트 URL
+            type: 'GET', // HTTP 메서드
+            success: function(response) {
+                // 응답에서 업데이트된 목록 데이터를 추출
+                var updatedContentList = $(response).find('#tableBody').html();
+
+                // 현재 페이지의 목록을 업데이트된 목록으로 교체
+                $('#tableBody').html(updatedContentList);
+            },
+            error: function(xhr, status, error) {
+                // AJAX 요청이 실패한 경우의 처리
+                console.error('AJAX 요청 실패:', status, error);
+            }
+        });
+    }
+});
+
+
+$(document).ready(function() {
+    // 초기 목록을 불러오는 함수
+    function loadInitialContent() {
+        $.ajax({
+            url: 'content', // 기본 목록을 가져오는 엔드포인트 URL
+            method: 'GET', // HTTP 메서드
+            success: function(response) {
+                // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
+                var newTableBodyContent = $(response).find('tbody').html();
+
+                // 목록을 업데이트합니다.
+                $('#tableBody').html(newTableBodyContent);
+            },
+            error: function(xhr, status, error) {
+                // 요청이 실패했을 때의 처리
+                console.error("초기 목록 요청 실패");
+                console.error(error);
+            }
+        });
+    }
+
+
+    // 검색 폼 전송 이벤트를 가로챕니다.
+    $('#searchForm').submit(function(event) {
+        event.preventDefault(); // 기본 폼 제출을 막습니다.
+
+        // 폼 데이터를 가져옵니다.
+        var formData = $(this).serialize();
+
+        // 입력 필드의 값을 확인합니다.
+        var conName = $('#firstName').val().trim();
+        var lecName = $('#lastName').val().trim();
+
+        if (conName === "" && lecName === "") {
+            // 검색 값이 비어 있으면 초기 목록을 불러옵니다.
+            loadInitialContent();
+        } else {
+            // 검색 값이 비어 있지 않으면 AJAX 요청을 보냅니다.
+            $.ajax({
+                url: 'selectSearch', // 서버의 엔드포인트 URL
+                method: 'POST', // HTTP 메서드
+                data: formData, // 폼 데이터
+                success: function(response) {
+                    // 성공적으로 요청을 보냈을 때의 처리
+                    console.log("검색 요청 성공");
+
+                    // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
+                    var newTableBodyContent = $(response).find('tbody').html();
+
+                    // 검색 결과를 업데이트합니다.
+                    $('#tableBody').html(newTableBodyContent);
+                },
+                error: function(xhr, status, error) {
+                    // 요청이 실패했을 때의 처리
+                    console.error("검색 요청 실패");
+                    console.error(error);
+                }
+            });
+        }
+    });
+
+    // 검색 버튼 클릭 시 폼 리셋 및 초기 목록 로드
+    $('#resetButton').click(function(event) {
+        event.preventDefault(); // 기본 이벤트를 막습니다.
+
+        // 폼을 리셋합니다.
+        $('#searchForm')[0].reset();
+
+        // 초기 목록을 불러옵니다.
+        loadInitialContent();
+    });
 });
 
 

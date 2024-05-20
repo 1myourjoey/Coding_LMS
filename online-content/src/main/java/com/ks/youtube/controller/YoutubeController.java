@@ -1,13 +1,14 @@
 package com.ks.youtube.controller;
 
 import com.ks.youtube.entity.contents_manage;
-import com.ks.youtube.entity.lecture_info;
 import com.ks.youtube.service.ContentService;
 import com.ks.youtube.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class YoutubeController {
@@ -37,14 +38,14 @@ public class YoutubeController {
         return "redirect:/content";
     }
 
-    @GetMapping("updateContent")
+    @PostMapping("updateContent")
     public String updateContent(contents_manage contentsManage){
         contentService.insertOrUpdateContent(contentsManage);
 
 //        contentService.updateContent(contentsManage);
         return "redirect:/content";
     }
-    @GetMapping("deleteContent")
+    @PostMapping("deleteContent")
     public String deleteContent(String conNum){
         contentService.deleteContent(conNum);
         return "redirect:/content";
@@ -62,30 +63,14 @@ public class YoutubeController {
         model.addAttribute("selectSearch",contentService.selectSearch(conName,lecName));
         model.addAttribute("lectureList",lectureService.lectureList());
         return "content";
-    }
-    @GetMapping("lecture")
-    public String lecture(Model model){
-        model.addAttribute("lectureList",lectureService.lectureList());
-        return "lecture";
-    }
-    @GetMapping("lectureDetail")
-    public String lectureDetail(Model model){
-        model.addAttribute("lectureList",lectureService.lectureList());
-        return "lecture";
-    }
+   }
+//@PostMapping("selectSearch")
+//@ResponseBody
+//public List<contents_manage> selectSearch(@RequestParam("conName") String conName, @RequestParam("lecName") String lecName) {
+//    return contentService.selectSearch(conName, lecName);
+//}
 
-    @PostMapping("lectureInfo")
-    public String lectureInfo(lecture_info lectureInfo){
-        lectureService.insertOrUpdateLecture(lectureInfo);
 
-        //lectureService.insertLectureInfo(lectureInfo);
-        return "redirect:/content";
-    }
-    @GetMapping("selectLecture")
-    @ResponseBody
-    public lecture_info selectLecture(@RequestParam("lecNum") String lecNum,Model model){
-        return lectureService.selectLecture(lecNum);
-    }
 
 
 

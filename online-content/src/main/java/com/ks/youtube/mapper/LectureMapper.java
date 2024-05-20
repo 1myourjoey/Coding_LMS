@@ -3,6 +3,7 @@ package com.ks.youtube.mapper;
 
 import com.ks.youtube.entity.lecture_info;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface LectureMapper {
     void updateLectureInfo(lecture_info lectureInfo);
     lecture_info selectLecture(String lecNum);
     lecture_info getContentByNum(String lecNum);
+    List<lecture_info> searchLecture(@Param("lecName") String lecName);
 
 
 
