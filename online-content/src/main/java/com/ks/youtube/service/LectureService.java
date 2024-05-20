@@ -1,6 +1,7 @@
 package com.ks.youtube.service;
 
 
+import com.ks.youtube.entity.contents_manage;
 import com.ks.youtube.entity.lecture_info;
 import com.ks.youtube.mapper.LectureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,12 @@ public class LectureService {
     public lecture_info selectLecture(String lecNum){
         return lectureMapper.selectLecture(lecNum);
     }
+    public List<lecture_info> searchLecture(String lecName) {
+        return lectureMapper.searchLecture(lecName);
+    }
 
-    @Transactional
+
+
     public void insertOrUpdateLecture(lecture_info lectureInfo){
        lecture_info existingContent = lectureMapper.getContentByNum(lectureInfo.getLecNum());
 
@@ -35,5 +40,7 @@ public class LectureService {
             lectureMapper.insertLectureInfo(lectureInfo);
         }
     }
+
+
 
 }

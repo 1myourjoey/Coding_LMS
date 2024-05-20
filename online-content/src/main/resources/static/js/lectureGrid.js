@@ -1,4 +1,4 @@
-function addEmptyRowBelow(button) {
+function addEmptyRow(button) {
     // 테이블의 tbody를 찾습니다.
     const tbody = document.getElementById('tdInsert');
 

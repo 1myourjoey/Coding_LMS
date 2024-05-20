@@ -38,7 +38,7 @@ public class ContentService {
         contentMapper.deleteContent(conNum);
     }
 
-    @Transactional
+
     public void insertOrUpdateContent(contents_manage contentsManage) {
         // 콘텐츠 관리번호로 데이터 조회
         contents_manage existingContent = contentMapper.getContentByNum(contentsManage.getConNum());

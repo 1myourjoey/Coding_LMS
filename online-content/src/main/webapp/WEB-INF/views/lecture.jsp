@@ -107,15 +107,15 @@
                     <div class="form-group" style="margin-left: 40px;">
                         <label for="firstName">콘텐츠명</label>
 
-                        <input type="text" class="form-control" id="firstName" name="conName" placeholder="" value="" style="max-width: 350px;">
+                        <input type="text" class="form-control" placeholder="" value="" style="max-width: 350px;">
                     </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="lastName">교과목명</label>
 
-                    <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
-                    <input type="submit"class="btn btn-primary" value="검색"></input>
+                    <input type="text" class="form-control" placeholder="" value="" style="max-width: 350px;">
+                    <input type="button" class="btn btn-primary" value="검색"></input>
                 </div>
             </div>
               </form>
@@ -171,21 +171,21 @@
                 </table>
 
             </div>
-                <div id="notice" class="tabContent">
+                <div id="lectureNotice" class="tabLecture">
 
-                    <div id="contentInfo" class="mb-3">
+                    <div id="lectureInfo" class="mb-3">
                     <form action="lectureInfo" method="post">
                         <table class="table table border">
 
                             <tbody>
                             <tr>
                                 <td class="table-light">온라인강좌번호</td>
-                                <td><input type="text" class="form-control" name="lecNum" value="${selectLecture.lecNum}" readonly></td>
+                                <td><input type="text" class="form-control" name="lecNum" value="${selectLecture.lecNum}" id="inputLecNum" readonly></td>
                             </tr>
 
                             <tr>
                                 <td class="table-light">온라인강좌명</td>
-                                    <td><input type="text" class="form-control" id="lecName" name="lecName" value="${selectLecture.lecName}"></td>
+                                    <td><input type="text" class="form-control" id="inputLecName" name="lecName" value="${selectLecture.lecName}"></td>
                             </tr>
 
                             <tr>
@@ -216,11 +216,7 @@
 
                         <div>
 
-                            <form action="deleteContent">
-                            <input type="hidden" name="conNum" id="deleteBtn"  value="">
-                            <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="삭제">
-                            </form>
-                            <input type="button" onclick="addEmptyRowBelow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
+                            <input type="button" onclick="addEmptyRow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
 
                             </div>
                     </div>
@@ -232,8 +228,7 @@
 
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
 
 <script src="js/lectureGrid.js"></script>
 <script>
@@ -245,8 +240,8 @@ function lectureClick(lecNum) {
         url: "/selectLecture?lecNum=" + lecNum, // 클릭된 요소의 lecNum 값을 URL에 포함
         success: function(response) {
             // 응답 데이터를 사용하여 해당 폼 요소의 값을 설정합니다.
-            $('input[name="lecNum"]').val(response.lecNum);
-            $('input[name="lecName"]').val(response.lecName);
+            $('#inputLecNum').val(response.lecNum);
+            $('#inputLecName').val(response.lecName);
             $('input[name="lecStartDate"]').val(response.lecStartDate);
             $('input[name="lecEndDate"]').val(response.lecEndDate);
             $('textarea[name="lecEx"]').val(response.lecEx);
@@ -261,7 +256,7 @@ function lectureClick(lecNum) {
 </script>
 <script>
 $(document).ready(function() {
-    $('form').submit(function(event) {
+    $('form[action="lectureInfo"]').submit(function(event) {
         // 폼의 기본 동작을 막습니다.
         event.preventDefault();
 
@@ -293,7 +288,7 @@ $(document).ready(function() {
 
     function appendNewLecture() {
         $.ajax({
-            url: 'lectureDetail',
+            url: 'lecture',
             type: 'GET',
             success: function(response) {
                 // 응답에서 헤더와 사이드바를 제외한 부분을 추출하여 사용
@@ -307,8 +302,8 @@ $(document).ready(function() {
     }
 });
 
-</script>
 
+</script>
 
 
 

@@ -60,41 +60,6 @@
         </if>
     </select>
 
-    <insert id="insertOrUpdateContent" parameterType="com.ks.youtube.entity.contents_manage">
-        <![CDATA[
-        -- 데이터가 존재하는지 확인하는 쿼리
-        SELECT COUNT(*) FROM contents_manage WHERE con_num = #{conNum};
-
-        -- 데이터가 존재하면 업데이트를 수행하는 쿼리
-        UPDATE contents_manage
-        SET
-            con_name = #{conName},
-            lec_num = #{lecNum},
-            description = #{description},
-            video_id = #{videoId},
-            con_play_time = #{conPlayTime},
-            lec_name = #{lecName}
-        WHERE
-            con_num = #{conNum};
-
-        -- 데이터가 존재하지 않으면 삽입하는 쿼리
-        INSERT INTO contents_manage (con_num, lec_num, con_name, description, video_id, con_play_time, lec_name)
-        SELECT
-            CONCAT('J', YEAR(NOW()), '-', LPAD(IFNULL(SUBSTRING_INDEX(MAX(CON_NUM), '-', -1), 0) + 1, 4, '0')) AS next_con_num,
-            CONCAT('C', YEAR(NOW())),
-            #{conName},
-            #{description},
-            #{videoId},
-            #{conPlayTime},
-            #{lecName}
-        FROM
-            CONTENTS_MANAGE
-        WHERE
-            CON_NUM LIKE CONCAT('J', YEAR(NOW()), '%')
-    ]]>
-    </insert>
-
-
     <insert id="insertContent" parameterType="com.ks.youtube.entity.contents_manage">
         <![CDATA[
         INSERT INTO contents_manage (con_num, lec_num, con_name, description, video_id, con_play_time, lec_name)
@@ -106,7 +71,7 @@
         #{videoId},
         #{conPlayTime},
         #{lecName}
-        FROM CONTENTS_MANAGE
+        from contents_manage
         WHERE CON_NUM LIKE CONCAT('J', YEAR(NOW()), '%')
     ]]>
 
