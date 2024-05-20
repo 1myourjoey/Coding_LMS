@@ -135,13 +135,11 @@
             cursor: pointer; /* 마우스 커서를 포인터로 변경 */
            }
 
-
-
     </style>
     <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
         <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-    <link rel="stylesheet" href="css/modal.css">
+        <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
 
@@ -467,7 +465,8 @@
 
         </div>
     </div>
-    <div id="lectureForm"></div>
+    <div id="lectureForm" style="width:100%; margin-left: 12px;"></div>
+
 </main>
 
 
@@ -566,6 +565,9 @@ $(document).ready(function() {
 
                 // 업데이트된 데이터를 받아서 목록을 업데이트하는 함수를 호출
                 updateContentList();
+
+                $('#updateContent')[0].reset();
+                alert('데이터가 성공적으로 업데이트되었습니다.');
             },
             error: function(xhr, status, error) {
                 // 요청이 실패했을 때의 처리
