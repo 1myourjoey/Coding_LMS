@@ -1,17 +1,23 @@
 package com.sky.lms_web_service.controller;
 
 import com.sky.lms_web_service.dto.Contents_Manage;
+<<<<<<< Updated upstream
 import com.sky.lms_web_service.dto.User;
+=======
+>>>>>>> Stashed changes
 import com.sky.lms_web_service.service.ContentService;
 import com.sky.lms_web_service.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< Updated upstream
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> Stashed changes
 
 @Controller
 public class ContentController {
@@ -28,6 +34,7 @@ public class ContentController {
     }
 
     @GetMapping("content")
+<<<<<<< Updated upstream
     public String content(Model model, HttpServletRequest request)throws Exception{
 
         HttpSession session = request.getSession();
@@ -38,6 +45,9 @@ public class ContentController {
             return "redirect:/login";
         }
 
+=======
+    public String content(Model model){
+>>>>>>> Stashed changes
         model.addAttribute("contentList",contentService.selectAll());
         model.addAttribute("formatTime",contentService.formatTime());
         model.addAttribute("lectureList",lectureService.lectureList());
