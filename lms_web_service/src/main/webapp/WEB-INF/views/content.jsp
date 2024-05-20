@@ -319,11 +319,6 @@
                             </tr>
 
                             <tr>
-                                <td class="table-light">썸네일</td>
-                                <td><input type="text" class="form-control" name="thumbUrl" value="${selectContent.thumbUrl}"></td>
-                            </tr>
-
-                            <tr>
                                 <td class="table-light">Youtube비디오ID</td>
                                 <td>
                                 <div style="display: flex; align-items: center;">
