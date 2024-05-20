@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.lms_web_service.mapper.UserMapper">
+
+	<select id="getTotalCount" resultType="Integer">
+		select count(*) from user
+	</select>
+
+	<select id="selectUserList" resultType="com.sky.lms_web_service.dto.User">
+		<![CDATA[
+			SELECT user_no,
+			login_id,
+			pw,
+			user_name,
+			admin_yn,
+			email
+
+        	FROM user
+        	ORDER BY user_no DESC
+		]]>
+	</select>
+
+	<select id="selectUserListWithPaging" resultType="com.sky.lms_web_service.dto.User">
+		<![CDATA[
+        SELECT user_no,
+               login_id,
+               pw,
+               user_name,
+               admin_yn,
+               email
+        FROM user
+        ORDER BY user_no DESC
+        LIMIT #{offset}, #{size}
+    ]]>
+	</select>
+
+	<select id="selectCount" resultType="Integer">
+		SELECT COUNT(*) FROM user;
+	</select>
+
+	<select id="getUserByEmail" resultType="com.sky.lms_web_service.dto.User"
+			parameterType="String">
+		SELECT * FROM user WHERE email = #{email};
+	</select>
+
+	<select id="getUserById" resultType="com.sky.lms_web_service.dto.User"
+		parameterType="String">
+		SELECT * FROM user WHERE login_id = #{loginId};
+	</select>
+
+
+	<insert id="insertUser" parameterType="com.sky.lms_web_service.dto.User" useGeneratedKeys="true" keyProperty="userNo">
+		<![CDATA[
+        INSERT INTO user
+        (
+            login_id, pw, user_name, email, admin_yn
+        )
+        VALUES
+        (
+            #{loginId},
+            #{pw},
+            #{userName},
+            #{email},
+            'N'
+        )
+    ]]>
+	</insert>
+
+	<insert id="insertAdmin" parameterType="com.sky.lms_web_service.dto.User" useGeneratedKeys="true" keyProperty="userNo">
+		<![CDATA[
+        INSERT INTO user
+        (
+            login_id, pw, user_name, email, admin_yn
+        )
+        VALUES
+        (
+            #{loginId},
+            #{pw},
+            #{userName},
+            #{email},
+            'Y'
+        )
+    ]]>
+	</insert>
+
+	<delete id="deleteUser" parameterType="com.sky.lms_web_service.dto.User">
+		delete from user where login_id = #{loginId}
+	</delete>
+
+	<update id="updateUser" parameterType="com.sky.lms_web_service.dto.User">
+		<![CDATA[
+        update user set
+        	user_name = #{userName},
+            email = #{email}
+        where user_no = #{userNo}
+    ]]>
+	</update>
+
+	<update id="updateUser1" parameterType="com.sky.lms_web_service.dto.User">
+		<![CDATA[
+        update user set
+        	user_name = #{userName},
+            email = #{email}
+        where user_no = #{userNo}
+    ]]>
+	</update>
+
+
+	<update id="passwordupdateUser" parameterType="java.util.Map">
+		<![CDATA[
+        update user set
+            pw = #{newPassword}
+        where login_id = #{loginId}
+    ]]>
+	</update>
+
+
+
+</mapper>
