@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.lms_web_service.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="com.sky.lms_web_service.dto.Board" parameterType="map">
+		<![CDATA[
+    SELECT
+        board_idx,
+        title,
+        hit_cnt,
+        created_datetime
+    FROM
+        board
+    ORDER BY board_idx DESC
+    LIMIT #{offset}, #{itemsPerPage}
+    ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+        SELECT COUNT(*) FROM board;
+    ]]>
+	</select>
+
+	<insert id="insertBoard" parameterType="com.sky.lms_web_service.dto.Board" useGeneratedKeys="true" keyProperty="boardIdx">
+		<![CDATA[
+    INSERT INTO board
+    (
+        user_no,
+        title,
+        contents,
+        created_datetime,
+        hit_cnt
+    )
+    VALUES
+    (
+        #{userNo},
+        #{title},
+        #{contents},
+        NOW(),
+        0
+    )
+    ]]>
+	</insert>
+
+
+	<select id="selectBoardDetail" parameterType="int" resultType="com.sky.lms_web_service.dto.Board">
+		<![CDATA[
+        SELECT
+            board_idx,
+            title,
+            contents,
+            hit_cnt,
+			created_datetime
+        FROM
+            board
+        WHERE
+            board_idx = #{boardIdx}
+        ]]>
+	</select>
+
+
+	<update id="updateHitCount" parameterType="int">
+		<![CDATA[
+        UPDATE board
+        SET hit_cnt = hit_cnt + 1
+        WHERE board_idx = #{boardIdx}
+        ]]>
+	</update>
+
+	<update id="updateBoard" parameterType="com.sky.lms_web_service.dto.Board">
+		<![CDATA[
+        UPDATE board SET
+            title = #{title},
+            contents = #{contents},
+            updated_datetime = Now()
+        WHERE
+            board_idx = #{boardIdx}
+        ]]>
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		<![CDATA[
+    DELETE FROM board
+    WHERE
+        board_idx = #{boardIdx}
+    ]]>
+	</delete>
+
+
+	<insert id="insertBoardFileList" parameterType="com.sky.lms_web_service.dto.BoardFile">
+		<![CDATA[
+         INSERT INTO board_file
+         (
+            board_idx,
+            original_file_name,
+            stored_file_path,
+            file_size
+
+         )
+         VALUES
+      ]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+			#{item.boardIdx},
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize}
+
+			)
+		</foreach>
+	</insert>
+
+	<select id="selectBoardFileList" parameterType="int" resultType="com.sky.lms_web_service.dto.BoardFile">
+		<![CDATA[
+        SELECT
+            idx,
+            board_idx,
+            original_file_name,
+            FORMAT(ROUND(file_size / 1024), 0) AS file_size
+        FROM
+            board_file
+        WHERE
+            board_idx = #{boardIdx}
+        ]]>
+	</select>
+
+	<select id="selectBoardFileInformation" parameterType="map" resultType="com.sky.lms_web_service.dto.BoardFile">
+		<![CDATA[
+        SELECT
+            original_file_name,
+            stored_file_path,
+            file_size
+        FROM
+            board_file
+        WHERE
+            idx = #{idx}
+            AND board_idx = #{boardIdx}
+        ]]>
+	</select>
+</mapper>

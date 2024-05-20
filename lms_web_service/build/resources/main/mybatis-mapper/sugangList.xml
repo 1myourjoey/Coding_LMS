@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.lms_web_service.mapper.LectureMapper">
+
+    <select id="selectBySubjectId" resultType="com.sky.lms_web_service.dto.Lecture_Info">
+        SELECT * FROM lecture_info WHERE lec_num = #{lecNum}
+    </select>
+
+    <select id="selectAllLectures" resultType="com.sky.lms_web_service.dto.Lecture_Info">
+        SELECT * FROM lecture_info
+    </select>
+
+    <select id="getSugangRegWithDetails" resultType="com.sky.lms_web_service.dto.SugangRegWithDetails">
+        SELECT sugang_reg.*, lecture_info.lec_name, user.user_name , lecture_info.lec_ex, lecture_info.lec_start_date ,lecture_info.lec_end_date
+        FROM sugang_reg
+                 INNER JOIN lecture_info ON sugang_reg.lec_num = lecture_info.lec_num
+                 INNER JOIN user ON sugang_reg.USER_NO = user.USER_NO
+    </select>
+
+    <select id="getSugangRegWithDetailsByUserNo" resultType="com.sky.lms_web_service.dto.SugangRegWithDetails">
+        SELECT sugang_reg.*, lecture_info.lec_name, user.user_name , lecture_info.lec_ex, lecture_info.lec_start_date ,lecture_info.lec_end_date
+        FROM sugang_reg
+                 INNER JOIN lecture_info ON sugang_reg.lec_num = lecture_info.lec_num
+                 INNER JOIN user ON sugang_reg.USER_NO = user.USER_NO
+        WHERE sugang_reg.USER_NO = #{userNo}
+    </select>
+
+    <select id="getContentsByLecNum" resultType="com.sky.lms_web_service.dto.Contents_Manage">
+        SELECT cm.*
+        FROM lecture_info li
+                 LEFT JOIN contents_manage cm ON li.lec_num = cm.lec_num
+        WHERE li.lec_num = #{lecNum}
+    </select>
+
+</mapper>
