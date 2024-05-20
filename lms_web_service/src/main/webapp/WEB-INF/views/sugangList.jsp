@@ -118,7 +118,7 @@
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">수정</button>
                                             </div>
                                             <!-- 예시로 진행 시간 표시 -->
-                                            <small class="text-body-secondary">강의 시간: ${lecture.getLecStartDate()} </br>
+                                            <small class="text-body-secondary">수강기간 : ${lecture.getLecStartDate()} </br>
                                                 - ${lecture.getLecEndDate()}</small>
                                         </div>
                                     </div>
