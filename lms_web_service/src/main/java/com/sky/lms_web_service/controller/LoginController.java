@@ -60,6 +60,9 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.removeAttribute("loggedInUser");
         session.removeAttribute("isAdmin");
+
+        // 세션 만료
+        session.invalidate();
         return "redirect:/"; // 로그아웃 후 로그인 페이지로 리다이렉트
     }
 
