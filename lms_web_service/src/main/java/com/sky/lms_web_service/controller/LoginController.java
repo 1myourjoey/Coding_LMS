@@ -40,6 +40,7 @@ public class LoginController {
         if (user != null && user.getPw() != null && user.getPw().equals(pw)) {
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", user);
+            session.setAttribute("userNo", user.getUserNo());
 
             // 로그인 성공 시 관리자 여부 확인하여 반환
             if ("Y".equals(user.getAdminYn())) {

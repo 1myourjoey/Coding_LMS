@@ -27,7 +27,7 @@
             <li><a href="#">Help</a></li>
             <li><a href="#">Join</a></li>
             <li><a href="#">Sitemap</a></li>
-            <li><a class="open-modal" data-target="modal_sample_03">Login</a></li>
+            <li><a href="login">Login</a></li>
         </ul>
     </div>
 </header>
