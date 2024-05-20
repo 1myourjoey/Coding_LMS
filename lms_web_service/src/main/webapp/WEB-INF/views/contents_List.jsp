@@ -22,6 +22,7 @@
         <th>conName</th>
         <th>conDesc</th>
         <th>chapter</th>
+        <th>progress</th>
         <th></th>
     </tr>
     </thead>
@@ -44,6 +45,7 @@
                     </c:forEach>
                 </ul>
             </td>
+            <td id="progress_${loop.index}">0%</td>
             <!-- 학습하기 버튼 -->
             <td><button onclick="openPopup(${loop.index})">학습하기</button></td>
         </tr>

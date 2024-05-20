@@ -15,6 +15,7 @@ function handleClick(conNum) {
             $('input[name="videoId"]').val(response.videoId);
             $('input[name="conPlayTime"]').val(response.conPlayTime);
             $('input[name="id"]').val(response.id);
+            $('input[name="thumbUrl"]').val(response.thumbUrl);
             $('.js-preview-link').data('conNum', response.conNum);
 
         },
