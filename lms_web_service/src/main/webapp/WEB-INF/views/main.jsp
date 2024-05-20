@@ -18,7 +18,7 @@
             <li><a href="#">센터소개</a></li>
             <li><a href="#">모집안내</a></li>
             <li><a href="content">교육과정</a></li>
-            <li><a href="#">수강신청</a></li>
+            <li><a href="sugangReg">수강신청</a></li>
             <li><a href="#">커뮤니티</a></li>
         </ul>
 
