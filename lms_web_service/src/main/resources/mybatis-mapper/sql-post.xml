@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sky.mapper.PostMapper">
-    <select id="polist" resultType="com.sky.dto.PostDto">
+<mapper namespace="com.sky.lms_web_service.mapper.PostMapper">
+    <select id="polist" resultType="com.sky.lms_web_service.dto.Post">
         <![CDATA[
         SELECT
          post_num,
@@ -17,7 +17,7 @@
         ]]>
     </select>
 
-    <select id="getPostByNum" resultType="com.sky.dto.PostDto">
+    <select id="getPostByNum" resultType="com.sky.lms_web_service.dto.Post">
         <![CDATA[
         SELECT
             post_num,
@@ -48,7 +48,7 @@
     </update>
 
 <!--수정-->
-    <update id="updatePost" parameterType="com.sky.dto.PostDto">
+    <update id="updatePost" parameterType="com.sky.lms_web_service.dto.Post">
         <![CDATA[
         UPDATE post
         SET
@@ -61,7 +61,7 @@
 
 
 <!--    등록-->
-    <insert id="insertPost" parameterType="com.sky.dto.PostDto">
+    <insert id="insertPost" parameterType="com.sky.lms_web_service.dto.Post">
         <![CDATA[
     INSERT INTO post (user_no, post_title, post_contents, post_created, hit_cnt)
     VALUES (#{userNo}, #{postTitle}, #{postContents}, Now(), 0)
