@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.lms_web_service.mapper.QnaMapper">
+
+	<select id="selectQnaList" resultType="com.sky.lms_web_service.dto.Qna">
+		<![CDATA[
+        SELECT
+            q_num,
+            qna_title,
+            hit_cnt,
+        	qna_created
+        FROM
+            qna
+--         ORDER BY q_num DESC
+        ]]>
+	</select>
+
+	<insert id="insertQna" parameterType="com.sky.lms_web_service.dto.Qna" useGeneratedKeys="true" keyProperty="qNum">
+		<![CDATA[
+    INSERT INTO qna
+    (
+        user_no,
+        qna_title,
+        qna_contents,
+        qna_created,
+        hit_cnt
+    )
+    VALUES
+    (
+        #{userNo},
+        #{qnaTitle},
+        #{qnaContents},
+        NOW(),
+        0
+    )
+    ]]>
+	</insert>
+
+	<select id="selectQnaDetail" parameterType="int" resultType="com.sky.lms_web_service.dto.Qna">
+		<![CDATA[
+        SELECT
+             q_num,
+             qna_title,
+             qna_contents,
+             hit_cnt
+        FROM
+            qna
+        WHERE
+           q_num = #{qNum}
+        ]]>
+	</select>
+
+	<update id="updateHitCount" parameterType="int">
+		<![CDATA[
+        UPDATE qna
+        SET hit_cnt = hit_cnt + 1
+        WHERE q_num = #{qNum}
+        ]]>
+	</update>
+
+	<update id="updateQna" parameterType="com.sky.lms_web_service.dto.Qna">
+		<![CDATA[
+        UPDATE qna SET
+            qna_title = #{qnaTitle},
+            qna_contents = #{qnaContents}
+        WHERE
+            q_num = #{qNum}
+        ]]>
+	</update>
+
+	<delete id="deleteQna" parameterType="int">
+		<![CDATA[
+    DELETE FROM qna
+    WHERE
+        q_num = #{qNum}
+    ]]>
+	</delete>
+
+</mapper>

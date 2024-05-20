@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.lms_web_service.mapper.SugangRegisterMapper">
+
+    <insert id="insertSugangRegister" >
+        INSERT INTO sugang_reg (lec_num, user_no, lec_sub_date, complete_yn)
+        VALUES (#{lecNum}, #{userNo}, NOW(), #{completeYn})
+    </insert>
+
+    <select id="checkRegistered" resultType="int">
+        SELECT COUNT(*)
+        FROM sugang_reg
+        WHERE user_no = #{userNo} AND lec_num = #{lecNum}
+    </select>
+
+</mapper>
