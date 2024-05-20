@@ -211,7 +211,6 @@
 
                     <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
                     <input type="submit" class="btn btn-primary" value="검색">
-                    <input type="button" class="btn btn-primary" value="초기화" id="resetButton">
                 </div>
             </div>
               </form>
@@ -317,6 +316,11 @@
                             <tr>
                                 <td class="table-light">콘텐츠설명</td>
                                 <td><input type="text" class="form-control" name="description" value="${selectContent.description}"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="table-light">썸네일</td>
+                                <td><input type="text" class="form-control" name="thumbUrl" value="${selectContent.thumbUrl}"></td>
                             </tr>
 
                             <tr>
@@ -661,6 +665,9 @@ $(document).ready(function() {
                 success: function(response) {
                     // 성공적으로 요청을 보냈을 때의 처리
                     console.log("검색 요청 성공");
+
+                    $('#firstName').val('');
+                    $('#lastName').val('');
 
                     // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
                     var newTableBodyContent = $(response).find('tbody').html();

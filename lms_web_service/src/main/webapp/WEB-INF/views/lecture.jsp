@@ -190,13 +190,13 @@
 
                             <tr>
                                 <td class="table-light">강좌시작일시</td>
-                                    <td><input type="text" class="form-control" id="lecStartDate" name="lecStartDate" value="${selectLecture.lecStartDate}"></td>
+                                    <td><input type="date" class="form-control" id="lecStartDate" name="lecStartDate" value="${selectLecture.lecStartDate}"></td>
                             </tr>
 
                             <tr>
                                 <td class="table-light">강좌종료일시</td>
                                 <td>
-                                <input type="text" class="form-control" id="lecEndDate" name="lecEndDate" value="${selectLecture.lecEndDate}" style="margin-right: 5px;">
+                                <input type="date" class="form-control" id="lecEndDate" name="lecEndDate" value="${selectLecture.lecEndDate}" style="margin-right: 5px;">
 
                                 </td>
                             </tr>
@@ -294,6 +294,7 @@ $(document).ready(function() {
                 // 응답에서 헤더와 사이드바를 제외한 부분을 추출하여 사용
                 var lectureInfo = $(response).find('#tdInsert').html();
                 $('#tdInsert').html(lectureInfo);
+                $('#modalSearchResults').html(lectureInfo);
             },
             error: function(xhr, status, error) {
                 console.error('AJAX request failed:', status, error);

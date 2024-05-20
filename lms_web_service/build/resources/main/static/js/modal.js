@@ -58,6 +58,7 @@ $(document).ready(function() {
                 // 성공적으로 검색 결과를 받았을 때 실행되는 콜백 함수
                 // 검색 결과를 테이블에 표시
                 displaySearchResults(response);
+                appendNewLecture();
             },
             error: function(xhr, status, error) {
                 // 요청이 실패한 경우 실행되는 콜백 함수
