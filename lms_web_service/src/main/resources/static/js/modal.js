@@ -91,3 +91,18 @@ $(document).ready(function() {
         });
     }
 });
+    function appendNewLecture() {
+        $.ajax({
+            url: 'lecture',
+            type: 'GET',
+            success: function(response) {
+                // 응답에서 헤더와 사이드바를 제외한 부분을 추출하여 사용
+                var lectureInfo = $(response).find('#tdInsert').html();
+                $('#tdInsert').html(lectureInfo);
+                $('#modalSearchResults').html(lectureInfo);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed:', status, error);
+            }
+        });
+    }

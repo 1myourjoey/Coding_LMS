@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // 이미지를 클릭하여 모달 열기
     $('#openModalButton').click(function() {
+        appendNewLecture();
         $('#myModal').css('display', 'block');
     });
 
@@ -58,7 +59,8 @@ $(document).ready(function() {
                 // 성공적으로 검색 결과를 받았을 때 실행되는 콜백 함수
                 // 검색 결과를 테이블에 표시
                 displaySearchResults(response);
-                appendNewLecture();
+                $('#modalSearchInput').val('');
+
             },
             error: function(xhr, status, error) {
                 // 요청이 실패한 경우 실행되는 콜백 함수
@@ -89,3 +91,18 @@ $(document).ready(function() {
         });
     }
 });
+    function appendNewLecture() {
+        $.ajax({
+            url: 'lecture',
+            type: 'GET',
+            success: function(response) {
+                // 응답에서 헤더와 사이드바를 제외한 부분을 추출하여 사용
+                var lectureInfo = $(response).find('#tdInsert').html();
+                $('#tdInsert').html(lectureInfo);
+                $('#modalSearchResults').html(lectureInfo);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed:', status, error);
+            }
+        });
+    }
