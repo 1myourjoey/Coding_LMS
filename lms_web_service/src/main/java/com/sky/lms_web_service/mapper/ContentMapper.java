@@ -21,4 +21,6 @@ public interface ContentMapper {
     void deleteContent(String conNum);
     Contents_Manage selectContent(String conNum);
     List<Contents_Manage> selectSearch(@Param("conName") String conName, @Param("lecName") String lecName);
+    List<Contents_Manage> findAllVideos();
+    List<Contents_Manage> selectContentsByLectureName(String lecName);
 }

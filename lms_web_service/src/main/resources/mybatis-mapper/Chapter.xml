@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sky.lms_web_service.mapper.ChapterMapper">
+
+    <select id="findAllChapters" resultType="com.sky.lms_web_service.dto.Chapter">
+        SELECT * FROM chapter
+    </select>
+
+    <insert id="saveChapter" parameterType="com.sky.lms_web_service.dto.Chapter">
+        INSERT INTO chapter (con_num, chap_name, chap_start_time)
+        VALUES ( #{chapDto.conNum}, #{chapDto.chapName}, #{chapDto.chapStartTime});
+    </insert>
+
+</mapper>
