@@ -19,17 +19,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private HttpSession httpSession;
-
     @GetMapping("/login")
     public String loginForm() {
         return "/userlogin"; // 로그인 폼 페이지로 이동
-    }
-
-    @GetMapping("/index")
-    public String indexPage() {
-        return "index"; // index.html 파일로 이동
     }
 
     @PostMapping("/setlogin")
@@ -51,7 +43,6 @@ public class LoginController {
             return "fail"; // 로그인 실패 시 "fail" 반환
         }
     }
-
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
