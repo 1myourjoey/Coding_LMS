@@ -99,7 +99,6 @@
 </head>
 <body>
 
-
     <div id="lectureForm">
         <div class="row g-3 border p-3" style="margin-top: 10px; border-radius: 10px;">
             <div class="col-sm-6">
@@ -121,11 +120,11 @@
               </form>
         </div>
 
-        <div class="row g-3 border p-3" style="margin-top: 50px;" id="divHide">
+        <div class="row g-3 border p-3" style="margin-top: 50px; width:100%;" id="divHide">
             <h4>강좌정보</h4>
-            <div class="col-md-7" style="overflow-x: auto; overflow-y: auto; max-height: 600px;" id="lectureListWrapper">
+            <div class="col-md-7" style="overflow-x: auto; overflow-y: auto; max-height: 600px; width:100%;" id="lectureListWrapper">
 
-                <table class="table table-striped table-bordered table-hover" id="myTable">
+                <table class="table table-striped table-bordered table-hover" style="width:100%"; id="myTable">
                     <thead class="table-light">
                     <tr>
                         <th scope="col" style="text-align: center;">강좌번호</th>
@@ -209,7 +208,7 @@
                             </tbody>
 
                         </table>
-                            <input type="submit" value="Insert" class="btn btn-primary" style="float: right; margin-right: 0px;">
+                            <input type="submit" value="저장" class="btn btn-primary" style="float: right; margin-right: 0px;">
                             </form>
 
                     </div>
