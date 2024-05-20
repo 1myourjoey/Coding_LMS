@@ -64,4 +64,10 @@ public class ContentService {
         return lectureMapper.getContentsByLecNum(lecNum);
     }
 
+    public List<Contents_Manage> findAllVideos() {
+        return contentMapper.findAllVideos();
+    }
+    public List<Contents_Manage> getContentsByLectureName(String lecName) {
+        return contentMapper.selectContentsByLectureName(lecName);
+    }
 }

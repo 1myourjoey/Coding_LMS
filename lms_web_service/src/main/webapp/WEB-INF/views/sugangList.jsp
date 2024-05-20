@@ -114,13 +114,12 @@
                                         <!-- View, Edit 버튼 또는 기타 작업 버튼 추가 -->
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                <a href="${pageContext.request.contextPath}/contents_List?lecName=${lecture.lecName}" class="btn btn-sm btn-outline-secondary">보기</a>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">수정</button>
                                             </div>
                                             <!-- 예시로 진행 시간 표시 -->
                                             <small class="text-body-secondary">강의 시간: ${lecture.getLecStartDate()} </br>
                                                 - ${lecture.getLecEndDate()}</small>
-
                                         </div>
                                     </div>
                                 </div>

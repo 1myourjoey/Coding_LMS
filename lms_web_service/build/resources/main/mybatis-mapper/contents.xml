@@ -104,6 +104,8 @@
 	]]>
     </delete>
 
-
+    <select id="selectContentsByLectureName" parameterType="string" resultType="com.sky.lms_web_service.dto.Contents_Manage">
+    SELECT * FROM contents_manage WHERE lec_name = #{lecName}
+</select>
 
 </mapper>

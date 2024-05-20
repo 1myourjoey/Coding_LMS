@@ -1,12 +1,16 @@
 package com.sky.lms_web_service.controller;
 
+import com.sky.lms_web_service.dto.Chapter;
 import com.sky.lms_web_service.dto.Contents_Manage;
+import com.sky.lms_web_service.service.ChapterService;
 import com.sky.lms_web_service.service.ContentService;
 import com.sky.lms_web_service.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ContentController {
@@ -17,10 +21,24 @@ public class ContentController {
     @Autowired
     private LectureService lectureService;
 
+    @Autowired
+    private ChapterService chapterService;
+
     @GetMapping("/")
     public String main(){
         return "main";
     }
+
+    @GetMapping("/contents_List")
+    public String Showview(Model model, String lecName){
+        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
+        model.addAttribute("contents", contents);
+
+        List<Chapter> chapters = chapterService.findAllChapters();
+        model.addAttribute("chapters", chapters);
+        return "contents_List";
+    }
+
 
     @GetMapping("content")
     public String content(Model model){
@@ -62,22 +80,6 @@ public class ContentController {
         model.addAttribute("lectureList",lectureService.lectureList());
         return "content";
    }
-//@PostMapping("selectSearch")
-//@ResponseBody
-//public List<contents_manage> selectSearch(@RequestParam("conName") String conName, @RequestParam("lecName") String lecName) {
-//    return contentService.selectSearch(conName, lecName);
-//}
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

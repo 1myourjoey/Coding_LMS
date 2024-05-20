@@ -342,6 +342,15 @@
 
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="table-light">썸네일 URL</td>
+                                <td>
+                                    <div style="display: flex; align-items: center;">
+                                        <input type="text" class="form-control" id="thumbUrl" name="thumbUrl" value="${selectContent.thumbUrl}">
+                                        <input type="button" style="margin-left: 10px;" onclick="updateThumbnailUrl(); return false;" value="갱신">
+                                    </div>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <div>
@@ -688,17 +697,6 @@ $(document).ready(function() {
         loadInitialContent();
     });
 });
-
-
-
-
-
-
-
-
-
 </script>
-
-
 </body>
 </html>
