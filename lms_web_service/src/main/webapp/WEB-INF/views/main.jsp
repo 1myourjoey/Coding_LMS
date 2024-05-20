@@ -13,7 +13,7 @@
 <body>
 <header>
     <div class="inner">
-        <h1><a href="#">Coding</a></h1>
+        <h1><a href="/">Coding</a></h1>
 
         <ul id="gnb">
             <li><a href="/content">교육과정</a></li>
@@ -76,7 +76,7 @@
             <input type="radio" id="tab2" name="tabs">
             <label for="tab2">자료실</label>
 
-            <a href="#" style="margin-left: 300px;">더보기</a>
+            <a href="" style="margin-left: 300px;">더보기</a>
             <div id="notice" class="tabContent">
                 <h2>공지사항 내용입니다.</h2>
                 <ul>

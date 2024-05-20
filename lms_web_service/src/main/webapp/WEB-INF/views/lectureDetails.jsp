@@ -41,7 +41,11 @@
                 <tbody>
                 <c:forEach var="content" items="${contents}">
                     <tr data-lecNum="${content.lecNum}">
+<<<<<<< HEAD
                         <td><img src="${content.thumbUrl}" ></td>
+=======
+                        <td><img src="${content.thumbUrl}"></td>
+>>>>>>> yunyongsu
                         <td>${content.lecNum}</td>
                         <td>${content.lecName}</td>
                         <td>${content.conNum}</td>

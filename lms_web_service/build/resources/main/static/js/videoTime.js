@@ -43,30 +43,7 @@ function formatDuration(duration) {
 
 function fetchThumbnail() {
     const videoId = document.getElementById('videoIdInput').value;
-    var apiKey = "AIzaSyCGhQyWj6a975itCkAKU_vkojXiZHV2vto";
-    var apiUrl = "https://www.googleapis.com/youtube/v3/videos?id=" + videoId + "&key=" + apiKey + "&part=snippet";
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.items && data.items.length > 0) {
-                const video = data.items[0];
-                if (video.snippet && video.snippet.thumbnails && video.snippet.thumbnails.high) {
-                    const thumbnailUrl = video.snippet.thumbnails.high.url;
-                    document.getElementById('thumbUrl').value = thumbnailUrl;
-                } else {
-                    alert('썸네일 정보를 찾을 수 없습니다.');
-                }
-            } else {
-                alert('유효하지 않은 비디오 ID이거나 비디오를 찾을 수 없습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('비디오 데이터를 가져오는 중 오류 발생:', error);
-            alert('썸네일을 가져오는 중 오류가 발생했습니다.');
-        });
-}
-
-function updateThumbnailUrl() {
-    fetchThumbnail();
+    var apiUrl = "http://img.youtube.com/vi/" + videoId + "/default.jpg";
+    // 이미지 URL로 직접 요청
+    document.getElementById('thumbUrl').value = apiUrl;
 }
