@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.sky.lms_web_service.dto.User" %>
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html
+
+<html lang="en">
+<link rel="stylesheet" href="css/style.css">
 <div class="h-16 lg:flex w-full border-b border-gray-800 dark:border-gray-800 hidden px-10">
     <div class="flex h-full text-black-600 dark:text-black-400">
         <a href="/" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"><strong>Home</strong></a>
-        <a href="sugangReg" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강신청</a>
-        <a href="sugangList" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강목록</a>
-        <a href="boardlistuser" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">자료실</a>
-        <a href="post" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">공지사항</a>
-        <a href="qna/openQnaList.do" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Q&A</a>
+        <a href="/sugangReg" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강신청</a>
+        <a href="/sugangList" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강목록</a>
+        <a href="/boardlistuser" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">자료실</a>
+        <a href="/post" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">공지사항</a>
+        <a href="/qna/openQnaList.do" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Q&A</a>
     </div>
     <div class="ml-auto flex items-center space-x-7">
         <a href="/logout">
