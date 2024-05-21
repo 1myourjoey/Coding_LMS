@@ -26,10 +26,9 @@ public class SugangListController {
 
     @GetMapping("/sugangList")
     public String sugangList(Model model, HttpServletRequest request) {
-        // Get userNo from the session
+        // 유저넘 세션값 가져오기
         int userNo = (int) request.getSession().getAttribute("userNo");
 
-        // Get the list of lectures the user is registered for
         List<SugangRegWithDetails> lectures = lectureService.getSugangRegWithDetailsByUserNo(userNo);
 
         model.addAttribute("lectures", lectures);

@@ -26,6 +26,9 @@ public class LectureService {
     public List<Lecture_Info> searchLecture(String lecName) {
         return lectureMapper.searchLecture(lecName);
     }
+    public List<Lecture_Info> lectureSearch(String lecName, String lecEx){
+        return lectureMapper.lectureSearch(lecName,lecEx);
+    }
 
 
 
