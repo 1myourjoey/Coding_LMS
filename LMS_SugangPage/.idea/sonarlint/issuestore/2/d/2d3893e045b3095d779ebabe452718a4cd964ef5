@@ -1,20 +1,0 @@
-
-΅	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(£ν®ψÿÿÿÿ8ρΫλήχ1J$08120e23-3723-4bd1-9e97-c6a71fca4a30
-v
-java:S6837"3Remove this superfluous "@ResponseBody" annotation.(ά¥Ό8όΫλήχ1J$fba80541-2b0d-4414-9c1d-b2c7799d4096
-p
-java:S1128"-Remove this unused import 'com.sky.dto.User'.(‡Ες8άλήχ1J$6374ca6d-c04c-4e5c-b137-cd0d23b96d72
-z
-java:S1128"7Remove this unused import 'com.sky.dto.SugangRegister'.(ªµΞΓ8άλήχ1J$09233533-a8ee-468b-9937-a5c965b8f383
-
-java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(ν¤ϊÿÿÿÿ8άλήχ1J$06b9b448-3be4-4bb0-8aae-37079adb2424
-
-java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶―ψ¦ϊÿÿÿÿ8άλήχ1J$2c14a0a6-3c71-42ed-940e-b35e8ec3c757
-…
-java:S1128"BRemove this unused import 'javax.servlet.http.HttpServletRequest'.(ψ©Ή…8άλήχ1J$70322686-f62d-4130-9326-6e97c11208a8
-z
-java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ϊ΅ΩΫ8άλήχ1J$4ee74734-0fa1-4142-b9fd-e844a7c6cbec
-n
-java:S1128"+Remove this unused import 'java.util.Date'.(Έ…Όό8άλήχ1J$30a6ca5e-a0b5-494c-8a35-88606c5ab143
-r
-java:S1128"*Remove this unused import 'java.util.Map'.(Όθ½Òώÿÿÿÿ8άλήχ1J$84d3631d-dae3-4371-a8d2-49b90fec752d

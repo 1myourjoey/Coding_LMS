@@ -1,8 +1,0 @@
-
-‰
-java:S1192"MDefine a constant instead of duplicating this literal "loggedInUser" 4 times.(Âßí”J$78090be3-bd17-4997-bbce-746a51f9b525
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(£í®øÿÿÿÿJ$ae9f3ac0-cc89-4132-a52d-8873bd070df6
-~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$c1b0bade-efee-47a6-a633-71f9f9c6b6c7
-o
-java:S6856E"3Bind path variable "loginId" to a method parameter.(İŠÊÜJ$879011b8-a914-4e5a-b0a8-95d9b586bf57
