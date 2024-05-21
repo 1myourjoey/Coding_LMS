@@ -238,7 +238,7 @@
                                 <c:forEach var="contents" items="${contentList}" varStatus="loop">
                                     <tr>
                                         <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
-                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.lecName}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.lecName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); return false;">${contents.conName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); return false;">${contents.videoId}</td>
                                         <td onclick="handleClick('${contents.conNum}'); return false;">${contents.durationTime}</td>
@@ -418,7 +418,7 @@
                     </div>
 
                     <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 400px;">
-                      <form action="saveChapter" method="post">
+
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-light">
                             <tr>
@@ -430,31 +430,52 @@
                             </tr>
                             </thead>
                         <tbody id="addChapter">
+                        <c:forEach var="chapter" items="${selectChapter}" varStatus="loop">
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td style="text-align: center;">
                                     <input type="text" value="" style="width: 100%; text-align: center; border: none;">
                                 </td>
                                 <td style="text-align: center;">
-                                    <input type="text" value="" name="chapName" style="width: 100%; text-align: center; border: none;">
-
-                                    <input type="hidden" name="lecNum" id="chapterLecNum" value="${selectContent.lecNum}">
-                                    <input type="hidden" name="conNum" value="${selectContent.conNum}">
+                                    <input type="text" value="${chapter.chapName}"  id="chapName" style="width: 100%; text-align: center; border: none;">
 
                                 </td>
                                 <td style="text-align: center;">
-                                    <input type="text" value="" name="chapStartTime" style="width: 100%; text-align: center; border: none;">
+                                    <input type="text" value="${chapter.chapStartTime}"  id="chapStartTime" style="width: 100%; text-align: center; border: none;">
                                 </td>
                                 <td style="text-align: center;">
                                     <input type="text" value="" style="width: 100%; text-align: center; border: none;">
                                 </td>
                             </tr>
+                        </c:forEach>
                         </tbody>
 
-
                         </table>
+
+                        <form action="saveChapter" id="saveChapterForm" method="post">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="text-align: center;">챕터명</th>
+                                <th scope="col" style="text-align: center;">위치(시분초)</th>
+                            </tr>
+                            </thead>
+                         <tbody>
+                         <tr>
+                         <td>
+                         <input type="text" name="chapName" style="width: 100%; text-align: center; border: none;">
+                         </td>
+
+                         <td>
+                            <input type="text" name="chapStartTime"  style="width: 100%; text-align: center; border: none;">
+                            <input type="hidden" name="lecNum" id="chapterLecNum" value="${selectContent.lecNum}">
+                            <input type="hidden" name="conNum" value="${selectContent.conNum}">
+                         </td>
+
+                        </tr>
                         <input type="submit" value="저장">
                         <form>
+
                             <input type="button" onclick="addEmptyChapter(this)" value="추가">
                             <input type="button" value="삭제">
 
@@ -714,6 +735,36 @@ $(document).ready(function() {
         loadInitialContent();
     });
 });
+
+
+$(document).ready(function() {
+    // 폼 제출 이벤트 리스너
+    $('#saveChapterForm').submit(function(event) {
+        event.preventDefault(); // 기본 동작 방지
+
+        // 폼 데이터를 가져옵니다.
+        var formData = $(this).serialize();
+
+        // AJAX 요청을 보냅니다.
+        $.ajax({
+            url: $(this).attr('action'), // action 속성에 지정된 URL로 요청을 보냅니다.
+            method: $(this).attr('method'), // method 속성에 지정된 HTTP 메서드를 사용합니다.
+            data: formData, // 폼 데이터를 전송합니다.
+            success: function(response) {
+                // 요청이 성공적으로 처리되었을 때의 처리
+                console.log("저장 요청 성공");
+                // 여기에 성공 메시지 표시 등의 추가 작업을 할 수 있습니다.
+            },
+            error: function(xhr, status, error) {
+                // 요청이 실패했을 때의 처리
+                console.error("저장 요청 실패");
+                console.error(error);
+                // 여기에 실패 메시지 표시 등의 추가 작업을 할 수 있습니다.
+            }
+        });
+    });
+});
+
 </script>
 </body>
 </html>

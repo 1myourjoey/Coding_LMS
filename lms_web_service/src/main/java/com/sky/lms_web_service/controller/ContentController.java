@@ -42,8 +42,8 @@ public class ContentController {
         List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
         model.addAttribute("contents", contents);
 
-        List<Chapter> chapters = chapterService.findAllChapters();
-        model.addAttribute("chapters", chapters);
+        //List<Chapter> chapters = chapterService.findAllChapters();
+        //model.addAttribute("chapters", chapters);
         return "contents_List";
     }
     @GetMapping("content")

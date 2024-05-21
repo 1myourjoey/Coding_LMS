@@ -12,8 +12,8 @@ public class ChapterService {
     @Autowired
     private ChapterMapper chapterMapper;
 
-    public List<Chapter> findAllChapters() {
-       return chapterMapper.findAllChapters();
+    public List<Chapter> findAllChapters(String conNum) {
+       return chapterMapper.findAllChapters(conNum);
     }
 
     public void saveChapter(Chapter chapter) {
