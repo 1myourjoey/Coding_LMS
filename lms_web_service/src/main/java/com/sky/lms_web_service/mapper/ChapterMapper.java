@@ -10,5 +10,5 @@ import java.util.List;
 public interface ChapterMapper {
 
     List<Chapter> findAllChapters();
-    void saveChapter(@Param("chapDto") Chapter chapterDto, String conNum);
+    void saveChapter(Chapter chapter);
 }

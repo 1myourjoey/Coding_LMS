@@ -37,10 +37,12 @@
     </select>
 
     <select id="selectContent" resultType="com.sky.lms_web_service.dto.Contents_Manage">
-        SELECT *
-        FROM contents_manage
-        WHERE con_num = #{conNum}
+        SELECT cm.*, c.*
+        FROM contents_manage AS cm
+        JOIN chapter AS c ON cm.con_num = c.con_num
+        WHERE cm.con_num = #{conNum}
     </select>
+
 
     <select id="selectSearch" resultType="com.sky.lms_web_service.dto.Contents_Manage" parameterType="hashMap">
         SELECT
@@ -62,7 +64,7 @@
 
     <insert id="insertContent" parameterType="com.sky.lms_web_service.dto.Contents_Manage">
         <![CDATA[
-        INSERT INTO contents_manage (con_num, lec_num, con_name, description, video_id, con_play_time, lec_name, thumbUrl)
+        INSERT INTO contents_manage (con_num, lec_num, con_name, description, video_id, con_play_time, lec_name, thumb_url)
         SELECT
         CONCAT('J', YEAR(NOW()), '-', LPAD(IFNULL(SUBSTRING_INDEX(MAX(CON_NUM), '-', -1), 0) + 1, 4, '0')) AS next_con_num,
         #{lecNum},

@@ -10,8 +10,15 @@
     </select>
 
     <insert id="saveChapter" parameterType="com.sky.lms_web_service.dto.Chapter">
-        INSERT INTO chapter (con_num, chap_name, chap_start_time)
-        VALUES ( #{chapDto.conNum}, #{chapDto.chapName}, #{chapDto.chapStartTime});
+        INSERT INTO chapter (con_num, lec_num, chap_name, chap_start_time)
+        VALUES
+        (
+        #{conNum},
+        #{lecNum},
+        #{chapName},
+        #{chapStartTime}
+        )
     </insert>
+
 
 </mapper>

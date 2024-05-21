@@ -110,8 +110,6 @@
                         <label for="lecEx">내용</label>
                         <input type="text" class="form-control mb-2 mr-sm-2" id="lecEx" name="lecEx" style="max-width: 350px;">
 
-
-
                         <input type="submit" class="btn btn-primary mb-2" value="검색">
                     </div>
                 </div>
@@ -170,7 +168,7 @@
                 <div id="lectureNotice" class="tabLecture">
 
                     <div id="lectureInfo" class="mb-3">
-                    <form action="lectureInfo" method="post">
+                    <form action="lectureInfo" method="post" id="lectureReset">
                         <table class="table table border">
 
                             <tbody>
@@ -211,6 +209,10 @@
                     </div>
 
                         <div>
+                            <form action="deleteLecture" id="deleteLectureForm">
+                            <input type="hidden" name="lecNum" id="deleteButton"  value="${selectLecture.lecNum}">
+                            <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="삭제">
+                            </form>
 
                             <input type="button" onclick="addEmptyRow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
 
@@ -240,6 +242,7 @@ function lectureClick(lecNum) {
             $('#inputLecName').val(response.lecName);
             $('input[name="lecStartDate"]').val(response.lecStartDate);
             $('input[name="lecEndDate"]').val(response.lecEndDate);
+            $('#deleteButton').val(response.lecNum);
             $('textarea[name="lecEx"]').val(response.lecEx);
         },
         error: function(xhr, status, error) {
@@ -273,6 +276,7 @@ $(document).ready(function() {
                 appendNewLecture(response);
 
                 // 폼의 입력 필드를 비웁니다.
+                alert('데이터가 성공적으로 저장되었습니다.');
                 $form[0].reset();
             },
             error: function(xhr, status, error) {
@@ -317,6 +321,8 @@ $(document).ready(function() {
                         displaySearchResults(response);
                         $('#lec_name').val('');
                         $('#lecEx').val('');
+                        $('#lectureReset')[0].reset();
+
                     },
                     error: function(xhr, status, error) {
                         // 요청이 실패한 경우 실행되는 콜백 함수
@@ -336,16 +342,56 @@ $(document).ready(function() {
                 // 결과를 순회하면서 테이블에 추가
                 $.each(results, function(index, result) {
                     var row = '<tr>' +
-                        '<td>' + result.lecNum + '</td>' +
-                        '<td>' + result.lecStartDate + '</td>' +
-                        '<td>' + result.lecEndDate + '</td>' +
-                        '<td>' + result.lecName + '</td>' +
-                        '<td>' + result.lecEx + '</td>' +
+                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecNum + '</td>' +
+                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecStartDate + '</td>' +
+                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecEndDate + '</td>' +
+                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecName + '</td>' +
+                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecEx + '</td>' +
                         '</tr>';
                     $tbody.append(row);
                 });
             }
         });
+
+        $(document).ready(function() {
+            // 삭제 폼 제출 이벤트 리스너
+            $('#deleteLectureForm').submit(function(event) {
+                event.preventDefault(); // 폼 기본 동작 방지
+
+                // 확인 메시지를 표시
+                var confirmation = confirm('데이터를 삭제하시겠습니까?');
+
+                if (confirmation) {
+                    // 폼 데이터를 가져옵니다.
+                    var formData = $(this).serialize();
+
+                    // AJAX 요청을 보냅니다.
+                    $.ajax({
+                        url: $(this).attr('action'),
+                        method: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            // 성공적으로 요청을 보냈을 때의 처리
+                            console.log("삭제 요청 성공");
+                            alert('데이터가 성공적으로 삭제되었습니다.');
+
+                            // 삭제 후 업데이트된 목록을 불러옵니다.
+                            appendNewLecture();
+                        },
+                        error: function(xhr, status, error) {
+                            // 요청이 실패했을 때의 처리
+                            console.error("요청 실패");
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    // 삭제 취소 시 아무 동작도 하지 않음
+                    console.log("삭제 요청 취소됨");
+                }
+            });
+        });
+
+
 
 
 
