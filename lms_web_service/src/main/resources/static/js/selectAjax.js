@@ -51,3 +51,56 @@ $(document).ready(function() {
         });
     });
 });
+
+
+function selectChapter(conNum) {
+    $.ajax({
+        url: "/selectChapter?conNum=" + conNum, // 클릭된 요소의 conNum 값을 URL에 포함
+        method: 'POST', // 또는 POST, PUT 등 원하는 HTTP 메서드를 선택하세요
+        success: function(response) {
+            // 성공적으로 데이터를 가져왔을 때의 처리
+            displayChapterData(response); // 가져온 데이터를 처리하는 함수 호출
+        },
+        error: function(xhr, status, error) {
+            // 요청이 실패했을 때의 처리
+            console.error("요청 실패");
+            console.error(error);
+        }
+    });
+}
+
+function timeToSeconds(time) {
+    // 시간을 ':'를 기준으로 나눕니다.
+    var parts = time.split(':');
+    // 각 부분을 정수로 변환하여 시, 분, 초로 분리합니다.
+    var hours = parseInt(parts[0]);
+    var minutes = parseInt(parts[1]);
+    var seconds = parseInt(parts[2]);
+    // 총 초를 계산합니다.
+    var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    return totalSeconds;
+}
+
+function displayChapterData(chapters) {
+    // 서버로부터 받은 데이터를 처리하여 HTML에 추가하는 로직
+    var tbody = $('#addChapter'); // 테이블의 tbody 요소 선택
+
+    // 기존 내용을 비웁니다.
+    tbody.empty();
+
+    // 각 챕터에 대해 반복하면서 행을 추가합니다.
+    $.each(chapters, function(index, chapter) {
+
+    var startTimeSeconds = timeToSeconds(chapter.chapStartTime);
+        var row = '<tr>' +
+            '<td><input type="checkbox"></td>' +
+            '<td style="text-align: center;"><input type="text" value="' + (index + 1) + '" style="width: 100%; text-align: center; border: none;"></td>' +
+            '<td style="text-align: center;"><input type="text" value="' + chapter.chapName + '" name="chapName" style="width: 100%; text-align: center; border: none;"><input type="hidden" name="lecNum" value="' + chapter.lecNum + '"><input type="hidden" name="conNum" value="' + chapter.conNum + '"></td>' +
+            '<td style="text-align: center;"><input type="text" value="' + chapter.chapStartTime + '" name="chapStartTime" style="width: 100%; text-align: center; border: none;"></td>' +
+            '<td style="text-align: center;"><input type="text" value="' + startTimeSeconds + '" style="width: 100%; text-align: center; border: none;"></td>' +
+            '</tr>';
+        tbody.append(row); // 새로운 행을 추가합니다.
+    });
+}
+
+

@@ -110,4 +110,7 @@
     SELECT * FROM contents_manage WHERE lec_name = #{lecName}
 </select>
 
+
+
+
 </mapper>

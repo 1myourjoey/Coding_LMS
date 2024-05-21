@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
-    List<Chapter> findAllChapters();
+    List<Chapter> findAllChapters(String conNum);
     void saveChapter(Chapter chapter);
 }

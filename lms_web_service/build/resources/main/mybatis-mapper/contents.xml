@@ -37,12 +37,10 @@
     </select>
 
     <select id="selectContent" resultType="com.sky.lms_web_service.dto.Contents_Manage">
-        SELECT cm.*, c.*
-        FROM contents_manage AS cm
-        JOIN chapter AS c ON cm.con_num = c.con_num
-        WHERE cm.con_num = #{conNum}
+        SELECT *
+        FROM contents_manage
+        WHERE con_num = #{conNum}
     </select>
-
 
     <select id="selectSearch" resultType="com.sky.lms_web_service.dto.Contents_Manage" parameterType="hashMap">
         SELECT
@@ -111,5 +109,8 @@
     <select id="selectContentsByLectureName" parameterType="string" resultType="com.sky.lms_web_service.dto.Contents_Manage">
     SELECT * FROM contents_manage WHERE lec_name = #{lecName}
 </select>
+
+
+
 
 </mapper>
