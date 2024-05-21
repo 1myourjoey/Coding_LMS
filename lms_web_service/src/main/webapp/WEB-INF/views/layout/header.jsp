@@ -2,50 +2,35 @@
 <%@ page import="com.sky.lms_web_service.dto.User" %>
 <!DOCTYPE html>
 <html lang="ko">
-<header class="header header-shadow" id="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light container">
-        <a href="/main.do" class="navbar-brand"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<div class="h-16 lg:flex w-full border-b border-gray-800 dark:border-gray-800 hidden px-10">
+    <div class="flex h-full text-black-600 dark:text-black-400">
+        <a href="/" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"><strong>Home</strong></a>
+        <a href="sugangReg" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강신청</a>
+        <a href="sugangList" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강목록</a>
+        <a href="boardlistuser" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">자료실</a>
+        <a href="post" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">공지사항</a>
+        <a href="qna/openQnaList.do" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Q&A</a>
+    </div>
+    <div class="ml-auto flex items-center space-x-7">
+        <a href="/logout">
+            <button class="h-8 px-3 rounded-md shadow">Logout</button>
+        </a>
+        <button class="flex items-center">
+          <span class="relative flex-shrink-0">
+            <img class="w-7 h-7 rounded-full" src="https://images.unsplash.com/photo-1521587765099-8835e7201186?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="profile" />
+            <span class="absolute right-0 -mb-0.5 bottom-0 w-2 h-2 rounded-full bg-green-500 border border-white dark:border-gray-900"></span>
+          </span>
+            <%
+                User loggedInUser = (User) session.getAttribute("loggedInUser");
+                if (loggedInUser != null) {
+            %>
+            <span class="nav-link">환영합니다, <%= loggedInUser.getUserName() %>님!</span>
+            <%
+                }
+            %>
+            <svg viewBox="0 0 24 24" class="w-4 ml-1 flex-shrink-0" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/sugangReg">수강신청</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/sugangList">내 수강목록</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">공지사항</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">자료실</a>
-                </li>
-
-            </ul>
-            <div class="nav-right">
-                <div class="wrap-time wrap-time-pc">
-                    <span><img src="/images/icon-time.png" alt="시간"></span>
-                    <span class="time _timer">59:37</span>
-                    <span class="extend">시간연장</span>
-                    <%
-                        User loggedInUser = (User) session.getAttribute("loggedInUser");
-                        if (loggedInUser != null) {
-                    %>
-                    <span class="nav-link">환영합니다, <%= loggedInUser.getUserName() %>님! (번호: <%= loggedInUser.getUserNo() %>)</span>
-                    <%
-                        }
-                    %>
-                </div>
-                <div class="logout">
-                    <a href="/logout">
-                        <img src="/images/icon-logout.png" alt="로그아웃">
-                        <p>로그아웃</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
+    </div>
+</div>
