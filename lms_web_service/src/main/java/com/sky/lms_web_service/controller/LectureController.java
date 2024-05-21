@@ -48,6 +48,12 @@ public class LectureController {
         return lectureService.searchLecture(lecName);
     }
 
+    @PostMapping("/lectureSearch")
+    @ResponseBody
+    public List<Lecture_Info> lectureSearch(@RequestParam("lecName") String lecName,@RequestParam("lecEx") String lecEx){
+        return lectureService.lectureSearch(lecName,lecEx);
+    }
+
 
 
 

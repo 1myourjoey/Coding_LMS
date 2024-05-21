@@ -101,24 +101,24 @@
 
     <div id="lectureForm">
         <div class="row g-3 border p-3" style="margin-top: 10px; border-radius: 10px;">
-            <div class="col-sm-6">
-                <form action="selectSearch" method="post">
+            <form action="lectureSearch" method="post" class="form-inline" id="lectureSearch">
+                <div class="col-sm-12">
                     <div class="form-group" style="margin-left: 40px;">
-                        <label for="firstName">콘텐츠명</label>
+                        <label for="lecName">교과목명</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="lec_name" name="lecName" style="max-width: 350px;">
 
-                        <input type="text" class="form-control" placeholder="" value="" style="max-width: 350px;">
+                        <label for="lecEx">내용</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="lecEx" name="lecEx" style="max-width: 350px;">
+
+
+
+                        <input type="submit" class="btn btn-primary mb-2" value="검색">
                     </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="lastName">교과목명</label>
-
-                    <input type="text" class="form-control" placeholder="" value="" style="max-width: 350px;">
-                    <input type="button" class="btn btn-primary" value="검색"></input>
                 </div>
-            </div>
-              </form>
+            </form>
         </div>
+
+
 
         <div class="row g-3 border p-3" style="margin-top: 50px; width:100%;" id="divHide">
             <h4>강좌정보</h4>
@@ -135,10 +135,10 @@
                     </tr>
                     </thead>
 
-                <c:choose>
-                    <c:when test="${empty selectSearch}">
-                    <tbody id="tdInsert">
-                        <c:forEach var="lecture" items="${lectureList}" varStatus="loop">
+                <tbody id="tdInsert">
+                    <c:choose>
+                        <c:when test="${empty lectureSearch}">
+                            <c:forEach var="lecture" items="${lectureList}" varStatus="loop">
                                 <tr>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecNum()}</td>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecStartDate()}</td>
@@ -146,14 +146,10 @@
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecName()}</td>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecEx()}</td>
                                 </tr>
-                        </c:forEach>
-                    </tbody>
-                    </c:when>
-
-
-                    <c:otherwise>
-                        <c:forEach var="lecture" items="${lectureList}" varStatus="loop">
-                            <tbody id="tdInsert">
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="lecture" items="${lectureSearch}" varStatus="loop">
                                 <tr>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecNum()}</td>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecStartDate()}</td>
@@ -161,10 +157,11 @@
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecName()}</td>
                                     <td onclick="lectureClick('${lecture.getLecNum()}'); return false;">${lecture.getLecEx()}</td>
                                 </tr>
-                            </tbody>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+                </tbody>
+
 
 
                 </table>
@@ -302,9 +299,59 @@ $(document).ready(function() {
     }
 });
 
+        $(document).ready(function() {
+            // 검색 폼 제출 이벤트 리스너
+            $('#lectureSearch').submit(function(e) {
+                e.preventDefault(); // 폼 기본 동작 방지
+
+            var formData = $('#lectureSearch').serialize();
+
+                // AJAX 요청
+                $.ajax({
+                    url: '/lectureSearch', // 검색을 처리할 서버의 엔드포인트
+                    method: 'POST', // POST 요청
+                    data: formData,
+                    success: function(response) {
+                        // 성공적으로 검색 결과를 받았을 때 실행되는 콜백 함수
+                        // 검색 결과를 테이블에 표시
+                        displaySearchResults(response);
+                        $('#lec_name').val('');
+                        $('#lecEx').val('');
+                    },
+                    error: function(xhr, status, error) {
+                        // 요청이 실패한 경우 실행되는 콜백 함수
+                        console.error('AJAX request failed:', status, error);
+                    }
+                });
+            });
+
+            // 검색 결과를 테이블에 표시하는 함수
+            function displaySearchResults(results) {
+                // 결과를 표시할 tbody 요소 선택
+                var $tbody = $('#tdInsert');
+
+                // tbody 내용 비우기
+                $tbody.empty();
+
+                // 결과를 순회하면서 테이블에 추가
+                $.each(results, function(index, result) {
+                    var row = '<tr>' +
+                        '<td>' + result.lecNum + '</td>' +
+                        '<td>' + result.lecStartDate + '</td>' +
+                        '<td>' + result.lecEndDate + '</td>' +
+                        '<td>' + result.lecName + '</td>' +
+                        '<td>' + result.lecEx + '</td>' +
+                        '</tr>';
+                    $tbody.append(row);
+                });
+            }
+        });
+
+
+
+
 
 </script>
-
 
 
 
