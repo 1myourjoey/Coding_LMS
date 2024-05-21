@@ -1,13 +1,17 @@
 
     /* 부트스트랩에서 재정의한 CSS */
 body {
-    padding-top: 56px;
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
     h2 {
         font-size: 1.5rem;
         font-style: italic;
     }
-
+    .h-8.px-3.rounded-md.shadow {
+        background-color: #323232;
+        color: white;
+    }
 
 .form-basic {
     padding: 20px;
@@ -20,8 +24,11 @@ body {
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #323232;
+    border-color: #323232;
+    border-radius: 80px; /* 버튼을 라운드 형식으로 만듭니다 */
+    padding: 10px 20px; /* 버튼 내부의 패딩을 설정합니다 */
+    text-decoration: none;
 }
 
 /* 커스텀 CSS 추가 */
@@ -68,6 +75,9 @@ h2.my-4 {
 }
 
 .btn-primary:hover {
-    background-color: #000080;
-    border-color: #0056b3;
+    background-color: #505050;
+    border-color: #505050;
 }
+
+
+
