@@ -16,8 +16,7 @@ public class ChapterService {
        return chapterMapper.findAllChapters();
     }
 
-    public void saveChapter(Chapter chapter, String conNum) {
-        chapter.setConNum(conNum);
-        chapterMapper.saveChapter(chapter, conNum);
+    public void saveChapter(Chapter chapter) {
+        chapterMapper.saveChapter(chapter);
     }
 }

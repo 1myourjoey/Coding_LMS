@@ -30,7 +30,9 @@ public class LectureService {
         return lectureMapper.lectureSearch(lecName,lecEx);
     }
 
-
+    public void deleteLecture(String lecNum){
+        lectureMapper.deleteLecture(lecNum);
+    }
 
     public void insertOrUpdateLecture(Lecture_Info lectureInfo){
        Lecture_Info existingContent = lectureMapper.getContentByNum(lectureInfo.getLecNum());

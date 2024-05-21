@@ -54,6 +54,12 @@ public class LectureController {
         return lectureService.lectureSearch(lecName,lecEx);
     }
 
+    @PostMapping("deleteLecture")
+    public String deleteLecture(String lecNum){
+        lectureService.deleteLecture(lecNum);
+        return "redirect:/content";
+    }
+
 
 
 

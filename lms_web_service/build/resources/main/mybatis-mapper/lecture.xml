@@ -64,4 +64,12 @@
         WHERE lec_name LIKE CONCAT('%', #{lecName}, '%')
     </select>
 
+
+    <delete id="deleteLecture" parameterType="String">
+        <![CDATA[
+		delete from lecture_info where lec_num = #{lecNum};
+
+	]]>
+    </delete>
+
 </mapper>

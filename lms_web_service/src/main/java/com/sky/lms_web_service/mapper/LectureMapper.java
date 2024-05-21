@@ -19,6 +19,7 @@ public interface LectureMapper {
     List<Lecture_Info> searchLecture(@Param("lecName") String lecName);
     List<Lecture_Info> lectureSearch(@Param("lecName") String lecName,@Param("lecEx") String lecEx);
 
+    void deleteLecture(String lecNum);
 
     List<Contents_Manage> getContentsByLecNum(String lecNum);
     List<SugangRegWithDetails> getSugangRegWithDetails();

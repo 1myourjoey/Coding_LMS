@@ -135,6 +135,9 @@
             cursor: pointer; /* 마우스 커서를 포인터로 변경 */
            }
 
+
+
+
     </style>
     <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
@@ -183,7 +186,7 @@
             </li>
         </ul>
 
-        <button id="btn-hide" class="btn btn-primary" style="margin-top: 500px;">메뉴숨기기</button>
+        <button id="btn-hide" style="margin-top: 500px;">메뉴숨기기</button>
 </div>
 <div>
 
@@ -208,7 +211,7 @@
                     <label for="lastName">교과목명</label>
 
                     <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
-                    <input type="submit" class="btn btn-primary" value="검색">
+                    <input type="submit" value="검색">
                 </div>
             </div>
               </form>
@@ -305,11 +308,8 @@
                                 <img id="openModalButton" src="img/search.svg" style="width: 16px; height: 16px; cursor: pointer;">
                             </div>
 
-
                                 </td>
-
                             </tr>
-
 
                             <tr>
                                 <td class="table-light">콘텐츠설명</td>
@@ -352,15 +352,15 @@
                         </table>
                         <div>
                             <input type="hidden" value="${selectContent.conNum}">
-                            <input type="submit" value="저장" class="btn btn-primary" style="float: right; margin-right: 0px;">
+                            <input type="submit" value="저장"  style="float: right; margin-right: 0px;">
                             </form>
 
                             <form action="deleteContent" id="deleteContentForm">
                             <input type="hidden" name="conNum" id="deleteBtn"  value="${selectContent.conNum}">
-                            <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="삭제">
+                            <input type="submit"  style="float: right; margin-right: 5px;" value="삭제">
                             </form>
 
-                                <input type="button" onclick="addEmptyRowBelow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
+                                <input type="button" onclick="addEmptyRowBelow(this)"  style="float: right; margin-right: 5px;" value="추가">
 
                             </div>
                     </div>
@@ -417,45 +417,47 @@
                         </div>
                     </div>
 
-
-                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 200px;">
+                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 400px;">
+                      <form action="saveChapter" method="post">
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-light">
                             <tr>
+                                <th scope="col"><input type="checkbox"></th>
                                 <th scope="col" style="text-align: center;">챕터</th>
                                 <th scope="col" style="text-align: center;">챕터명</th>
                                 <th scope="col" style="text-align: center;">위치(시분초)</th>
                                 <th scope="col" style="text-align: center;">시작위치[초]</th>
                             </tr>
                             </thead>
-                            <tbody>
+                        <tbody id="addChapter">
                             <tr>
-                                <td style="text-align: center;">1</td>
-                                <td style="text-align: center;">B-0423</td>
-                                <td style="text-align: center;">00:00:00</td>
-                                <td style="text-align: center;">20</td>
+                                <td><input type="checkbox"></td>
+                                <td style="text-align: center;">
+                                    <input type="text" value="" style="width: 100%; text-align: center; border: none;">
+                                </td>
+                                <td style="text-align: center;">
+                                    <input type="text" value="" name="chapName" style="width: 100%; text-align: center; border: none;">
 
+                                    <input type="hidden" name="lecNum" id="chapterLecNum" value="${selectContent.lecNum}">
+                                    <input type="hidden" name="conNum" value="${selectContent.conNum}">
+
+                                </td>
+                                <td style="text-align: center;">
+                                    <input type="text" value="" name="chapStartTime" style="width: 100%; text-align: center; border: none;">
+                                </td>
+                                <td style="text-align: center;">
+                                    <input type="text" value="" style="width: 100%; text-align: center; border: none;">
+                                </td>
                             </tr>
-                            <tr>
-                                <td style="text-align: center;">2</td>
-                                <td style="text-align: center;">변수의 개념</td>
-                                <td style="text-align: center;">00:00:00</td>
-                                <td style="text-align: center;">60</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">3</td>
-                                <td style="text-align: center;">Java</td>
-                                <td style="text-align: center;">00:00:00</td>
-                                <td style="text-align: center;">150</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;">4</td>
-                                <td style="text-align: center;">서식1</td>
-                                <td style="text-align: center;">00:00:00</td>
-                                <td style="text-align: center;">200</td>
-                            </tr>
-                            </tbody>
+                        </tbody>
+
+
                         </table>
+                        <input type="submit" value="저장">
+                        <form>
+                            <input type="button" onclick="addEmptyChapter(this)" value="추가">
+                            <input type="button" value="삭제">
+
                     </div>
 
                 </div>
@@ -476,7 +478,7 @@
 <script src="js/modal.js"></script>
 <script src="js/videoTime.js"></script>
 <script src="js/grid.js"></script>
-
+<script src="js/addEmptyChapter.js"></script>
 <script src="js/checkBox.js"></script>
 
 <script>
@@ -566,7 +568,7 @@ $(document).ready(function() {
                 updateContentList();
 
                 $('#updateContent')[0].reset();
-                alert('데이터가 성공적으로 업데이트되었습니다.');
+                alert('데이터가 성공적으로 저장되었습니다.');
             },
             error: function(xhr, status, error) {
                 // 요청이 실패했을 때의 처리
@@ -578,9 +580,13 @@ $(document).ready(function() {
     });
 
 
-    $('#deleteContentForm').submit(function(event) {
-        event.preventDefault(); // 기본 폼 제출 방지
+$('#deleteContentForm').submit(function(event) {
+    event.preventDefault(); // 기본 폼 제출 방지
 
+    // 사용자에게 확인 메시지 표시
+    var confirmDelete = confirm("데이터를 삭제하시겠습니까?");
+
+    if (confirmDelete) {
         // 폼 데이터를 가져옵니다.
         var formData = $(this).serialize();
 
@@ -595,6 +601,9 @@ $(document).ready(function() {
 
                 // 삭제 후 업데이트된 목록을 불러옵니다.
                 updateContentList();
+
+                $('#updateContent')[0].reset();
+                alert('데이터가 성공적으로 삭제되었습니다.');
             },
             error: function(xhr, status, error) {
                 // 요청이 실패했을 때의 처리
@@ -602,7 +611,12 @@ $(document).ready(function() {
                 console.error(error);
             }
         });
-    });
+    } else {
+        // 사용자가 삭제를 취소한 경우
+        console.log("삭제 요청 취소됨");
+    }
+});
+
 
     // 목록을 업데이트하는 함수
     function updateContentList() {
