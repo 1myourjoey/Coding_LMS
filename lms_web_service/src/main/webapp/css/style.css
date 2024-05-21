@@ -31,6 +31,17 @@ body {
     text-decoration: none;
 }
 
+    .registerButton {
+        color: #323232;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .registerButton:hover {
+        background-color: #505050;
+    }
 /* 커스텀 CSS 추가 */
 h2.my-4 {
     margin-top: 20px;
@@ -65,7 +76,7 @@ h2.my-4 {
     }
 }
 
-/* 강좌 이동 버튼 스타일 조정 */
+/* 수강렉 보기 버튼 */
 .btn-primary {
     color: #fff;
     border-radius: 5px;
@@ -78,6 +89,7 @@ h2.my-4 {
     background-color: #505050;
     border-color: #505050;
 }
+
 
 
 
