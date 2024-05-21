@@ -229,32 +229,32 @@
                     </tr>
                     </thead>
 
-<tbody id="tableBody">
-    <c:choose>
-        <c:when test="${empty selectSearch}">
-            <c:forEach var="contents" items="${contentList}" varStatus="loop">
-                <tr>
-                    <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
-                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.lecName}</td>
-                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.conName}</td>
-                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.videoId}</td>
-                    <td onclick="handleClick('${contents.conNum}'); return false;">${contents.durationTime}</td>
-                </tr>
-            </c:forEach>
-        </c:when>
-        <c:otherwise>
-            <c:forEach var="search" items="${selectSearch}" varStatus="loop">
-                <tr>
-                    <td><input type="checkbox" onclick="handleClick('${search.conNum}')"></td>
-                    <td onclick="handleClick('${search.conNum}'); return false;">${search.lecName}</td>
-                    <td onclick="handleClick('${search.conNum}'); return false;">${search.conName}</td>
-                    <td onclick="handleClick('${search.conNum}'); return false;">${search.videoId}</td>
-                    <td onclick="handleClick('${search.conNum}'); return false;">${search.durationTime}</td>
-                </tr>
-            </c:forEach>
-        </c:otherwise>
-    </c:choose>
-</tbody>
+                    <tbody id="tableBody">
+                        <c:choose>
+                            <c:when test="${empty selectSearch}">
+                                <c:forEach var="contents" items="${contentList}" varStatus="loop">
+                                    <tr>
+                                        <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
+                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.lecName}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.conName}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.videoId}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.durationTime}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="search" items="${selectSearch}" varStatus="loop">
+                                    <tr>
+                                        <td><input type="checkbox" onclick="handleClick('${search.conNum}')"></td>
+                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.lecName}</td>
+                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.conName}</td>
+                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.videoId}</td>
+                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.durationTime}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </tbody>
 
 
 
@@ -359,8 +359,6 @@
                             <input type="hidden" name="conNum" id="deleteBtn"  value="${selectContent.conNum}">
                             <input type="submit" class="btn btn-primary" style="float: right; margin-right: 5px;" value="삭제">
                             </form>
-
-
 
                                 <input type="button" onclick="addEmptyRowBelow(this)" class="btn btn-primary" style="float: right; margin-right: 5px;" value="추가">
 
@@ -521,6 +519,7 @@ $(document).ready(function() {
                 // 컨텐츠 정보를 숨기고 강좌 정보 폼을 표시합니다.
                 $('.container-fluid').hide();
                 $('#lectureForm').show();
+
 
                 // 강좌 정보 폼의 submit 이벤트 추가
                 $('#lectureForm').submit(function(e) {
