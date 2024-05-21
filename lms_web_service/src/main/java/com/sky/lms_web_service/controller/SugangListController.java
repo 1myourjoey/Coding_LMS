@@ -32,7 +32,7 @@ public class SugangListController {
         List<SugangRegWithDetails> lectures = lectureService.getSugangRegWithDetailsByUserNo(userNo);
 
         model.addAttribute("lectures", lectures);
-        return "sugangList"; // sugangList.jsp 파일을 뷰로 사용
+        return "sugangList"; //
     }
 
     @GetMapping("/sugangReg")
