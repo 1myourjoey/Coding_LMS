@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class section_progress {
+public class Section_Progress {
     String conNum;
     String lecNum;
     int userNo;

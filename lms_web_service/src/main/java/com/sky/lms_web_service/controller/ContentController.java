@@ -1,31 +1,51 @@
 package com.sky.lms_web_service.controller;
 
+import com.sky.lms_web_service.dto.Chapter;
 import com.sky.lms_web_service.dto.Contents_Manage;
 import com.sky.lms_web_service.dto.User;
+import com.sky.lms_web_service.service.ChapterService;
 import com.sky.lms_web_service.service.ContentService;
 import com.sky.lms_web_service.service.LectureService;
+import com.sky.lms_web_service.service.ProgressService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ContentController {
 
     @Autowired
     private ContentService contentService;
-
     @Autowired
     private LectureService lectureService;
+    @Autowired
+    private ChapterService chapterService;
+    @Autowired
+    private ProgressService progressService;
 
     @GetMapping("/")
     public String main(){
         return "main";
     }
 
+    @GetMapping("/contents_List")
+    public String ShowvContentList(Model model,String lecName){
+        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
+        model.addAttribute("contents", contents);
+
+        List<Chapter> chapters = chapterService.findAllChapters();
+        model.addAttribute("chapters", chapters);
+        return "contents_List";
+    }
     @GetMapping("content")
     public String content(Model model, HttpServletRequest request){
 

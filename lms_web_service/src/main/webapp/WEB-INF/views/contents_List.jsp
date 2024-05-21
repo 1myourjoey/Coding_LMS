@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/contents_List.css">
     <title>YouTube Video Popup</title>
-    <style>
-
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>YouTube Video Popup Example</h1>
@@ -28,18 +26,18 @@
     </thead>
     <tbody>
     <!-- varStatus : 현재 항목의 정보(index를 위해 사용)-->
-    <c:forEach items="${contents}" var="contents" varStatus="loop">
-        <tr class="videoItem" data-videoId="${contents.videoId}">
-            <td>${contents.conNum}</td>
-            <td><img src="${contents.thumbUrl}" alt="thumbnail" class="thumbnail"></td>
-            <td>${contents.conName}</td>
-            <td>${contents.description}</td>
+    <c:forEach items="${contents}" var="content" varStatus="loop">
+        <tr class="videoItem" data-videoId="${content.videoId}">
+            <td>${content.conNum}</td>
+            <td><img src="${content.thumbUrl}" alt="thumbnail" class="thumbnail"></td>
+            <td>${content.conName}</td>
+            <td>${content.description}</td>
             <td>
                 <ul class="chapter-list">
                     <!-- 챕터 정보를 표시할 리스트 -->
                     <c:forEach items="${chapters}" var="chapter">
                         <!-- chapter테이블의 conNum과  -->
-                        <c:if test="${chapter.conNum eq contents.conNum}">
+                        <c:if test="${chapter.conNum eq content.conNum}">
                             <li class="chapter-item">${chapter.chapName} (${chapter.chapStartTime})</li>
                         </c:if>
                     </c:forEach>
@@ -56,13 +54,13 @@
 <script>
     //비디오 목록과 챕터 목록을 script에서 사용하기 위한 배열 선언.
     window.contents = [
-        <c:forEach items="${contents}" var="contents" varStatus="loop">
+        <c:forEach items="${contents}" var="content" varStatus="loop">
         {
-            videoId: '${contents.videoId}',
-            conName:'${contents.conName}',
+            videoId: '${content.videoId}',
+            conName:'${content.conName}',
             chapters: [
                 <c:forEach items="${chapters}" var="chapter" varStatus="chapLoop">
-                <c:if test="${chapter.conNum eq contents.conNum}">
+                <c:if test="${chapter.conNum eq content.conNum}">
                 { chapName: '${chapter.chapName}', chapStartTime: '${chapter.chapStartTime}' }<c:if test="${!chapLoop.last}">, </c:if>
                 </c:if>
                 </c:forEach>
@@ -86,6 +84,7 @@
         popup.name = index;
         //팝업창 가운데 정렬
         popup.moveTo((window.screen.width - popupWidth) / 2, (window.screen.height - popupHeight) / 2);
+        updateProgress(index);
 
         //팝업창 안에서의 HTML/CSS
         popup.document.write('<div id="video-container" style="width: 100%; height: 650px; display: flex;">');
@@ -111,7 +110,13 @@
         popup.document.write('</div>');
         popup.document.write('</div>');
 
+        // 팝업이 닫힐 때 시청한 시간 저장
+        popup.onbeforeunload = function () {
+            saveProgress(index);
+        };
+
     }
+
     // 시간을 초 단위로 변환
     function convertToSeconds(time) {
         var parts = time.split(':');
@@ -160,6 +165,24 @@
                 chapterList.innerHTML += '<div class="chapterItem" style="border: 1px solid #ddd; background-color: #ffffff; height: 70px; padding: 8px; margin-bottom: 10px; border-radius: 10px; cursor: pointer;" onclick="opener.seekToChapter(\'' + chapters[i].chapStartTime + '\')">' + chapters[i].chapName + ' (' + chapters[i].chapStartTime + ')</div>';
             }
         }
+    }
+    function saveProgress(index) {
+        var currentTime = popup.document.getElementsByTagName('iframe')[0].contentWindow.document.getElementsByTagName('video')[0].currentTime;
+        // AJAX 요청을 사용하여 서버에 현재 시청한 시간을 저장
+        $.ajax({
+            url: '/saveVideoProgress', // 저장하는 API endpoint
+            type: 'POST',
+            data: {
+                videoId: contents[index].videoId,
+                currentTime: currentTime
+            },
+            success: function(data) {
+                console.log('Progress saved successfully.');
+            }
+        });
+    }
+    function updateProgress(index) {
+        document.getElementById('progress_' + index).innerText = '0%';
     }
 </script>
 </body>
