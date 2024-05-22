@@ -478,9 +478,7 @@
 
                             <input type="button" onclick="addEmptyChapter(this)" value="추가">
                             <input type="button" value="삭제">
-
                     </div>
-
                 </div>
             </div>
 

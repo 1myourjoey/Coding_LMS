@@ -253,6 +253,7 @@ function lectureClick(lecNum) {
 }
 
 </script>
+
 <script>
 $(document).ready(function() {
     $('form[action="lectureInfo"]').submit(function(event) {
@@ -392,15 +393,6 @@ $(document).ready(function() {
         });
 
 
-
-
-
-
-
 </script>
-
-
-
-
 </body>
 </html>
