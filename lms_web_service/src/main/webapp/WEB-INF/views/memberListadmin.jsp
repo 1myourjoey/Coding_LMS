@@ -10,12 +10,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>개인정보 수정</title>
+<title>회원정보 수정</title>
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
     crossorigin="anonymous">
+     <style>
+            /* 버튼과 링크의 배경색과 글꼴 색상 변경 */
+            .btn-primary,
+            .btn-primary:hover,
+            .btn-primary:active,
+            .btn-primary:focus,
+            .page-link {
+                background-color: #323232;
+                border-color: #323232;
+                color: #ffffff;
+            }
+
+
+            /* 페이지네이션 링크의 색상 변경 */
+            .pagination a.page-link {
+            border-color: #323232;
+                color: #323232;
+            }
+        </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">

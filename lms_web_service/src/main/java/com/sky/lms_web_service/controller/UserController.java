@@ -168,7 +168,7 @@ public class UserController {
 
 		// 세션에 업데이트된 사용자 정보 저장
 		session.setAttribute("loggedInUser", updatedUser);
-		return "redirect:/memberlist"; // 수정 후 목록 페이지로 리다이렉트
+		return "redirect:/memberList"; // 수정 후 목록 페이지로 리다이렉트
 	}
 
 
@@ -208,7 +208,7 @@ public class UserController {
 
 		// 변경된 비밀번호로 다시 로그인하도록 사용자에게 안내
 
-		return "redirect:/memberlist"; // 비밀번호 수정 후 목록 페이지로 리다이렉트
+		return "redirect:/memberList"; // 비밀번호 수정 후 목록 페이지로 리다이렉트
 	}
 
 

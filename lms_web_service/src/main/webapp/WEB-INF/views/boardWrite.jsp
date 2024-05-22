@@ -7,8 +7,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style>
 		body {
-			background-color: #f8f9fa;
-			padding-top: 50px; /* 네비게이션 바의 높이만큼 여백 추가 */
+			background-color: #fff;
+			padding-top: 80px; /* 네비게이션 바의 높이만큼 여백 추가 */
 		}
 
 		.container {
@@ -21,6 +21,12 @@
 		h2 {
 			margin-bottom: 20px;
 		}
+		/* 버튼의 배경색과 글꼴 색상 변경 */
+                        .btn-primary, .btn-success, .btn-danger {
+                            background-color: #323232;
+                            color: #ffffff;
+                            border-color: #323232;
+                        }
 	</style>
 </head>
 <body>

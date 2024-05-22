@@ -5,11 +5,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>자료실</title>
-	<!-- 부트스트랩 CDN 추가 -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <meta charset="UTF-8">
+    <title>자료실</title>
+    <!-- 부트스트랩 CDN 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+    			background-color: #fff;
+    			padding-top: 100px; /* 네비게이션 바의 높이만큼 여백 추가 */
+    		}
+        /* 버튼의 배경색과 글꼴 색상 변경 */
+        .btn-primary, .btn-success, .btn-danger {
+            background-color: #323232;
+            color: #ffffff;
+            border-color: #323232;
+        }
+    </style>
 <body>
 <div class="container">
 	<h2>자료실</h2>
@@ -44,18 +55,26 @@
 						<textarea class="form-control" title="내용" id="contents" name="contents" >${board.contents}</textarea>
 					</td>
 				</tr>
+				<tr>
+                     <th scope="row">첨부파일</th>
+                     <td></td><td></td><td></td>
+                </tr>
 				</tbody>
 			</table>
 		</div>
 		<input type="hidden" id="boardIdx" name="boardIdx" value="${board.boardIdx}" />
+
 	</form>
+
+
 
 	    <div class="file_list">
 	       <c:forEach var="list" items="${board.fileList}">
 	            <a href="<c:url value='/board/downloadBoardFile.do' />?idx=${list.idx}&amp;boardIdx=${list.boardIdx}">${list.originalFileName} (${list.fileSize} kb)</a>
 	        </c:forEach>
 	    </div>
-
+    </br>
+    </br>
 
 <div class="file_list">
     <c:forEach var="file" items="${board.fileList}">
