@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.sky.lms_web_service.dto.User" %>
-<!DOCTYPE html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <style>
+        .flex.h-full.text-black-600.dark.text-black-400 a {
+            color: black;
+        }
 
-<html lang="en">
+    </style>
+</head>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/stylecard.css">
 <div class="h-16 lg:flex w-full border-b border-gray-800 dark:border-gray-800 hidden px-10">
     <div class="flex h-full text-black-600 dark:text-black-400">
         <a href="/" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8"><strong>Home</strong></a>

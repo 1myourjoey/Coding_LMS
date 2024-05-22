@@ -192,6 +192,7 @@ body {
     left: 0;
 }
 .card-buttons button {
+
     flex: 1 1 auto;
     -webkit-user-select: none;
     -moz-user-select: none;

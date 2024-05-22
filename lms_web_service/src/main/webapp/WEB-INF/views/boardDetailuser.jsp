@@ -5,11 +5,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>자료실</title>
-	<!-- 부트스트랩 CDN 추가 -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <meta charset="UTF-8">
+    <title>자료실</title>
+    <!-- 부트스트랩 CDN 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+    			background-color: #fff;
+    			padding-top: 100px; /* 네비게이션 바의 높이만큼 여백 추가 */
+    		}
+        /* 버튼의 배경색과 글꼴 색상 변경 */
+        .btn-primary, .btn-success, .btn-danger {
+            background-color: #323232;
+            color: #ffffff;
+            border-color: #323232;
+        }
+    </style>
 <body>
 <div class="container">
 	<h2>자료실</h2>
@@ -34,23 +45,33 @@
 					<td>관리자</td>
 					<th scope="row">작성일</th>
 					<td>${board1.createdDatetime}</td>
+
 				</tr>
 				<tr>
                     <th scope="row">제목</th>
-                    <td colspan="3"><input type="text" class="form-control" id="title" name="title" value="${board1.title}" readonly /></td>
+                    <td>${board1.title}</td>
+                    <th scope="row">   </th>
+                    <td>                </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="view_text">
-                        <textarea class="form-control" title="내용" id="contents" name="contents" readonly>${board1.contents}</textarea>
-                    </td>
+                    <th scope="row">내용</th>
+                    <td>${board1.contents}</td>
+                    <th scope="row">   </th>
+                    <td>                </td>
                 </tr>
-
+                <tr>
+                    <th scope="row">*첨부파일</th>
+                    <td>                </td>
+                    <td>                </td>
+                    <td>                </td>
+                </tr>
+                 <br>
 				</tbody>
 			</table>
 		</div>
 		<input type="hidden" id="boardIdx" name="boardIdx" value="${board.boardIdx}" />
 	</form>
-<p>-------------------첨부파일-------------------------</p>
+
 	    <div class="file_list">
 	       <c:forEach var="list" items="${board1.fileList}">
 	            <a href="<c:url value='/board/downloadBoardFile.do' />?idx=${list.idx}&amp;boardIdx=${list.boardIdx}">${list.originalFileName} (${list.fileSize} kb)</a>
@@ -76,7 +97,7 @@
 
 
 
-
+    <br><br>
 	<a href="<c:url value='/boardlistuser' />" class="btn btn-primary">목록으로</a>
 	<a href="<c:url value='/' />" class="btn btn-primary">홈으로</a>
 </div>

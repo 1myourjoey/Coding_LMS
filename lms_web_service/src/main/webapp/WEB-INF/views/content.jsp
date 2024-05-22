@@ -75,21 +75,16 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        .btn-primary {
+            background-color: #323232;
+            border-color: #323232;
+            padding: 5px 10px; /* 버튼 내부의 패딩을 설정합니다 */
+            text-decoration: none;
+        }
 
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
+        .btn-primary:hover {
+            background-color: #505050;
+            border-color: #505050;
         }
         .bd-mode-toggle {
             z-index: 1500;
@@ -134,9 +129,6 @@
             color: inherit; /* 기본 링크 색상으로 설정 */
             cursor: pointer; /* 마우스 커서를 포인터로 변경 */
            }
-
-
-
 
     </style>
     <script src="https://apis.google.com/js/api.js"></script>
@@ -186,7 +178,7 @@
             </li>
         </ul>
 
-        <button id="btn-hide" style="margin-top: 500px;">메뉴숨기기</button>
+        <button class="btn btn-primary" id="btn-hide" style="margin-top: 500px;">메뉴숨기기</button>
 </div>
 <div>
 
@@ -196,6 +188,7 @@
           </svg>
     </button>
 </div>
+    <div id="lectureForm" style="width:100%; margin-left: 12px;"></div>
     <div class="container-fluid">
         <div class="row g-3 border p-3"  style="margin-top: 10px; border-radius: 10px;">
             <div class="col-sm-6">
@@ -211,7 +204,7 @@
                     <label for="lastName">교과목명</label>
 
                     <input type="text" class="form-control" id="lastName" name="lecName" placeholder="" value="" style="max-width: 350px;">
-                    <input type="submit" value="검색">
+                    <input type="submit" class="btn btn-primary" value="검색">
                 </div>
             </div>
               </form>
@@ -221,7 +214,7 @@
             <h4>온라인콘텐츠</h4>
             <div class="col-md-7" style="overflow-x: auto; overflow-y: auto; max-height: 600px;">
 
-                <table class="table table-striped table-bordered table-hover" id="myTable">
+                <table class="table table-striped table-bordered table-hover" id="myTable" style="margin-top:0px";>
                     <thead class="table-light">
                     <tr>
                         <th scope="col"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
@@ -239,9 +232,9 @@
                                     <tr>
                                         <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.lecName}</td>
-                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.conName}</td>
-                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.videoId}</td>
-                                        <td onclick="handleClick('${contents.conNum}'); return false;">${contents.durationTime}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.conName}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.videoId}</td>
+                                        <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.durationTime}</td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
@@ -249,10 +242,10 @@
                                 <c:forEach var="search" items="${selectSearch}" varStatus="loop">
                                     <tr>
                                         <td><input type="checkbox" onclick="handleClick('${search.conNum}')"></td>
-                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.lecName}</td>
-                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.conName}</td>
-                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.videoId}</td>
-                                        <td onclick="handleClick('${search.conNum}'); return false;">${search.durationTime}</td>
+                                        <td onclick="handleClick('${search.conNum}'); selectChapter('${search.conNum}'); return false;">${search.lecName}</td>
+                                        <td onclick="handleClick('${search.conNum}'); selectChapter('${search.conNum}'); return false;">${search.conName}</td>
+                                        <td onclick="handleClick('${search.conNum}'); selectChapter('${search.conNum}'); return false;">${search.videoId}</td>
+                                        <td onclick="handleClick('${search.conNum}'); selectChapter('${search.conNum}'); return false;">${search.durationTime}</td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>
@@ -281,7 +274,7 @@
 
                     <div id="contentInfo" class="mb-3">
 
-                        <table class="table table border">
+                        <table class="table table border" style="margin-top:0px;">
 
                         <form action="updateContent" id="updateContent">
                             <tbody>
@@ -321,7 +314,7 @@
                                 <td>
                                 <div style="display: flex; align-items: center;">
                                 <input type="text"class="form-control" id="videoIdInput" name="videoId" value="${selectContent.videoId}">
-                                <input type="button" style="margin-left: 10px;" class="js-preview-link" data-conNum="${conNum}" value="영상확인">
+                                <input type="button" style="margin-left: 10px;" class="js-preview-link btn btn-primary btn-sm" data-conNum="${conNum}"  value="영상확인">
                                 </div>
                                 </td>
                             </tr>
@@ -333,7 +326,7 @@
                                 <td>
                                 <div style="display: flex; align-items: center;">
                                     <input type="text" class="form-control" id="conPlayTime" name="conPlayTime" value="${selectContent.conPlayTime}">
-                                    <input type="button" style="margin-left: 10px; display: inline-block;" onclick="updateVideoDuration(); return false;" value="갱신">
+                                    <input type="button" style="margin-left: 10px; display: inline-block;" onclick="updateVideoDuration(); return false;" class="btn btn-primary btn-sm" value="갱신">
 
                                 </div>
 
@@ -344,7 +337,7 @@
                                 <td>
                                     <div style="display: flex; align-items: center;">
                                         <input type="text" class="form-control" id="thumbUrl" name="thumbUrl" value="${selectContent.thumbUrl}">
-                                        <input type="button" style="margin-left: 10px;" onclick="fetchThumbnail();" value="갱신">
+                                        <input type="button" style="margin-left: 10px;" onclick="fetchThumbnail();" class="btn btn-primary btn-sm" value="갱신">
                                     </div>
                                 </td>
                             </tr>
@@ -352,15 +345,15 @@
                         </table>
                         <div>
                             <input type="hidden" value="${selectContent.conNum}">
-                            <input type="submit" value="저장"  style="float: right; margin-right: 0px;">
+                            <input type="submit" value="저장"  style="float: right; margin-right: 0px;" class="btn btn-primary btn-sm">
                             </form>
 
                             <form action="deleteContent" id="deleteContentForm">
                             <input type="hidden" name="conNum" id="deleteBtn"  value="${selectContent.conNum}">
-                            <input type="submit"  style="float: right; margin-right: 5px;" value="삭제">
+                            <input type="submit"  style="float: right; margin-right: 5px;" value="삭제" class="btn btn-primary btn-sm">
                             </form>
 
-                                <input type="button" onclick="addEmptyRowBelow(this)"  style="float: right; margin-right: 5px;" value="추가">
+                                <input type="button" onclick="addEmptyRowBelow(this)"  style="float: right; margin-right: 5px;" class="btn btn-primary btn-sm" value="추가">
 
                             </div>
                     </div>
@@ -417,9 +410,9 @@
                         </div>
                     </div>
 
-                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 400px;">
+                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 700px;">
 
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" style="margin-top:0px;">
                             <thead class="table-light">
                             <tr>
                                 <th scope="col"><input type="checkbox"></th>
@@ -433,19 +426,10 @@
                         <c:forEach var="chapter" items="${selectChapter}" varStatus="loop">
                             <tr>
                                 <td><input type="checkbox"></td>
-                                <td style="text-align: center;">
-                                    <input type="text" value="" style="width: 100%; text-align: center; border: none;">
-                                </td>
-                                <td style="text-align: center;">
-                                    <input type="text" value="${chapter.chapName}"  id="chapName" style="width: 100%; text-align: center; border: none;">
-
-                                </td>
-                                <td style="text-align: center;">
-                                    <input type="text" value="${chapter.chapStartTime}"  id="chapStartTime" style="width: 100%; text-align: center; border: none;">
-                                </td>
-                                <td style="text-align: center;">
-                                    <input type="text" value="" style="width: 100%; text-align: center; border: none;">
-                                </td>
+                                <td id="chapName" style="text-align: center;"></td>
+                                <td id="chapStartTime" style="text-align: center;">${chapter.chapName}</td>
+                                <td style="text-align: center;">${chapter.chapStartTime}</td>
+                                <td id="someId" style="text-align: center;"></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -453,7 +437,7 @@
                         </table>
 
                         <form action="saveChapter" id="saveChapterForm" method="post">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" style="margin-top:100px">
                             <thead class="table-light">
                             <tr>
                                 <th scope="col" style="text-align: center;">챕터명</th>
@@ -463,32 +447,38 @@
                          <tbody>
                          <tr>
                          <td>
-                         <input type="text" name="chapName" style="width: 100%; text-align: center; border: none;">
+                         <input type="text" name="chapName" value="${selectOneChapter.chapName}" style="width: 100%; text-align: center; border: none;">
                          </td>
 
                          <td>
-                            <input type="text" name="chapStartTime"  style="width: 100%; text-align: center; border: none;">
+                            <input type="text" name="chapStartTime" value="${selectOneChapter.chapStartTime}" style="width: 100%; text-align: center; border: none;">
                             <input type="hidden" name="lecNum" id="chapterLecNum" value="${selectContent.lecNum}">
-                            <input type="hidden" name="conNum" value="${selectContent.conNum}">
+                            <input type="hidden" name="conNum" id="ChapterSave" data-conNum="${selectContent.conNum}" value="${selectContent.conNum}">
+                            <input type="hidden" name="chapNum" value="${selectOneChapter.chapNum}">
                          </td>
 
                         </tr>
-                        <input type="submit" value="저장">
-                        <form>
+                        </tbody>
+                        </table>
 
-                            <input type="button" onclick="addEmptyChapter(this)" value="추가">
-                            <input type="button" value="삭제">
+                        <input type="submit" value="저장" class="btn btn-primary btn-sm" style="float: right; margin-right: 0px;">
+                        </form>
+                            <input type="button" onclick="addEmptyChapter(this)" value="추가" class="btn btn-primary btn-sm" style="float: right; margin-right: 5px;">
+                        <form id="deleteChapterForm">
+                            <input type="hidden" name="chapNum" value="${selectContent.chapNum}">
+                            <button type="button" id="ChapterNum" class="btn btn-primary btn-sm" data-conNum="${selectContent.conNum}" onclick="deleteChapter()" style="float: right; margin-right: 5px;">삭제</button>
 
+                        </form>
                     </div>
-
                 </div>
             </div>
 
         </div>
     </div>
-    <div id="lectureForm" style="width:100%; margin-left: 12px;"></div>
+
 
 </main>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -740,6 +730,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     // 폼 제출 이벤트 리스너
     $('#saveChapterForm').submit(function(event) {
+    var conNum = $('#ChapterSave').data('conNum');
         event.preventDefault(); // 기본 동작 방지
 
         // 폼 데이터를 가져옵니다.
@@ -747,23 +738,94 @@ $(document).ready(function() {
 
         // AJAX 요청을 보냅니다.
         $.ajax({
-            url: $(this).attr('action'), // action 속성에 지정된 URL로 요청을 보냅니다.
-            method: $(this).attr('method'), // method 속성에 지정된 HTTP 메서드를 사용합니다.
+            url: 'saveChapter', // action 속성에 지정된 URL로 요청을 보냅니다.
+            method: 'POST', // method 속성에 지정된 HTTP 메서드를 사용합니다.
             data: formData, // 폼 데이터를 전송합니다.
             success: function(response) {
                 // 요청이 성공적으로 처리되었을 때의 처리
                 console.log("저장 요청 성공");
+
+                $('#saveChapterForm')[0].reset();
+                $('input[name="chapName"]').val('');
+                $('input[name="chapStartTime"]').val('');
+                $('input[name="chapNum"]').val('');
+
+                alert('데이터가 성공적으로 저장되었습니다.');
+                selectChapter(conNum);
                 // 여기에 성공 메시지 표시 등의 추가 작업을 할 수 있습니다.
             },
             error: function(xhr, status, error) {
+
                 // 요청이 실패했을 때의 처리
                 console.error("저장 요청 실패");
                 console.error(error);
+
+                $('#saveChapterForm')[0].reset();
+
+                $('input[name="chapName"]').val('');
+                $('input[name="chapStartTime"]').val('');
+                $('input[name="chapNum"]').val('');
+                alert('데이터 저장에 실패하였습니다.');
                 // 여기에 실패 메시지 표시 등의 추가 작업을 할 수 있습니다.
             }
         });
     });
 });
+
+function selectOneChapter(chapNum) {
+    // chapNum을 서버로 전송하여 데이터를 가져옴
+    $.ajax({
+        url: 'selectOneChapter', // 서버의 URL
+        type: 'POST', // HTTP 요청 방식
+        data: { chapNum: chapNum }, // 전송할 데이터
+        success: function(response) {
+            // 성공 시 처리할 내용
+            console.log(response); // 서버에서 받은 응답을 콘솔에 출력
+
+            // chapName과 chapStartTime 입력 필드에 값 설정
+            $('input[name="chapName"]').val(response.chapName);
+            $('input[name="chapStartTime"]').val(response.chapStartTime);
+            $('input[name="chapNum"]').val(response.chapNum);
+        },
+        error: function(xhr, status, error) {
+            // 에러 발생 시 처리할 내용
+            console.error(error); // 에러 메시지를 콘솔에 출력
+        }
+    });
+}
+
+function deleteChapter() {
+
+    var conNum = $('#ChapterNum').data('conNum');
+    if (confirm("정말로 이 챕터를 삭제하시겠습니까?")) {
+        var formData = $('#deleteChapterForm').serialize(); // 폼 데이터를 수집합니다.
+
+        $.ajax({
+            url: 'deleteChapter', // 서버의 URL
+            type: 'POST', // HTTP 요청 방식
+            data: formData, // 수집한 폼 데이터를 전송합니다.
+            success: function(response) {
+
+                console.log(response); // 서버에서 받은 응답을 콘솔에 출력
+                alert('챕터가 성공적으로 삭제되었습니다.');
+                $('#saveChapterForm')[0].reset();
+                selectChapter(conNum);
+
+                // 삭제 후 필요한 작업 수행
+            },
+            error: function(xhr, status, error) {
+                // 에러 발생 시 처리할 내용
+                console.error(error); // 에러 메시지를 콘솔에 출력
+                alert('챕터 삭제에 실패했습니다.');
+                $('#saveChapterForm')[0].reset();
+            }
+        });
+    }
+}
+
+
+
+
 
 </script>
 </body>
