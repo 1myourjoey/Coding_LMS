@@ -16,7 +16,28 @@ public class ChapterService {
        return chapterMapper.findAllChapters(conNum);
     }
 
+    public Chapter selectChapter(String chapNum){
+        return chapterMapper.selectChapter(chapNum);
+    }
+
+    public void insertOrUpdateChapter(Chapter chapter){
+        Chapter existingContent = chapterMapper.getContentByNum(chapter.getChapNum());
+
+        if (existingContent != null) {
+            chapterMapper.updateChapter(chapter);
+        }
+        else {
+            chapterMapper.saveChapter(chapter);
+        }
+    }
+
     public void saveChapter(Chapter chapter) {
         chapterMapper.saveChapter(chapter);
+    }
+    public void updateChapter(Chapter chapter){
+        chapterMapper.updateChapter(chapter);
+    }
+    public void deleteChapter(String chapNum){
+        chapterMapper.deleteChapter(chapNum);
     }
 }

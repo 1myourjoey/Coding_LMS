@@ -90,17 +90,25 @@ function displayChapterData(chapters) {
 
     // 각 챕터에 대해 반복하면서 행을 추가합니다.
     $.each(chapters, function(index, chapter) {
-
-    var startTimeSeconds = timeToSeconds(chapter.chapStartTime);
+        var startTimeSeconds = timeToSeconds(chapter.chapStartTime);
         var row = '<tr>' +
             '<td><input type="checkbox"></td>' +
-            '<td style="text-align: center;"><input type="text" value="' + (index + 1) + '" style="width: 100%; text-align: center; border: none;"></td>' +
-            '<td style="text-align: center;"><input type="text" value="' + chapter.chapName + '" name="chapName" style="width: 100%; text-align: center; border: none;"><input type="hidden" name="lecNum" value="' + chapter.lecNum + '"><input type="hidden" name="conNum" value="' + chapter.conNum + '"></td>' +
-            '<td style="text-align: center;"><input type="text" value="' + chapter.chapStartTime + '" name="chapStartTime" style="width: 100%; text-align: center; border: none;"></td>' +
-            '<td style="text-align: center;"><input type="text" value="' + startTimeSeconds + '" style="width: 100%; text-align: center; border: none;"></td>' +
+            '<td id="someId' + index + '" style="text-align: center;" onclick="selectOneChapter(' + chapter.chapNum + ')">' + (index + 1) + '</td>' +
+            '<td id="chapName' + index + '" style="text-align: center;" name="chapName" onclick="selectOneChapter(' + chapter.chapNum + ')">' + chapter.chapName +
+                '<input type="hidden" name="lecNum" value="' + chapter.lecNum + '">' +
+                '<input type="hidden" name="conNum" value="' + chapter.conNum + '">' +
+                '<input type="hidden" name="chapNum" value="' + chapter.chapNum + '">' +
+            '</td>' +
+            '<td id="chapStartTime' + index + '" style="text-align: center;" name="chapStartTime" onclick="selectOneChapter(' + chapter.chapNum + ')">' + chapter.chapStartTime + '</td>' +
+            '<td id="someOtherId' + index + '" style="text-align: center;" onclick="selectOneChapter(' + chapter.chapNum + ')">' + startTimeSeconds + '</td>' +
             '</tr>';
         tbody.append(row); // 새로운 행을 추가합니다.
+        $('#saveChapterForm')[0].reset();
     });
 }
+
+
+
+
 
 

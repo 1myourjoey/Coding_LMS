@@ -11,6 +11,7 @@ import java.sql.Time;
 @ToString
 public class Chapter {
     private int serealNum;
+    private String chapNum;
     private String lecNum;
     private String conNum;
     private String chapName;
