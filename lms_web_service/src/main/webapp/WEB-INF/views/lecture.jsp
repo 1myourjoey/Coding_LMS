@@ -76,21 +76,16 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        .btn-primary {
+            background-color: #323232;
+            border-color: #323232;
+            padding: 5px 10px; /* 버튼 내부의 패딩을 설정합니다 */
+            text-decoration: none;
+        }
 
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
+        .btn-primary:hover {
+            background-color: #505050;
+            border-color: #505050;
         }
         .bd-mode-toggle {
             z-index: 1500;
@@ -253,6 +248,7 @@ function lectureClick(lecNum) {
 }
 
 </script>
+
 <script>
 $(document).ready(function() {
     $('form[action="lectureInfo"]').submit(function(event) {
@@ -392,15 +388,6 @@ $(document).ready(function() {
         });
 
 
-
-
-
-
-
 </script>
-
-
-
-
 </body>
 </html>

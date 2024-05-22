@@ -10,6 +10,12 @@
         WHERE con_num = #{conNum}
     </select>
 
+
+    <select id="selectChapter" resultType="com.sky.lms_web_service.dto.Chapter">
+        SELECT * FROM chapter
+        WHERE chap_num = #{chapNum}
+    </select>
+
     <insert id="saveChapter" parameterType="com.sky.lms_web_service.dto.Chapter">
         INSERT INTO chapter (con_num, lec_num, chap_name, chap_start_time)
         VALUES
@@ -20,6 +26,27 @@
         #{chapStartTime}
         )
     </insert>
+
+    <update id="updateChapter" parameterType="com.sky.lms_web_service.dto.Chapter">
+        <![CDATA[
+	    UPDATE chapter SET
+		chap_name = #{chapName},
+		chap_start_time = #{chapStartTime}
+		WHERE chap_num = #{chapNum};
+	    ]]>
+    </update>
+
+    <delete id="deleteChapter" parameterType="String">
+        <![CDATA[
+		delete from chapter where chap_num = #{chapNum};
+	]]>
+    </delete>
+
+    <select id="getContentByNum" parameterType="String" resultType="com.sky.lms_web_service.dto.Chapter">
+        <![CDATA[
+            SELECT * FROM chapter WHERE chap_num = #{chapNum}
+        ]]>
+    </select>
 
 
 </mapper>
