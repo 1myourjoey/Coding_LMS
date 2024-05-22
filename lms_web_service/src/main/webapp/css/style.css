@@ -13,34 +13,44 @@ body {
         color: white;
     }
 
-.form-basic {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
+
 
 .table-responsive {
     margin-top: 20px;
 }
 
-.btn-primary {
-    background-color: #323232;
-    border-color: #323232;
-    border-radius: 80px; /* 버튼을 라운드 형식으로 만듭니다 */
-    padding: 10px 20px; /* 버튼 내부의 패딩을 설정합니다 */
-    text-decoration: none;
-}
+    .btn-primary {
+        background-color: #323232;
+        border-color: #323232;
+        border-radius: 80px; /* 버튼을 라운드 형식으로 만듭니다 */
+        padding: 10px 20px; /* 버튼 내부의 패딩을 설정합니다 */
+        text-decoration: none;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+        background-color: #505050;
+        border-color: #505050;
+    }
 
-    .registerButton {
-        color: #323232;
-        border-radius: 5px;
+
+    #registerButton {
+        background-color: #323232;
+        border-color: #323232;
+        border-radius: 80px; /* 버튼을 라운드 형식으로 만듭니다 */
+        padding: 10px 20px; /* 버튼 내부의 패딩을 설정합니다 */
+
+        color: #fff;
         text-transform: uppercase;
         font-weight: 600;
         transition: all 0.3s ease;
     }
 
-    .registerButton:hover {
+    #registerButton:hover {
         background-color: #505050;
+        border-color: #505050;
     }
 /* 커스텀 CSS 추가 */
 h2.my-4 {
@@ -77,18 +87,8 @@ h2.my-4 {
 }
 
 /* 수강렉 보기 버튼 */
-.btn-primary {
-    color: #fff;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
 
-.btn-primary:hover {
-    background-color: #505050;
-    border-color: #505050;
-}
+
 
 
 
