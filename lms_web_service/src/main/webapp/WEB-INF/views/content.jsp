@@ -196,6 +196,7 @@
           </svg>
     </button>
 </div>
+    <div id="lectureForm" style="width:100%; margin-left: 12px;"></div>
     <div class="container-fluid">
         <div class="row g-3 border p-3"  style="margin-top: 10px; border-radius: 10px;">
             <div class="col-sm-6">
@@ -484,9 +485,10 @@
 
         </div>
     </div>
-    <div id="lectureForm" style="width:100%; margin-left: 12px;"></div>
+
 
 </main>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
