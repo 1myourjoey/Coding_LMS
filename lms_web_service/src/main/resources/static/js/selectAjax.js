@@ -12,6 +12,8 @@ function handleClick(conNum) {
             $('#lecName').val(response.lecName);
             $('#lecNum').val(response.lecNum);
             $('#chapterLecNum').val(response.lecNum);
+            $('#ChapterNum').data('conNum', response.conNum);
+            $('#ChapterSave').data('conNum', response.conNum);
             $('input[name="description"]').val(response.description);
             $('input[name="videoId"]').val(response.videoId);
             $('input[name="conPlayTime"]').val(response.conPlayTime);

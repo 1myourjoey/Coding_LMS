@@ -410,7 +410,7 @@
                         </div>
                     </div>
 
-                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 400px;">
+                    <div id="chapterInfo" style="overflow-x: auto; overflow-y: auto; max-height: 700px;">
 
                         <table class="table table-striped table-bordered table-hover" style="margin-top:0px;">
                             <thead class="table-light">
@@ -437,7 +437,7 @@
                         </table>
 
                         <form action="saveChapter" id="saveChapterForm" method="post">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" style="margin-top:100px">
                             <thead class="table-light">
                             <tr>
                                 <th scope="col" style="text-align: center;">챕터명</th>
@@ -453,20 +453,22 @@
                          <td>
                             <input type="text" name="chapStartTime" value="${selectOneChapter.chapStartTime}" style="width: 100%; text-align: center; border: none;">
                             <input type="hidden" name="lecNum" id="chapterLecNum" value="${selectContent.lecNum}">
-                            <input type="hidden" name="conNum" value="${selectContent.conNum}">
+                            <input type="hidden" name="conNum" id="ChapterSave" data-conNum="${selectContent.conNum}" value="${selectContent.conNum}">
                             <input type="hidden" name="chapNum" value="${selectOneChapter.chapNum}">
                          </td>
 
                         </tr>
-                        <input type="submit" value="저장" class="btn btn-primary btn-sm">
-                        </form>
+                        </tbody>
+                        </table>
 
-                            <input type="button" onclick="addEmptyChapter(this)" value="추가" class="btn btn-primary btn-sm">
+                        <input type="submit" value="저장" class="btn btn-primary btn-sm" style="float: right; margin-right: 0px;">
+                        </form>
+                            <input type="button" onclick="addEmptyChapter(this)" value="추가" class="btn btn-primary btn-sm" style="float: right; margin-right: 5px;">
                         <form id="deleteChapterForm">
                             <input type="hidden" name="chapNum" value="${selectContent.chapNum}">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="deleteChapter()">삭제</button>
-                        </form>
+                            <button type="button" id="ChapterNum" class="btn btn-primary btn-sm" data-conNum="${selectContent.conNum}" onclick="deleteChapter()" style="float: right; margin-right: 5px;">삭제</button>
 
+                        </form>
                     </div>
                 </div>
             </div>
@@ -728,6 +730,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     // 폼 제출 이벤트 리스너
     $('#saveChapterForm').submit(function(event) {
+    var conNum = $('#ChapterSave').data('conNum');
         event.preventDefault(); // 기본 동작 방지
 
         // 폼 데이터를 가져옵니다.
@@ -748,6 +751,7 @@ $(document).ready(function() {
                 $('input[name="chapNum"]').val('');
 
                 alert('데이터가 성공적으로 저장되었습니다.');
+                selectChapter(conNum);
                 // 여기에 성공 메시지 표시 등의 추가 작업을 할 수 있습니다.
             },
             error: function(xhr, status, error) {
@@ -761,6 +765,7 @@ $(document).ready(function() {
                 $('input[name="chapName"]').val('');
                 $('input[name="chapStartTime"]').val('');
                 $('input[name="chapNum"]').val('');
+                alert('데이터 저장에 실패하였습니다.');
                 // 여기에 실패 메시지 표시 등의 추가 작업을 할 수 있습니다.
             }
         });
@@ -790,6 +795,8 @@ function selectOneChapter(chapNum) {
 }
 
 function deleteChapter() {
+
+    var conNum = $('#ChapterNum').data('conNum');
     if (confirm("정말로 이 챕터를 삭제하시겠습니까?")) {
         var formData = $('#deleteChapterForm').serialize(); // 폼 데이터를 수집합니다.
 
@@ -798,10 +805,12 @@ function deleteChapter() {
             type: 'POST', // HTTP 요청 방식
             data: formData, // 수집한 폼 데이터를 전송합니다.
             success: function(response) {
-                // 성공 시 처리할 내용
+
                 console.log(response); // 서버에서 받은 응답을 콘솔에 출력
                 alert('챕터가 성공적으로 삭제되었습니다.');
                 $('#saveChapterForm')[0].reset();
+                selectChapter(conNum);
+
                 // 삭제 후 필요한 작업 수행
             },
             error: function(xhr, status, error) {
