@@ -2,7 +2,14 @@
 <%@ page import="com.sky.lms_web_service.dto.User" %>
 <!DOCTYPE html>
 <html lang="ko">
+<head>
+    <style>
+        .flex.h-full.text-black-600.dark.text-black-400 a {
+            color: black;
+        }
 
+    </style>
+</head>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/stylecard.css">
 <div class="h-16 lg:flex w-full border-b border-gray-800 dark:border-gray-800 hidden px-10">

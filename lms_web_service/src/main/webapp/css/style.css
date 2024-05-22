@@ -13,7 +13,12 @@ body {
         color: white;
     }
 
-
+    .flex.h-full.text-black-600.dark.text-black-400 {
+        color: black !important;
+    }
+    a[href="/"],a[href="/sugangReg"],a[href="/sugangList"],a[href="/post"],a[href="/boardlistuser"],a[href="/qna/openQnaList.do"] {
+        color: black;
+    }
 
 .table-responsive {
     margin-top: 20px;

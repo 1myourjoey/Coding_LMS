@@ -7,11 +7,15 @@
     <meta charset="UTF-8">
     <title>수강 신청</title>
     <link href="https://assets.codepen.io/344846/style.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylecard.css">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/stylecard.css">
+
 </head>
 <body class="bg-white text-black">
 <div class="h-screen flex overflow-hidden text-sm bg-white text-black">
@@ -20,7 +24,7 @@
         <%@include file="/WEB-INF/views/layout/header.jsp"%>
         <div class="">
             <div class="flex items-center space-x-3 sm:mt-7 mt-4">
-                <a  class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-black dark:border-white pb-1.5"></a>
+
 
             </div>
         </div>
@@ -38,13 +42,14 @@
                                     <h1 class="card-fullname">${lecture.getLecName()}</h1>
                                     <h2 class="card-jobtitle">${lecture.getUserName()}</h2>
                                 </div>
-                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                <div class="row">
+                                <div class="row">
                                     <div class="card-section is-active" id="about">
                                         <div class="card-content">
                                             <div class="card-subtitle">ABOUT</div>
                                             <p class="card-desc">${lecture.getLecEx()}</p>
                                         </div>
-
+                                    </div>
                                     </div>
                                     <div class="card-buttons">
                                         <button data-section="#about" class="is-active" onclick="window.location.href='${pageContext.request.contextPath}/contents_List?lecName=${lecture.lecName}'"><strong>강좌 보기</strong></button>
@@ -63,7 +68,7 @@
                 </svg>
             </button>
             <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">1</button>
-            <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800 dark:text-white leading-none">2</button>
+            <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">2</button>
             <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">3</button>
             <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">4</button>
             <button class="inline-flex items-center h-8 w-8 justify-center text-black rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">
