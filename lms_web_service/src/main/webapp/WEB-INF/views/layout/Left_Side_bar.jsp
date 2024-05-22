@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="com.sky.lms_web_service.dto.User" %>
+<!DOCTYPE html>
+<html lang="ko">
 <div class="w-20 flex-shrink-0 border-r border-gray-200 flex-col hidden sm:flex bg-white text-black">
     <div class="h-16 flex items-center justify-center bg-white text-black">
         <svg class="w-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 54 33">

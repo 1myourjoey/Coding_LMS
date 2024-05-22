@@ -10,19 +10,43 @@
     <title>수강 신청</title>
     <link href="https://assets.codepen.io/344846/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        #registerButton {
+            background-color: #323232;
+            border-color: #323232;
+            border-radius: 80px;
+            padding: 10px 20px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        #registerButton:hover {
+            background-color: #505050;
+            border-color: #505050;
+        }
+    </style>
+
 </head>
 <body class="bg-white text-black">
-<div class="h-screen flex overflow-hidden text-sm bg-white text-black">
+<div class="h-screen flex overflow text-sm bg-white text-black">
     <%@ include file="/WEB-INF/views/layout/Left_Side_bar.jsp"%>
     <div class="flex-grow overflow-hidden h-full flex flex-col">
         <%@include file="/WEB-INF/views/layout/header.jsp"%>
         <div class="">
             <div class="flex items-center space-x-3 sm:mt-7 mt-4">
-                <a  class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-black dark:border-white pb-1.5"></a>
+                <a  class="px-3 border-b-2 border text dark:text-black dark:border-white pb-1.5"></a>
 
             </div>
         </div>
-        <div> <br> </div>
+        <div style="display: flex; justify-content:right; margin-right: 20px; margin-bottom: 20px">
+
+            <button center type="button" id="registerButton" class="btn btn-primary">수강신청</button>
+
+        </div>
+
         <table class="text-left">
             <thead>
             <tr class="text-black-400">
@@ -32,7 +56,7 @@
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">컨텐츠 넘버</th>
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">컨텐츠 이름</th>
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">강좌 설명</th>
-                <th class="font-normal  pt-0 pb-3 border-b border-gray-200 dark:border-gray-800"> <button type="button" id="registerButton" class="btn btn-primary">수강신청</button></th>
+
             </tr>
             </thead>
             <tbody class="text-black-600 dark:text-black-100">
