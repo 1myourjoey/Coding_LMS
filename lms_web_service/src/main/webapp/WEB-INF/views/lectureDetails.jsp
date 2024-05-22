@@ -39,7 +39,6 @@
             <c:forEach var="content" items="${contents}">
                 <tr data-lecNum="${content.lecNum}">
                 <tr>
-
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800"><img src="${content.thumbUrl}" ></td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">${content.lecNum}</td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">${content.lecName}</td>

@@ -2,6 +2,7 @@ package com.sky.lms_web_service.controller;
 
 import com.sky.lms_web_service.dto.Chapter;
 import com.sky.lms_web_service.dto.Contents_Manage;
+import com.sky.lms_web_service.dto.Section_Progress;
 import com.sky.lms_web_service.dto.User;
 import com.sky.lms_web_service.service.ChapterService;
 import com.sky.lms_web_service.service.ContentService;
@@ -31,6 +32,8 @@ public class ContentController {
     private ChapterService chapterService;
     @Autowired
     private ProgressService progressService;
+    @Autowired
+    private HttpSession httpSession;
 
     @GetMapping("/")
     public String main(){
@@ -38,14 +41,50 @@ public class ContentController {
     }
 
     @GetMapping("/contents_List")
-    public String ShowvContentList(Model model,String lecName){
-        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
-        model.addAttribute("contents", contents);
+    public String ShowvContentList(HttpServletRequest request, Model model, String lecName) {
 
-        //List<Chapter> chapters = chapterService.findAllChapters();
-        //model.addAttribute("chapters", chapters);
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
+        Map<String, List<Chapter>> contentChapters = new HashMap<>();
+
+        for (Contents_Manage content : contents) {
+            List<Chapter> chapters = chapterService.findAllChapters(content.getConNum());
+            contentChapters.put(content.getConNum(), chapters);
+        }
+
+        model.addAttribute("contents", contents);
+        model.addAttribute("contentChapters", contentChapters);
         return "contents_List";
     }
+
+    @GetMapping("/learning")
+    public String Showvlearning(Model model, String lecName) {
+        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
+        Map<String, List<Chapter>> contentChapters = new HashMap<>();
+
+        for (Contents_Manage content : contents) {
+            List<Chapter> chapters = chapterService.findAllChapters(content.getConNum());
+            contentChapters.put(content.getConNum(), chapters);
+        }
+        model.addAttribute("contents", contents);
+        model.addAttribute("contentChapters", contentChapters);
+        return "learning";
+    }
+
+
+    @PostMapping("/saveLastWatchedTime")
+    @ResponseBody
+    public String saveLastWatchedTime(@RequestBody Section_Progress sectionProgress) {
+        progressService.saveLastWatchedTime(sectionProgress);
+        return "마지막 시청 시간이 성공적으로 저장되었습니다.";
+    }
+
     @GetMapping("content")
     public String content(Model model, HttpServletRequest request){
 
