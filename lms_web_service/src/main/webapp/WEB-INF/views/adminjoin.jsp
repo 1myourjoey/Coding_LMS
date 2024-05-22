@@ -1,27 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>관리자 등록</title>
+    <!-- Bootstrap CSS CDN 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 500px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            background-color: #323232;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #505050;
+        }
+    </style>
 </head>
 <body>
-<h2>관리자 등록</h2>
-<form id="registerForm" action="/adminregister" method="post">
-    <label for="loginId">회원 아이디:</label>
-    <input type="text" id="loginId" name="loginId" required>
-    <br>
-    <label for="userName">이름:</label>
-    <input type="text" id="userName" name="userName" required>
-    <br>
-    <label for="pw">비밀번호:</label>
-    <input type="password" id="pw" name="pw" required>
-    <br>
-    <label for="email">이메일:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <input type="submit" value="가입">
-</form>
+<div class="container">
+    <h2 class="text-center">관리자 등록</h2>
+    <form id="registerForm" action="/adminregister" method="post">
+        <div class="form-group">
+            <label for="loginId">회원 아이디:</label>
+            <input type="text" class="form-control" id="loginId" name="loginId" required>
+        </div>
+        <div class="form-group">
+            <label for="userName">이름:</label>
+            <input type="text" class="form-control" id="userName" name="userName" required>
+        </div>
+        <div class="form-group">
+            <label for="pw">비밀번호:</label>
+            <input type="password" class="form-control" id="pw" name="pw" required>
+        </div>
+        <div class="form-group">
+            <label for="email">이메일:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">가입</button>
+    </form>
+</div>
+
+<!-- jQuery 및 Bootstrap JS CDN 추가 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     document.getElementById("registerForm").addEventListener("submit", function(event) {
