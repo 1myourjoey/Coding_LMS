@@ -26,15 +26,6 @@
     </select>
 
 
-    <!-- SELECT 쿼리 (답글 조회) -->
-    <select id="selectReplies" parameterType="int" resultType="com.sky.lms_web_service.dto.Comment">
-        SELECT * FROM comment
-        WHERE p_comment_num = #{pCommentNum}
-        ORDER BY comment_created ASC
-    </select>
-
-
-
     <!-- UPDATE 쿼리 (답글 수정) -->
     <update id="updateComment">
         UPDATE comment
@@ -42,5 +33,16 @@
         WHERE comment_num = #{commentNum}
     </update>
 
+    <select id="selectReplies" parameterType="int" resultType="com.sky.lms_web_service.dto.Comment">
+        SELECT * FROM comment
+        WHERE p_comment_num = #{commentNum}
+    </select>
 
+
+
+<!--    대댓글 달기  -->
+    <insert id="addReply" parameterType="com.sky.lms_web_service.dto.Comment">
+        INSERT INTO comment (q_num,p_comment_num, user_no, comment_contents, comment_created)
+        VALUES (#{qNum},#{pCommentNum}, #{userNo}, #{commentContents}, NOW())
+    </insert>
 </mapper>

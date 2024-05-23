@@ -11,7 +11,6 @@
     <a href="/memberlistadmin">계정 리스트(수정/삭제)</a><br><br>
     <a href="/adminjoin">관리자 등록</a><br><br>
     <a href="/board/openBoardList.do">자료실</a><br><br>
-
     <a href="/logout">로그아웃</a><br><br>
         <div id="sessionInfo"></div>
 
