@@ -28,7 +28,7 @@
 
         <a href="/sugangReg" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강신청</a>
         <a href="/sugangList" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">수강목록</a>
-        <a href="/boardlistuser" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">자료실</a>
+        <a href="/board/openBoardList.do" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">자료실</a>
         <a href="/post" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">공지사항</a>
         <a href="/qna/openQnaList.do" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Q&A</a>
     </div>
