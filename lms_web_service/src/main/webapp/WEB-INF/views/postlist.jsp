@@ -8,9 +8,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
-         <a href="/">
+
                <img src="/img/lms.png" class="logo-img" alt="로고 이미지">
-           </a>
+
         <style>
         body, ul, li {
           padding:0;
@@ -122,7 +122,17 @@
         <div class="con text-align-center">
 
           <ul class="menu-bar__box">
-            <li><a href="/">HOME</a></li>
+
+            <li>
+                <c:choose>
+                    <c:when test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+                        <a href="indexadmin">HOME</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/">HOME</a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
             <li><a href="/sugangReg">수강신청</a></li>
             <li><a href="/content">교육과정</a></li>
             <li><a href="/boardlistuser">자료실</a></li>
