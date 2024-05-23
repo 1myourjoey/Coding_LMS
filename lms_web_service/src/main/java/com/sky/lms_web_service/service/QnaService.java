@@ -1,5 +1,6 @@
 package com.sky.lms_web_service.service;
 
+import com.sky.lms_web_service.dto.Post;
 import com.sky.lms_web_service.dto.Qna;
 import com.sky.lms_web_service.mapper.QnaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,14 @@ public class QnaService {
 	}
 
 
+
+
+	public List<Qna> getPaginatedPost(int offset, int itemsPerPage){
+		return qnaMapper.findPage(offset,itemsPerPage);
+	}
+
+	public int getTotal() {
+
+		return qnaMapper.countTotal();
+	}
 }

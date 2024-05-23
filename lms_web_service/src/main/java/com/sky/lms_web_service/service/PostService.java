@@ -38,6 +38,18 @@ public class PostService {
 
 
 
+    public List<Post> getPaginatedPostList(int offset, int itemsPerPage){
+        return postMapper.findPaginated(offset,itemsPerPage);
+    }
 
+    public int getTotalPages() {
+
+        return postMapper.countTotalPosts();
+    }
+
+    //검색기능
+    public List<Post> searchPostsByContents(String postTitle) {
+        return postMapper.searchPostsByContents(postTitle);
+    }
 
 }
