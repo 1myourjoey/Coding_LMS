@@ -45,7 +45,6 @@
         <img src="img/computer.png" alt="Innovation Image">
         <div class="inner">
             <h1>내일을 위한! 당신의 멘토링!</h1>
-            <p>거제대학교 HiVE센터는 미래의 행복발전소입니다.<br></p>
         </div>
         <div class="main-menu-list-wrapper">
             <div class="main-menu-list-area">
@@ -130,10 +129,12 @@
     <div class="inner">
         <div class="f-cnt">
             <div class="f-info">
-                <p class="info-addr">(26464) 강원특별자치도 원주시 건강로 32(반곡동) 국민건강보험공단</p>
+                <p class="info-addr">(04104) 서울 마포구 신촌로 176 중앙빌딩 중앙정보처리학원</p>
                 <ul class="info-cs">
-                    <li><strong class="strong">대표전화 1577-1000</strong><span class="span">(유료, 평일 09시~18시)</span></li>
-                    <li><strong class="strong">해외이용 82-33-811-2001</strong><span class="span">(유료, 평일 09시~18시)</span>
+
+                    <li><strong class="strong">사업자 등록번호 : 220-95-00629</strong><span class="span"></span>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 대표전화 : 02-704-1711</strong><span class="span">(평일 09시~18시)</span></li>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FAX : 02-393-9218</strong><span class="span"></span>
                     </li>
                 </ul>
             </div>
@@ -157,7 +158,6 @@
                 <p class="f-copy">© Ministry of Education. All rights reserved.</p>
             </div>
             <div class="f-btm-ban">
-                <span class="ban-txt">이 누리집은 보건복지부 산하기관 누리집입니다.</span>
             </div>
         </div>
     </div>

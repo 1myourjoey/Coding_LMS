@@ -11,12 +11,105 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원정보 수정</title>
+<link rel="stylesheet" href="css/styles.css">
+ <img src="/img/lms.png" alt="로고" class="logo-img">
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
     crossorigin="anonymous">
      <style>
+     /* normalize */
+     body, ul, li {
+       padding:0;
+       margin:0;
+       list-style:none;
+     }
+
+     a {
+       color:inherit;
+       text-decoration:none;
+     }
+
+     /* customize */
+     /* font */
+     @font-face {
+       font-family: 'LotteMartDream';
+       font-style: normal;
+       font-weight: 400;
+       src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+     }
+     @font-face {
+       font-family: 'LotteMartDream';
+       font-style: normal;
+       font-weight: 700;
+       src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+     }
+     @font-face {
+       font-family: 'LotteMartDream';
+       font-style: normal;
+       font-weight: 300;
+       src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+     }
+     html {
+      font-family: 'LotteMartDream', sans-serif;
+     }
+
+     /* setting */
+     :root {
+       --site-width:1200px;
+     }
+
+     .con-min-width {
+       min-width:var(--site-width);
+       padding:0 330px;
+       justify-content: flex-end; /* 수정 */
+     }
+
+     .con {
+       width:var(--site-width);
+     }
+
+     /* menu-bar */
+     .menu-bar {
+       margin-top:0px;
+     }
+
+     .menu-bar__box {
+       display: flex; /* 수정 */
+       justify-content: center; /* 가운데 정렬 */
+       border-bottom: 1px solid black; /* 검은 줄 추가 */
+     }
+
+     .menu-bar__box > li {
+       margin: 0 10px; /* 간격 조절 */
+     }
+
+     .menu-bar__box > li > a {
+       padding:10px 50px;
+       display:block;
+       font-weight:700;
+       font-size:1.2rem;
+     }
+
+     .menu-bar__box > li:hover > a {
+       color:gray;
+       text-decoration:underline;
+     }
+     .logo-img {
+       width: 100px; /* 로고 이미지의 너비 */
+       height: auto; /* 자동으로 높이 설정 */
+       margin-left: 130px; /* 로고 이미지를 오른쪽으로부터 130px만큼 떨어지도록 설정하여 좀 더 왼쪽으로 이동시킵니다. */
+       margin-top: 40px; /* 로고 이미지를 아래로 40px 이동시킵니다. */
+     }
+
+     .logout-link {
+       position: absolute;
+       top: 50px;
+       right: 20px;
+       font-weight: bold;
+       margin-right: 100px;
+     }
             /* 버튼과 링크의 배경색과 글꼴 색상 변경 */
             .btn-primary,
             .btn-primary:hover,
@@ -37,11 +130,20 @@
         </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/indexadmin">홈 화면</a>
-        </div>
-    </nav>
+     <a href="/logout" class="logout-link">로그아웃</a> <!-- 로그아웃 링크 추가 -->
+            <nav class="menu-bar con-min-width">
+                <div class="con text-align-center">
+
+                  <ul class="menu-bar__box">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/sugangReg">수강신청</a></li>
+                    <li><a href="/content">교육과정</a></li>
+                    <li><a href="/boardlistuser">자료실</a></li>
+                    <li><a href="/post">공지사항</a></li>
+                    <li><a href="/qna/openQnaList.do">Q&A</a></li>
+                  </ul>
+                </div>
+              </nav>
     <div class="container" style="padding-top: 50px;">
         <table class="table table-bordered table-hover">
             <thead>
@@ -93,6 +195,46 @@
         </c:if>
     </div>
 
+<br><br><br><br><br><br><br>
+<footer id="footer">
+    <div class="foot-quick">
+    </div>
+    <div class="inner">
+        <div class="f-cnt">
+            <div class="f-info">
+                <p class="info-addr">(04104) 서울 마포구 신촌로 176 중앙빌딩 중앙정보처리학원</p>
+                <ul class="info-cs">
+
+                    <li><strong class="strong">사업자 등록번호 : 220-95-00629</strong><span class="span"></span>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 대표전화 : 02-704-1711</strong><span class="span">(평일 09시~18시)</span></li>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FAX : 02-393-9218</strong><span class="span"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="f-link">
+                <div class="link-go">
+                    <a href="#" class="btn btn-txt sm ico-arr">찾아오시는 길</a>
+                    <a href="#" class="btn btn-txt sm ico-arr">이용안내</a>
+                    <a href="#" class="btn btn-txt sm ico-arr">직원검색</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="f-btm">
+            <div class="f-btm-text">
+                <div class="f-menu">
+                    <a href="#" class="point">개인정보처리방침</a>
+                    <a href="#">저작권 정책</a>
+                    <a href="#">웹 접근성 품질인증 마크 획득</a>
+                </div>
+                <p class="f-copy">© Ministry of Education. All rights reserved.</p>
+            </div>
+            <div class="f-btm-ban">
+            </div>
+        </div>
+    </div>
+</footer>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
