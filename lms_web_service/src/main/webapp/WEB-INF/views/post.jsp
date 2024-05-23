@@ -149,38 +149,36 @@
         }
 
         #board-search .search-window {
-            padding: 15px 0;
-            background-color: #f9f7f9;
+          padding: 15px 0;
+          background-color: #f9f7f9;
         }
-
         #board-search .search-window .search-wrap {
-            position: relative;
-            width: 80%;
-            max-width: 564px;
+          position: relative;
+        /*   padding-right: 124px; */
+          margin: 0 auto;
+          width: 80%;
+          max-width: 564px;
         }
-
         #board-search .search-window .search-wrap input {
-            height: 40px;
-            width: 100%;
-            font-size: 14px;
-            padding: 7px 14px;
-            border: 1px solid #ccc;
+          height: 40px;
+          width: 100%;
+          font-size: 14px;
+          padding: 7px 14px;
+          border: 1px solid #ccc;
         }
-
         #board-search .search-window .search-wrap input:focus {
-            border-color: #333;
-            outline: 0;
-            border-width: 1px;
+          border-color: #333;
+          outline: 0;
+          border-width: 1px;
         }
-
         #board-search .search-window .search-wrap .btn {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 108px;
-            padding: 0;
-            font-size: 16px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 108px;
+          padding: 0;
+          font-size: 16px;
         }
 
         .board-table {
@@ -290,15 +288,32 @@
     </div>
 
 
+
+<!-- 검색기능 -->
+<div id="board-search">
+    <div class="container">
+        <div class="search-window">
+           <form action="/search" method="GET">
+                <div class="search-wrap">
+                    <input id="postTitle" type="search" name="postTitle" placeholder="검색어를 입력해주세요." value="">
+                       <button type="submit" class="btn btn-dark">검색</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 검색기능 -->
+
+
+
+
     <div id="board-list">
         <div class="container">
             <table class="board-table">
                 <thead>
                 <tr>
                     <th scope="col" class="th-num">번호</th>
-                  <!--  <th scope="col" class="th-user"></th>-->
                     <th scope="col" class="th-title">제목</th>
-                  <!--  <th scope="col" class="th-title">내용</th> -->
                     <th scope="col" class="th-date">등록일</th>
                     <th scope="col" class="th-date">조회수</th>
 
@@ -308,10 +323,8 @@
                 <c:forEach items="${plist}" var="post">
                     <tr>
                         <td>${post.postNum}</td>
-                   <!--   <td>${post.userNo}</td> -->
-                      <td><a href="postlist?postNum=${post.postNum}">${post.postTitle}</a></td>
 
-                        <!--   <td>${post.postContents}</td>-->
+                      <td><a href="postlist?postNum=${post.postNum}">${post.postTitle}</a></td>
                         <td>${post.postCreated}</td>
                         <td>${post.hitCnt}</td>
                     </tr>
@@ -324,12 +337,29 @@
 </section>
 <div style="margin-top: 20px; text-align: right; padding-right: 100px;">
     <c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
-        <a href="postinsert" class="btn btn-secondary btn-sm" id="btn_q" style="margin-left: 10px;">
-            등록
-        </a>
+        <a href="postinsert" class="btn " id="btn_q" style="margin-left: 10px; background-color: #323232; color: white;">
+                    등록
+                </a>
     </c:if>
 </div>
-
+<!-- 페이징 -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <c:if test="${currentPage > 1}">
+            <li class="page-item"><a class="page-link" href="?page=1"  style="background-color: #323232; color: white;">처음</a></li>
+            <li class="page-item"><a class="page-link" href="?page=${currentPage - 1}"  style="background-color: #323232; color: white;">이전</a></li>
+        </c:if>
+        <c:forEach begin="1" end="${totalPages}" var="page">
+            <li class="page-item ${page == currentPage ? 'active' : ''}">
+                <a class="btn" href="?page=${page}"  style="background-color: #323232; color: white;">${page}</a>
+            </li>
+        </c:forEach>
+        <c:if test="${currentPage < totalPages}">
+            <li class="page-item"><a class="page-link" href="?page=${currentPage + 1}"  style="background-color: #323232; color: white;">다음</a></li>
+            <li class="page-item"><a class="page-link" href="?page=${totalPages}"  style="background-color: #323232; color: white;">마지막</a></li>
+        </c:if>
+    </ul>
+</nav>
 
 <footer>
     <div class="wrap-footer">

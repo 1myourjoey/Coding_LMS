@@ -1,5 +1,6 @@
 package com.sky.lms_web_service.mapper;
 
+import com.sky.lms_web_service.dto.Post;
 import com.sky.lms_web_service.dto.Qna;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +21,7 @@ public interface QnaMapper {
 	void deleteQna(int qNum) throws Exception;
 
 
+	List<Qna> findPage(int offset, int itemsPerPage);
 
+	int countTotal();
 }

@@ -6,6 +6,7 @@
 		<![CDATA[
         SELECT
             q_num,
+            user_no,
             qna_title,
             hit_cnt,
         	qna_created
@@ -40,6 +41,7 @@
 		<![CDATA[
         SELECT
              q_num,
+             user_no,
              qna_title,
              qna_contents,
              hit_cnt
@@ -75,5 +77,35 @@
         q_num = #{qNum}
     ]]>
 	</delete>
+
+
+
+
+
+	<select id="findPage" resultType="com.sky.lms_web_service.dto.Qna" parameterType="map">
+		<![CDATA[
+        SELECT
+        q_num,
+        user_no,
+        qna_title,
+        qna_contents,
+        qna_created,
+        hit_cnt
+        FROM
+            qna
+        ORDER BY
+           qna_created DESC
+        LIMIT #{offset}, #{itemsPerPage}
+    ]]>
+	</select>
+
+
+
+	<select id="countTotal" resultType="int">
+		SELECT COUNT(*) FROM qna
+	</select>
+
+
+
 
 </mapper>
