@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자료실</title>
+    <link rel="stylesheet" href="/css/styles.css">
+     <img src="/img/lms.png" alt="로고" class="logo-img">
     <!-- 부트스트랩 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 부트스트랩 아이콘 CDN -->
@@ -25,44 +27,7 @@
             margin: 0 auto;
         }
 
-        footer {
-            background-color: #2c3e50;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            border-top: 200px solid #ffffff;
-        }
 
-        .wrap-footer {
-            max-width: 1000px;
-            top: 100px;
-            margin: 20px;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer-top-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-direction: row;
-        }
-
-        .footer2 {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer2 a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .footer2 a::before {
-            content: "•";
-            margin-right: 5px;
-        }
 
         .logos img {
             max-width:  20%;
@@ -83,50 +48,6 @@
             margin-bottom: 5px;
         }
 
-        .footer-btm-wrap {
-            margin-top: 100px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            min-width: 160px;
-            z-index: 1;
-            flex-direction: column;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: flex;
-        }
-
-        .dropdown-content a {
-            color: #000000;
-            text-decoration: none;
-            margin: 10px;
-        }
-
-        .navbar-nav {
-            position: absolute;
-            left: 30%;
-            transform: translateX(-50%);
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-            color: #333;
-            letter-spacing: 1px;
-        }
-
-        .nav-link {
-            margin-right: 80px;
-        }
-
-        .btn-primary {
-            width: 200px;
-        }
 
         table {
             border-collapse: collapse;
@@ -148,40 +69,8 @@
             text-align: center;
         }
 
-        #board-search .search-window {
-            padding: 15px 0;
-            background-color: #f9f7f9;
-        }
 
-        #board-search .search-window .search-wrap {
-            position: relative;
-            width: 80%;
-            max-width: 564px;
-        }
 
-        #board-search .search-window .search-wrap input {
-            height: 40px;
-            width: 100%;
-            font-size: 14px;
-            padding: 7px 14px;
-            border: 1px solid #ccc;
-        }
-
-        #board-search .search-window .search-wrap input:focus {
-            border-color: #333;
-            outline: 0;
-            border-width: 1px;
-        }
-
-        #board-search .search-window .search-wrap .btn {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 108px;
-            padding: 0;
-            font-size: 16px;
-        }
 
         .board-table {
             font-size: 13px;
@@ -254,45 +143,125 @@
             outline: none;
             box-shadow: 0 0 0 2px #555;
         }
-    </style>
-</head>
-<body>
+        /* normalize */
+        body, ul, li {
+          padding:0;
+          margin:0;
+          list-style:none;
+        }
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <!-- 로고 -->
-        <a href="/indexadmin">
-            <h1>LMS</h1>
-        </a>
+        a {
+          color:inherit;
+          text-decoration:none;
+        }
 
-        <!-- 네비게이션 토글 버튼 -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        /* customize */
+        /* font */
+        @font-face {
+          font-family: 'LotteMartDream';
+          font-style: normal;
+          font-weight: 400;
+          src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+        }
+        @font-face {
+          font-family: 'LotteMartDream';
+          font-style: normal;
+          font-weight: 700;
+          src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+        }
+        @font-face {
+          font-family: 'LotteMartDream';
+          font-style: normal;
+          font-weight: 300;
+          src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+        }
+        html {
+         font-family: 'LotteMartDream', sans-serif;
+        }
 
-        <!-- 네비게이션 메뉴 -->
-        <div class="navbar-nav">
-            <div class="dropdown">
-                <a class="nav-link" href="#">강좌</a>
-                <div class="dropdown-content">
-                    <a href="lecex">나의 강좌 목록</a>
-                    <a href="/">수강 신청</a>
+        /* setting */
+        :root {
+          --site-width:1200px;
+        }
+
+        .con-min-width {
+          min-width:var(--site-width);
+          padding:0 330px;
+          justify-content: flex-end; /* 수정 */
+        }
+
+        .con {
+          width:var(--site-width);
+        }
+
+        /* menu-bar */
+        .menu-bar {
+          margin-top:0px;
+        }
+
+        .menu-bar__box {
+          display: flex; /* 수정 */
+          justify-content: center; /* 가운데 정렬 */
+          border-bottom: 1px solid black; /* 검은 줄 추가 */
+        }
+
+        .menu-bar__box > li {
+          margin: 0 10px; /* 간격 조절 */
+        }
+
+        .menu-bar__box > li > a {
+          padding:10px 50px;
+          display:block;
+          font-weight:700;
+          font-size:1.2rem;
+        }
+
+        .menu-bar__box > li:hover > a {
+          color:gray;
+          text-decoration:underline;
+        }
+        .logo-img {
+          width: 100px; /* 로고 이미지의 너비 */
+          height: auto; /* 자동으로 높이 설정 */
+          margin-left: 130px; /* 로고 이미지를 오른쪽으로부터 130px만큼 떨어지도록 설정하여 좀 더 왼쪽으로 이동시킵니다. */
+          margin-top: 40px; /* 로고 이미지를 아래로 40px 이동시킵니다. */
+        }
+
+        .logout-link {
+          position: absolute;
+          top: 50px;
+          right: 20px;
+          font-weight: bold;
+          margin-right: 100px;
+            }
+        </style>
+    </head>
+    <body>
+
+       <a href="/logout" class="logout-link">로그아웃</a> <!-- 로그아웃 링크 추가 -->
+            <nav class="menu-bar con-min-width">
+                <div class="con text-align-center">
+
+                  <ul class="menu-bar__box">
+                    <li>
+                     <c:choose>
+                     <c:when test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+                     <a href="/indexadmin">HOME</a>
+                     </c:when>
+                     <c:otherwise>
+                      <a href="/">HOME</a>
+                     </c:otherwise>
+                      </c:choose>
+                      </li>
+                    <li><a href="/sugangReg">수강신청</a></li>
+                    <li><a href="/content">교육과정</a></li>
+                    <li><a href="/board/openBoardList.do">자료실</a></li>
+                    <li><a href="/post">공지사항</a></li>
+                    <li><a href="/qna/openQnaList.do">Q&A</a></li>
+                  </ul>
                 </div>
-            </div>
-            <div class="dropdown">
-                <a class="nav-link" href="#">공지사항</a>
-                <div class="dropdown-content">
-                    <a href="#">서브메뉴2-1</a>
-                    <a href="#">서브메뉴2-2</a>
-                </div>
-            </div>
-        </div>
+              </nav>
 
-        <div style="margin-top: 0px; text-align: right; padding-right: 0px;">
-          <a href="/logout">로그아웃</a>
-        </div>
-    </div>
-</nav>
 
 <!-- 자료실 테이블 -->
 <section class="notice">
@@ -336,9 +305,14 @@
 </section>
 
 <!-- 글쓰기 버튼 -->
-<div style="margin-top: 20px; text-align: right; padding-right: 380px;">
-    <a href="/board/openBoardWrite.do" class="btn btn-dark" style="color: #ffffff;">글 쓰기</a>
-</div>
+<c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+    <div class="text-right" style="margin-left: 1400px;">
+        <a href="/board/openBoardWrite.do" class="btn" id="btn_q" style="background-color: #323232; color: white;">
+            등록
+        </a>
+    </div>
+</c:if>
+
 
 
  <nav aria-label="Page navigation">
@@ -359,21 +333,41 @@
         </ul>
     </nav>
 
-<!-- 푸터 -->
-<footer>
-    <div class="wrap-footer">
-        <div class="footer-top-wrap">
-            <div class="footer2">
-                <ul class="personalinfo">
-                    <li><a href="https://ltikorea.or.kr/kr/contents/policy/view.do">개인정보처리방침</a></li>
-                    <li><a href="https://ltikorea.or.kr/kr/contents/about_inst_5/view.do">오시는길</a></li>
-                    <li><a href="https://ltikorea.or.kr/kr/contents/userAgreement/view.do">이용약관</a></li>
-                    <li><a href="https://www.ltikorea.or.kr/kr/contents/refusal/view.do">이메일무단수집금지</a></li>
+<footer id="footer">
+    <div class="foot-quick">
+    </div>
+    <div class="inner">
+        <div class="f-cnt">
+            <div class="f-info">
+                <p class="info-addr">(04104) 서울 마포구 신촌로 176 중앙빌딩 중앙정보처리학원</p>
+                <ul class="info-cs">
+
+                    <li><strong class="strong">사업자 등록번호 : 220-95-00629</strong><span class="span"></span>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 대표전화 : 02-704-1711</strong><span class="span">(평일 09시~18시)</span></li>
+                    <li><strong class="strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FAX : 02-393-9218</strong><span class="span"></span>
+                    </li>
                 </ul>
-                <ul class="address">
-                    <li>대표자 : 김영민 사업자등록번호 : 102-82-6549 Tel : 032-6919-7714 Fax : 032-695-5485</li>
-                </ul>
-                <p class="copyright">Copyright ⓒ Literature Translation Institute of Korea. All Rights Reserved.</p>
+            </div>
+
+            <div class="f-link">
+                <div class="link-go">
+                    <a href="#" class="btn btn-txt sm ico-arr">찾아오시는 길</a>
+                    <a href="#" class="btn btn-txt sm ico-arr">이용안내</a>
+                    <a href="#" class="btn btn-txt sm ico-arr">직원검색</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="f-btm">
+            <div class="f-btm-text">
+                <div class="f-menu">
+                    <a href="#" class="point">개인정보처리방침</a>
+                    <a href="#">저작권 정책</a>
+                    <a href="#">웹 접근성 품질인증 마크 획득</a>
+                </div>
+                <p class="f-copy">© Ministry of Education. All rights reserved.</p>
+            </div>
+            <div class="f-btm-ban">
             </div>
         </div>
     </div>

@@ -69,4 +69,31 @@
     </insert>
 
 
+
+    <select id="findPaginated" resultType="com.sky.lms_web_service.dto.Post" parameterType="map">
+        <![CDATA[
+        SELECT
+            post_num,
+            user_no,
+            post_title,
+            post_contents,
+            post_created,
+            hit_cnt
+        FROM
+            post
+        ORDER BY
+            post_created DESC
+        LIMIT #{offset}, #{itemsPerPage}
+    ]]>
+    </select>
+
+
+
+    <select id="countTotalPosts" resultType="int">
+        SELECT COUNT(*) FROM post
+    </select>
+
+
+
+
 </mapper>

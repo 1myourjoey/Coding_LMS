@@ -38,6 +38,15 @@ public class PostService {
 
 
 
+    public List<Post> getPaginatedPostList(int offset, int itemsPerPage){
+        return postMapper.findPaginated(offset,itemsPerPage);
+    }
+
+    public int getTotalPages() {
+
+        return postMapper.countTotalPosts();
+    }
+
 
 
 }

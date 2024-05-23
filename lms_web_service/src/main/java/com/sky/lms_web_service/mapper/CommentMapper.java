@@ -10,11 +10,18 @@ import java.util.List;
 public interface CommentMapper {
     List<Comment>selectParentComments(int qNum);
 
-    List<Comment>selectReplies(int pCommentNum);
+
 
     int insertComment(Comment Comment);
 
     int updateComment(@Param("commentNum") int commentNum, @Param("commentContents") String commentContents);
 
     int deleteComment(int commentNum);
+
+    List<Comment>selectReplies(int commentNum);
+
+
+    int addReply(@Param("qNum") int qNum, @Param("pCommentNum") int pCommentNum, @Param("commentContents") String commentContents,@Param("userNo") int userNo);
+
+
 }

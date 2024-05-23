@@ -19,4 +19,13 @@ public interface PostMapper {
     void increaseHitCount(int hitCnt);
 
     void insertPost(Post Post);
+
+
+    List<Post> findPaginated(int offset,int itemsPerPage);
+
+    int countTotalPosts();
+
+    //검색기능
+
+
 }

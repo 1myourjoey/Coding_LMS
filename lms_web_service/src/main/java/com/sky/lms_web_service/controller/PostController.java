@@ -23,7 +23,8 @@ public class PostController {
 
 
     @GetMapping("/post")
-    public String po(Model model, HttpSession session) {
+    public String po(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page,
+                     @RequestParam(defaultValue = "10") int size) {
         // 세션에서 사용자 정보를 가져온다고 가정
         Object user = session.getAttribute("loggedInUser");
 
@@ -32,9 +33,43 @@ public class PostController {
             return "redirect:/login"; // 로그인 페이지의 URL로 변경
         }
 
-        // 세션에 사용자 정보가 있을 경우에만 포스트 페이지로 이동
-        List<Post> plist = postService.postilsts();
+        // 한 페이지에 보여줄 포스트 수 설정
+        int itemsPerPage = size;
+
+        // 총 포스트 수 가져오기
+        int totalPosts = postService.getTotalPages();
+
+        // 총 페이지 수 계산
+        int totalPages = (int) Math.ceil((double) totalPosts / itemsPerPage);
+
+        // 현재 페이지가 1보다 작으면 1로 설정
+        if (page < 1) {
+            page = 1;
+        }
+        // 현재 페이지가 마지막 페이지를 초과하면 마지막 페이지로 설정
+        else if (page > totalPages) {
+            page = totalPages;
+        }
+
+        // 현재 페이지의 시작 인덱스 계산
+        int offset = (page - 1) * itemsPerPage;
+        offset = Math.max(0, offset); // 음수 값이 되지 않도록 보정
+
+        // 현재 페이지의 포스트 목록 가져오기
+        List<Post> plist = postService.getPaginatedPostList(offset, itemsPerPage);
+
+        // 현재 페이지의 시작 및 끝 페이지 번호 계산
+        int maxVisiblePages = 10; // 한 번에 보여줄 페이지 수
+        int numPagesBeforeCurrent = 5; // 현재 페이지 앞에 보여줄 페이지 수
+
+        int startPage = Math.max(1, page - numPagesBeforeCurrent);
+        int endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
         model.addAttribute("plist", plist);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
         return "post";
     }
 
@@ -90,5 +125,11 @@ public class PostController {
 
         return "redirect:/post";
     }
+
+
+
+
+
+
 }
 
