@@ -126,13 +126,7 @@ public class PostController {
         return "redirect:/post";
     }
 
-//    검색기능
-@GetMapping("/search")
-public String searchPosts(@RequestParam("postTitle") String postTitle, Model model) {
-    model.addAttribute("posts", postService.searchPostsByContents(postTitle));
 
-    return "post"; // 검색 결과를 표시할 뷰 페이지로 이동
-}
 
 
 

@@ -47,9 +47,6 @@ public class PostService {
         return postMapper.countTotalPosts();
     }
 
-    //검색기능
-    public List<Post> searchPostsByContents(String postTitle) {
-        return postMapper.searchPostsByContents(postTitle);
-    }
+
 
 }
