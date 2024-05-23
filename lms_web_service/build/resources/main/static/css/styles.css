@@ -102,13 +102,14 @@ figure .inner {
 figure .inner h1 {
     font: normal 60px/1 "arial";
     color: #fff;
+    margin-bottom:10px;
 
 }
 
 figure .inner p {
     font: 16px/1.4 "arial";
     color: #888;
-    margin-bottom: 60px;
+    margin:0px 0px 60px 10px;
 }
 
 figure .inner a {

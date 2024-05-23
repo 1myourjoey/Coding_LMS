@@ -12,129 +12,13 @@
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous">
-    <style>
-        .navbar-custom {
-            height: 85px; /* 네비게이션 바의 높이를 70px로 설정 */
-            padding-top: 10px; /* 상단 패딩 추가 */
-            padding-bottom: 10px; /* 하단 패딩 추가 */
-        }
 
-        .navbar-nav .nav-link {
-            padding-top: 10px; /* 링크 상단 패딩 추가 */
-            padding-bottom: 10px; /* 링크 하단 패딩 추가 */
-        }
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-primary {
-            background-color: #323232;
-            border-color: #323232;
-            padding: 5px 10px; /* 버튼 내부의 패딩을 설정합니다 */
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #505050;
-            border-color: #505050;
-        }
-        .bd-mode-toggle {
-            z-index: 1500;
-        }
-
-        .container {
-            width: 2500px;
-            height: 100%;
-        }
-        .form-group {
-            display: flex;
-            align-items: center;
-        }
-        .form-group label {
-            flex: 0 0 auto; /* 레이블 크기 조절 */
-            margin-right: 50px; /* 레이블과 입력 사이 간격 조절 */
-        }
-        .form-group input{
-            margin-right: 20px;
-        }
-
-        .table-light {
-            width: 30%;
-            font-weight: bold; /* 첫 번째 셀의 너비 비중 설정 */
-        }
-        .table-light + td {
-            width: 70%; /* 두 번째 셀의 너비 비중 설정 */
-        }
-        #tabMenu {
-            margin-top: -25px; /* 원하는 만큼 위로 이동 */
-        }
-
-        #chapterInfo {
-            display: none; /* 챕터정보 테이블을 숨김 */
-        }
-
-        .input-full-width {
-            width: 100%;
-        }
-        a {
-            text-decoration: none; /* 링크에 밑줄 제거 */
-            color: inherit; /* 기본 링크 색상으로 설정 */
-            cursor: pointer; /* 마우스 커서를 포인터로 변경 */
-           }
-
-    </style>
     <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
         <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
         <link rel="stylesheet" href="css/modal.css">
+        <link rel="stylesheet" href="css/content.css">
+
 </head>
 <body>
 
@@ -182,7 +66,7 @@
 </div>
 <div>
 
-    <button id="btn-show" class="btn btn-primary" style="margin-top: 780px; border-radius: 50%;">
+    <button id="btn-show" class="btn btn-primary" style="margin-top: 700px; border-radius: 50%;">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
@@ -214,7 +98,7 @@
             <h4>온라인콘텐츠</h4>
             <div class="col-md-7" style="overflow-x: auto; overflow-y: auto; max-height: 600px;">
 
-                <table class="table table-striped table-bordered table-hover" id="myTable" style="margin-top:0px";>
+                <table class="table table-striped table-bordered table-hover" id="myTable" style="margin-top:5px";>
                     <thead class="table-light">
                     <tr>
                         <th scope="col"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
@@ -260,15 +144,13 @@
 
             <div class="col-md-5" id="tabMenu">
 
-                <ul class="nav nav-tabs">
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tabs" checked>
+        <label for="tab1">컨텐츠정보</label>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tab1" data-toggle="tab" href="#notice">컨텐츠정보</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tab2" data-toggle="tab" href="#dataRoom">챕터정보</a>
-                    </li>
-                </ul>
+        <input type="radio" id="tab2" name="tabs">
+        <label for="tab2">챕터정보</label>
+    </div>
 
                 <div id="notice" class="tabContent">
 
@@ -463,23 +345,19 @@
 
                         <input type="submit" value="저장" class="btn btn-primary btn-sm" style="float: right; margin-right: 0px;">
                         </form>
-                            <input type="button" onclick="addEmptyChapter(this)" value="추가" class="btn btn-primary btn-sm" style="float: right; margin-right: 5px;">
                         <form id="deleteChapterForm">
                             <input type="hidden" name="chapNum" value="${selectContent.chapNum}">
                             <button type="button" id="ChapterNum" class="btn btn-primary btn-sm" data-conNum="${selectContent.conNum}" onclick="deleteChapter()" style="float: right; margin-right: 5px;">삭제</button>
-
                         </form>
+                            <input type="button" onclick="addEmptyChapter(this)" value="추가" class="btn btn-primary btn-sm" style="float: right; margin-right: 5px;">
+
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
-
 </main>
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -491,342 +369,9 @@
 <script src="js/grid.js"></script>
 <script src="js/addEmptyChapter.js"></script>
 <script src="js/checkBox.js"></script>
+<script src="js/chapter.js"></script>
+<script src="js/formActive.js"></script>
+<script src="js/contentProcess.js"></script>
 
-<script>
-$(document).ready(function() {
-    // 로컬 스토리지에서 숨김 상태를 가져옵니다.
-    var isContainerHidden = localStorage.getItem('isContainerHidden');
-
-    // 컨텐츠정보 링크 클릭 시
-    $('#contentLink').click(function(e) {
-        e.preventDefault(); // 기본 이벤트(링크 이동) 방지
-
-        // 강좌 정보 폼을 숨깁니다.
-        $('#lectureForm').hide();
-
-        // .container-fluid를 나타내기만 합니다.
-        $('.container-fluid').show();
-
-        // 숨김 상태를 로컬 스토리지에 저장합니다.
-        localStorage.setItem('isContainerHidden', false);
-
-        // 강좌 정보 폼의 submit 이벤트 제거
-        $('#lectureForm').off('submit');
-    });
-
-    // 강좌정보 링크 클릭 시
-    $('#lectureLink').click(function(e) {
-        e.preventDefault(); // 기본 이벤트(링크 이동) 방지
-
-        // AJAX를 통해 강좌 정보 폼을 가져옵니다.
-        $.ajax({
-            url: '/lecture', // 컨트롤러의 URL
-            method: 'GET',
-            success: function(response) {
-                // 성공적으로 폼을 가져왔을 때, 가져온 HTML을 삽입합니다.
-                $('#lectureForm').html(response);
-
-                // 숨김 상태를 로컬 스토리지에 저장합니다.
-                localStorage.setItem('isContainerHidden', true);
-
-                // 컨텐츠 정보를 숨기고 강좌 정보 폼을 표시합니다.
-                $('.container-fluid').hide();
-                $('#lectureForm').show();
-
-
-                // 강좌 정보 폼의 submit 이벤트 추가
-                $('#lectureForm').submit(function(e) {
-                    // 필요한 작업 수행
-                });
-            },
-            error: function(xhr, status, error) {
-                // 에러가 발생했을 때의 처리
-                console.error(error);
-            }
-        });
-    });
-
-    // 페이지 로드 시 저장된 숨김 상태를 확인하고 적용합니다.
-    if (isContainerHidden === 'true') {
-        // 강좌 정보 폼을 숨깁니다.
-        $('#lectureForm').hide();
-    } else {
-        // 컨텐츠 정보를 숨기고 강좌 정보 폼을 표시합니다.
-        $('.container-fluid').hide();
-        $('#lectureForm').show();
-    }
-});
-
-
-$(document).ready(function() {
-    // 폼 전송 이벤트를 가로챕니다.
-    $('#updateContent').submit(function(e) {
-        e.preventDefault(); // 기본 전송 이벤트를 막습니다.
-
-        // 폼 데이터를 가져옵니다.
-        var formData = $(this).serialize();
-
-        // AJAX 요청을 보냅니다.
-        $.ajax({
-            url: 'updateContent', // 서버의 엔드포인트 URL
-            method: 'POST', // HTTP 메서드
-            data: formData, // 폼 데이터
-            success: function(response) {
-                // 성공적으로 요청을 보냈을 때의 처리
-                console.log('요청 성공');
-
-                // 업데이트된 데이터를 받아서 목록을 업데이트하는 함수를 호출
-                updateContentList();
-
-                $('#updateContent')[0].reset();
-                alert('데이터가 성공적으로 저장되었습니다.');
-            },
-            error: function(xhr, status, error) {
-                // 요청이 실패했을 때의 처리
-                console.error('요청 실패');
-                console.error(error);
-                // 실패 메시지 또는 오류 처리를 수행할 수 있습니다.
-            }
-        });
-    });
-
-
-$('#deleteContentForm').submit(function(event) {
-    event.preventDefault(); // 기본 폼 제출 방지
-
-    // 사용자에게 확인 메시지 표시
-    var confirmDelete = confirm("데이터를 삭제하시겠습니까?");
-
-    if (confirmDelete) {
-        // 폼 데이터를 가져옵니다.
-        var formData = $(this).serialize();
-
-        // AJAX 요청을 보냅니다.
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: formData,
-            success: function(response) {
-                // 성공적으로 요청을 보냈을 때의 처리
-                console.log("삭제 요청 성공");
-
-                // 삭제 후 업데이트된 목록을 불러옵니다.
-                updateContentList();
-
-                $('#updateContent')[0].reset();
-                alert('데이터가 성공적으로 삭제되었습니다.');
-            },
-            error: function(xhr, status, error) {
-                // 요청이 실패했을 때의 처리
-                console.error("요청 실패");
-                console.error(error);
-            }
-        });
-    } else {
-        // 사용자가 삭제를 취소한 경우
-        console.log("삭제 요청 취소됨");
-    }
-});
-
-
-    // 목록을 업데이트하는 함수
-    function updateContentList() {
-        $.ajax({
-            url: 'content', // 서버의 엔드포인트 URL
-            type: 'GET', // HTTP 메서드
-            success: function(response) {
-                // 응답에서 업데이트된 목록 데이터를 추출
-                var updatedContentList = $(response).find('#tableBody').html();
-
-                // 현재 페이지의 목록을 업데이트된 목록으로 교체
-                $('#tableBody').html(updatedContentList);
-            },
-            error: function(xhr, status, error) {
-                // AJAX 요청이 실패한 경우의 처리
-                console.error('AJAX 요청 실패:', status, error);
-            }
-        });
-    }
-});
-
-
-$(document).ready(function() {
-    // 초기 목록을 불러오는 함수
-    function loadInitialContent() {
-        $.ajax({
-            url: 'content', // 기본 목록을 가져오는 엔드포인트 URL
-            method: 'GET', // HTTP 메서드
-            success: function(response) {
-                // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
-                var newTableBodyContent = $(response).find('tbody').html();
-
-                // 목록을 업데이트합니다.
-                $('#tableBody').html(newTableBodyContent);
-            },
-            error: function(xhr, status, error) {
-                // 요청이 실패했을 때의 처리
-                console.error("초기 목록 요청 실패");
-                console.error(error);
-            }
-        });
-    }
-
-
-    // 검색 폼 전송 이벤트를 가로챕니다.
-    $('#searchForm').submit(function(event) {
-        event.preventDefault(); // 기본 폼 제출을 막습니다.
-
-        // 폼 데이터를 가져옵니다.
-        var formData = $(this).serialize();
-
-        // 입력 필드의 값을 확인합니다.
-        var conName = $('#firstName').val().trim();
-        var lecName = $('#lastName').val().trim();
-
-        if (conName === "" && lecName === "") {
-            // 검색 값이 비어 있으면 초기 목록을 불러옵니다.
-            loadInitialContent();
-        } else {
-            // 검색 값이 비어 있지 않으면 AJAX 요청을 보냅니다.
-            $.ajax({
-                url: 'selectSearch', // 서버의 엔드포인트 URL
-                method: 'POST', // HTTP 메서드
-                data: formData, // 폼 데이터
-                success: function(response) {
-                    // 성공적으로 요청을 보냈을 때의 처리
-                    console.log("검색 요청 성공");
-
-                    $('#firstName').val('');
-                    $('#lastName').val('');
-
-                    // 응답에서 <tbody> 내부의 콘텐츠만 추출합니다.
-                    var newTableBodyContent = $(response).find('tbody').html();
-
-                    // 검색 결과를 업데이트합니다.
-                    $('#tableBody').html(newTableBodyContent);
-                },
-                error: function(xhr, status, error) {
-                    // 요청이 실패했을 때의 처리
-                    console.error("검색 요청 실패");
-                    console.error(error);
-                }
-            });
-        }
-    });
-
-    // 검색 버튼 클릭 시 폼 리셋 및 초기 목록 로드
-    $('#resetButton').click(function(event) {
-        event.preventDefault(); // 기본 이벤트를 막습니다.
-
-        // 폼을 리셋합니다.
-        $('#searchForm')[0].reset();
-
-        // 초기 목록을 불러옵니다.
-        loadInitialContent();
-    });
-});
-
-
-$(document).ready(function() {
-    // 폼 제출 이벤트 리스너
-    $('#saveChapterForm').submit(function(event) {
-    var conNum = $('#ChapterSave').data('conNum');
-        event.preventDefault(); // 기본 동작 방지
-
-        // 폼 데이터를 가져옵니다.
-        var formData = $(this).serialize();
-
-        // AJAX 요청을 보냅니다.
-        $.ajax({
-            url: 'saveChapter', // action 속성에 지정된 URL로 요청을 보냅니다.
-            method: 'POST', // method 속성에 지정된 HTTP 메서드를 사용합니다.
-            data: formData, // 폼 데이터를 전송합니다.
-            success: function(response) {
-                // 요청이 성공적으로 처리되었을 때의 처리
-                console.log("저장 요청 성공");
-
-                $('#saveChapterForm')[0].reset();
-                $('input[name="chapName"]').val('');
-                $('input[name="chapStartTime"]').val('');
-                $('input[name="chapNum"]').val('');
-
-                alert('데이터가 성공적으로 저장되었습니다.');
-                selectChapter(conNum);
-                // 여기에 성공 메시지 표시 등의 추가 작업을 할 수 있습니다.
-            },
-            error: function(xhr, status, error) {
-
-                // 요청이 실패했을 때의 처리
-                console.error("저장 요청 실패");
-                console.error(error);
-
-                $('#saveChapterForm')[0].reset();
-
-                $('input[name="chapName"]').val('');
-                $('input[name="chapStartTime"]').val('');
-                $('input[name="chapNum"]').val('');
-                alert('데이터 저장에 실패하였습니다.');
-                // 여기에 실패 메시지 표시 등의 추가 작업을 할 수 있습니다.
-            }
-        });
-    });
-});
-
-function selectOneChapter(chapNum) {
-    // chapNum을 서버로 전송하여 데이터를 가져옴
-    $.ajax({
-        url: 'selectOneChapter', // 서버의 URL
-        type: 'POST', // HTTP 요청 방식
-        data: { chapNum: chapNum }, // 전송할 데이터
-        success: function(response) {
-            // 성공 시 처리할 내용
-            console.log(response); // 서버에서 받은 응답을 콘솔에 출력
-
-            // chapName과 chapStartTime 입력 필드에 값 설정
-            $('input[name="chapName"]').val(response.chapName);
-            $('input[name="chapStartTime"]').val(response.chapStartTime);
-            $('input[name="chapNum"]').val(response.chapNum);
-        },
-        error: function(xhr, status, error) {
-            // 에러 발생 시 처리할 내용
-            console.error(error); // 에러 메시지를 콘솔에 출력
-        }
-    });
-}
-
-function deleteChapter() {
-
-    var conNum = $('#ChapterNum').data('conNum');
-    if (confirm("정말로 이 챕터를 삭제하시겠습니까?")) {
-        var formData = $('#deleteChapterForm').serialize(); // 폼 데이터를 수집합니다.
-
-        $.ajax({
-            url: 'deleteChapter', // 서버의 URL
-            type: 'POST', // HTTP 요청 방식
-            data: formData, // 수집한 폼 데이터를 전송합니다.
-            success: function(response) {
-
-                console.log(response); // 서버에서 받은 응답을 콘솔에 출력
-                alert('챕터가 성공적으로 삭제되었습니다.');
-                $('#saveChapterForm')[0].reset();
-                selectChapter(conNum);
-
-                // 삭제 후 필요한 작업 수행
-            },
-            error: function(xhr, status, error) {
-                // 에러 발생 시 처리할 내용
-                console.error(error); // 에러 메시지를 콘솔에 출력
-                alert('챕터 삭제에 실패했습니다.');
-                $('#saveChapterForm')[0].reset();
-            }
-        });
-    }
-}
-
-
-
-
-
-</script>
 </body>
 </html>
