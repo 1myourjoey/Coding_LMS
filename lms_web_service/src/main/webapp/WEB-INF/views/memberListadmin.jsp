@@ -135,10 +135,10 @@
                 <div class="con text-align-center">
 
                   <ul class="menu-bar__box">
-                    <li><a href="/">HOME</a></li>
+                    <li><a href="/indexadmin">HOME</a></li>
                     <li><a href="/sugangReg">수강신청</a></li>
                     <li><a href="/content">교육과정</a></li>
-                    <li><a href="/boardlistuser">자료실</a></li>
+                    <li><a href="/board/openBoardList.do">자료실</a></li>
                     <li><a href="/post">공지사항</a></li>
                     <li><a href="/qna/openQnaList.do">Q&A</a></li>
                   </ul>
