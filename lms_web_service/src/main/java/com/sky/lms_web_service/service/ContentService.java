@@ -3,16 +3,21 @@ package com.sky.lms_web_service.service;
 
 
 import com.sky.lms_web_service.dto.Contents_Manage;
+import com.sky.lms_web_service.dto.Pagination;
 import com.sky.lms_web_service.mapper.ContentMapper;
 import com.sky.lms_web_service.mapper.LectureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 public class ContentService {
+
+    private static final int listSize = 3;
+    private static final int paginationSize = 3;
 
     @Autowired
     private ContentMapper contentMapper;
@@ -70,4 +75,51 @@ public class ContentService {
     public List<Contents_Manage> getContentsByLectureName(String lecName) {
         return contentMapper.selectContentsByLectureName(lecName);
     }
+
+
+
+    public ArrayList<Pagination> getPagination(int pageNo) {
+        ArrayList<Pagination> pgnList = new ArrayList<>();
+        int numRecords = contentMapper.selectCount();
+        int numPages = (int)Math.ceil((double)numRecords / listSize);
+
+        int firstLink = ((pageNo - 1) / paginationSize) * paginationSize + 1;
+        int lastLink = firstLink + paginationSize - 1;
+        if (lastLink > numPages) {
+            lastLink = numPages;
+        }
+
+        if (firstLink > 1) {
+            pgnList.add(new Pagination("이전", pageNo - paginationSize, false));
+        }
+
+        for (int i = firstLink; i <= lastLink; i++) {
+            pgnList.add(new Pagination("" + i, i, i == pageNo));
+        }
+
+        if (lastLink < numPages) {
+            int tmpPageNo = pageNo + paginationSize;
+            if (tmpPageNo > numPages) {
+                tmpPageNo = numPages;
+            }
+            pgnList.add(new Pagination("다음", tmpPageNo, false));
+        }
+
+        return pgnList;
+    }
+
+    public ArrayList<Contents_Manage> getMsgList(int pageNo) {
+        return (ArrayList<Contents_Manage>) contentMapper.selectList((pageNo - 1) * listSize, listSize);
+    }
+    public List<Contents_Manage> paging(int id, int start, int listSize) {
+        return (ArrayList<Contents_Manage>) contentMapper.paging(id, (start - 1) * listSize, listSize);
+    }
+
+
+
+
+
+
+
+
 }
