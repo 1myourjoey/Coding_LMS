@@ -94,11 +94,6 @@
     </select>
 
 
-<!--    검색기능-->
-    <select id="searchPostsByContents" resultType="com.sky.lms_web_service.dto.Post">
-        SELECT *
-        FROM post
-        WHERE post_title LIKE CONCAT('%', #{postTitle}, '%')
-    </select>
+
 
 </mapper>

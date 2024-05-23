@@ -26,6 +26,6 @@ public interface PostMapper {
     int countTotalPosts();
 
     //검색기능
-    List<Post> searchPostsByContents(String postTitle);
+
 
 }
