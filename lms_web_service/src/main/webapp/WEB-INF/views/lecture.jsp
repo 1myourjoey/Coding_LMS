@@ -13,84 +13,8 @@
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous">
-    <style>
-        .navbar-custom {
-            height: 85px; /* 네비게이션 바의 높이를 70px로 설정 */
-            padding-top: 10px; /* 상단 패딩 추가 */
-            padding-bottom: 10px; /* 하단 패딩 추가 */
-        }
+            <link rel="stylesheet" href="css/lecture.css">
 
-        .navbar-nav .nav-link {
-            padding-top: 10px; /* 링크 상단 패딩 추가 */
-            padding-bottom: 10px; /* 링크 하단 패딩 추가 */
-        }
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-primary {
-            background-color: #323232;
-            border-color: #323232;
-            padding: 5px 10px; /* 버튼 내부의 패딩을 설정합니다 */
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #505050;
-            border-color: #505050;
-        }
-        .bd-mode-toggle {
-            z-index: 1500;
-        }
-    </style>
 </head>
 <body>
 
@@ -100,9 +24,9 @@
                 <div class="col-sm-12">
                     <div class="form-group" style="margin-left: 40px;">
                         <label for="lecName">교과목명</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" id="lec_name" name="lecName" style="max-width: 350px;">
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="lec_name" name="lecName" style="max-width: 350px; margin-right:300px">
 
-                        <label for="lecEx">내용</label>
+                        <label for="lecEx">강좌내용</label>
                         <input type="text" class="form-control mb-2 mr-sm-2" id="lecEx" name="lecEx" style="max-width: 350px;">
 
                         <input type="submit" class="btn btn-primary mb-2" value="검색">
@@ -192,7 +116,7 @@
 
                             <tr>
                                 <td class="table-light">온라인강좌설명</td>
-                                <td><textarea class="form-control" name="lecEx" value="${selectLecture.lecEx}"></textarea></td>
+                                <td><textarea class="form-control" style="height: 150px;" name="lecEx" value="${selectLecture.lecEx}"></textarea></td>
                             </tr>
 
                             </tbody>
@@ -222,172 +146,8 @@
         </div>
     </div>
 
-
 <script src="js/lectureGrid.js"></script>
-<script>
-
-function lectureClick(lecNum) {
-    // 클릭된 요소의 lecNum 값을 사용하여 AJAX 요청을 보냅니다.
-    $.ajax({
-        type: "GET",
-        url: "/selectLecture?lecNum=" + lecNum, // 클릭된 요소의 lecNum 값을 URL에 포함
-        success: function(response) {
-            // 응답 데이터를 사용하여 해당 폼 요소의 값을 설정합니다.
-            $('#inputLecNum').val(response.lecNum);
-            $('#inputLecName').val(response.lecName);
-            $('input[name="lecStartDate"]').val(response.lecStartDate);
-            $('input[name="lecEndDate"]').val(response.lecEndDate);
-            $('#deleteButton').val(response.lecNum);
-            $('textarea[name="lecEx"]').val(response.lecEx);
-        },
-        error: function(xhr, status, error) {
-            // 오류 처리
-            console.error("Error:", error);
-        }
-    });
-}
-
-</script>
-
-<script>
-$(document).ready(function() {
-    $('form[action="lectureInfo"]').submit(function(event) {
-        // 폼의 기본 동작을 막습니다.
-        event.preventDefault();
-
-        // 폼 데이터를 직렬화합니다.
-        var formData = $(this).serialize();
-
-        // 현재 폼을 변수에 저장합니다.
-        var $form = $(this);
-
-        // AJAX 요청을 보냅니다.
-        $.ajax({
-            url: 'lectureInfo', // 강좌 정보를 추가하는 서버의 엔드포인트
-            type: 'POST', // POST 요청
-            data: formData, // 폼 데이터 전송
-            success: function(response) {
-                // 성공적으로 응답을 받았을 때 실행되는 콜백 함수
-                // 새로운 강좌 정보를 가져와서 목록에 추가합니다.
-                appendNewLecture(response);
-
-                // 폼의 입력 필드를 비웁니다.
-                alert('데이터가 성공적으로 저장되었습니다.');
-                $form[0].reset();
-            },
-            error: function(xhr, status, error) {
-                // 요청이 실패한 경우 실행되는 콜백 함수
-                console.error('AJAX request failed:', status, error);
-            }
-        });
-    });
-
-    function appendNewLecture() {
-        $.ajax({
-            url: 'lecture',
-            type: 'GET',
-            success: function(response) {
-                // 응답에서 헤더와 사이드바를 제외한 부분을 추출하여 사용
-                var lectureInfo = $(response).find('#tdInsert').html();
-                $('#tdInsert').html(lectureInfo);
-                $('#modalSearchResults').html(lectureInfo);
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX request failed:', status, error);
-            }
-        });
-    }
-});
-
-        $(document).ready(function() {
-            // 검색 폼 제출 이벤트 리스너
-            $('#lectureSearch').submit(function(e) {
-                e.preventDefault(); // 폼 기본 동작 방지
-
-            var formData = $('#lectureSearch').serialize();
-
-                // AJAX 요청
-                $.ajax({
-                    url: '/lectureSearch', // 검색을 처리할 서버의 엔드포인트
-                    method: 'POST', // POST 요청
-                    data: formData,
-                    success: function(response) {
-                        // 성공적으로 검색 결과를 받았을 때 실행되는 콜백 함수
-                        // 검색 결과를 테이블에 표시
-                        displaySearchResults(response);
-                        $('#lec_name').val('');
-                        $('#lecEx').val('');
-                        $('#lectureReset')[0].reset();
-
-                    },
-                    error: function(xhr, status, error) {
-                        // 요청이 실패한 경우 실행되는 콜백 함수
-                        console.error('AJAX request failed:', status, error);
-                    }
-                });
-            });
-
-            // 검색 결과를 테이블에 표시하는 함수
-            function displaySearchResults(results) {
-                // 결과를 표시할 tbody 요소 선택
-                var $tbody = $('#tdInsert');
-
-                // tbody 내용 비우기
-                $tbody.empty();
-
-                // 결과를 순회하면서 테이블에 추가
-                $.each(results, function(index, result) {
-                    var row = '<tr>' +
-                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecNum + '</td>' +
-                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecStartDate + '</td>' +
-                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecEndDate + '</td>' +
-                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecName + '</td>' +
-                    '<td onclick="lectureClick(\'' + result.lecNum + '\'); return false;">' + result.lecEx + '</td>' +
-                        '</tr>';
-                    $tbody.append(row);
-                });
-            }
-        });
-
-        $(document).ready(function() {
-            // 삭제 폼 제출 이벤트 리스너
-            $('#deleteLectureForm').submit(function(event) {
-                event.preventDefault(); // 폼 기본 동작 방지
-
-                // 확인 메시지를 표시
-                var confirmation = confirm('데이터를 삭제하시겠습니까?');
-
-                if (confirmation) {
-                    // 폼 데이터를 가져옵니다.
-                    var formData = $(this).serialize();
-
-                    // AJAX 요청을 보냅니다.
-                    $.ajax({
-                        url: $(this).attr('action'),
-                        method: 'POST',
-                        data: formData,
-                        success: function(response) {
-                            // 성공적으로 요청을 보냈을 때의 처리
-                            console.log("삭제 요청 성공");
-                            alert('데이터가 성공적으로 삭제되었습니다.');
-
-                            // 삭제 후 업데이트된 목록을 불러옵니다.
-                            appendNewLecture();
-                        },
-                        error: function(xhr, status, error) {
-                            // 요청이 실패했을 때의 처리
-                            console.error("요청 실패");
-                            console.error(error);
-                        }
-                    });
-                } else {
-                    // 삭제 취소 시 아무 동작도 하지 않음
-                    console.log("삭제 요청 취소됨");
-                }
-            });
-        });
-
-
-</script>
+<script src="js/lectureProcess.js"></script>
+<script src="js/lectureClick.js"></script>
 </body>
 </html>
