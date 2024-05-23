@@ -7,9 +7,9 @@
     <title>Q&A</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/styles.css">
-    <a href="/">
+
            <img src="/img/lms.png" class="logo-img" alt="로고 이미지">
-       </a>
+
 
      <style>
 
