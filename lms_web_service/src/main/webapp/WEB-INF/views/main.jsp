@@ -16,7 +16,7 @@
         <h1><a href="/">Coding</a></h1>
 
         <ul id="gnb">
-            <li><a href="/content">교육과정</a></li>
+            <li><a href="/content">강좌관리</a></li>
             <li><a href="/sugangReg">수강신청</a></li>
             <li> <a href="/board/openBoardList.do">자료실</a></li>
             <li><a href="/post">공지사항</a></li>

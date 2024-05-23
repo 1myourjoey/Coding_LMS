@@ -19,13 +19,21 @@
         <link rel="stylesheet" href="css/modal.css">
         <link rel="stylesheet" href="css/content.css">
 
+<style>
+#myTable {
+    width: 100%; /* 원하는 너비로 지정 */
+    height: 400px; /* 원하는 높이로 지정 */
+    overflow: auto; /* 필요에 따라 스크롤을 추가합니다. */
+}
+
+</style>
 </head>
 <body>
 
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-      <img src="img/online.png" style="width: 120px; height: 100px; margin-right: 10px;">
-        <span class="fs-4">Coding Education</span>
+      <img src="/img/lms.png" style="width: 100px; height: 80px; margin-right: 10px; margin-left:30px">
+
     </a>
 
     <ul class="nav nav-pills">
@@ -38,7 +46,7 @@
     <div id="sidebar" class="flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Sidebar</span>
+            <span class="fs-4">LMS</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
@@ -252,7 +260,7 @@
 
                             </div>
                             <!-- 테이블 데이터 -->
-                            <table id="dataTable">
+                            <table id="dataTable" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>강좌번호</th>
