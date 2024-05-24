@@ -19,6 +19,26 @@
         <link rel="stylesheet" href="css/modal.css">
         <link rel="stylesheet" href="css/content.css">
 
+<style>
+/* 테이블 전체의 너비 설정 */
+#myTable {
+    width: 100%;
+}
+
+/* 길이가 너무 긴 셀에 대한 처리 */
+#myTable td {
+    max-width: 200px; /* 셀의 최대 너비 설정 */
+    white-space: nowrap; /* 텍스트가 셀을 넘어가지 않고 한 줄에 표시되도록 설정 */
+    overflow: hidden; /* 셀 내부의 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 셀 내용이 넘칠 경우 '...'으로 대체하여 표시 */
+}
+
+.checkbox-cell {
+    width: 4%; /* 또는 원하는 크기로 지정 */
+}
+
+
+</style>
 </head>
 <body>
 
@@ -101,7 +121,7 @@
                 <table class="table table-striped table-bordered table-hover" id="myTable" style="margin-top:5px";>
                     <thead class="table-light">
                     <tr>
-                        <th scope="col"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
+                        <th scope="col" class="checkbox-cell"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
                         <th scope="col" style="text-align: center;">교과목</th>
                         <th scope="col" style="text-align: center;">콘텐츠명</th>
                         <th scope="col" style="text-align: center;">Youtube연동번호</th>
@@ -114,7 +134,7 @@
                             <c:when test="${empty selectSearch}">
                                 <c:forEach var="contents" items="${paging}" varStatus="loop">
                                     <tr>
-                                        <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
+                                        <td class="checkbox-cell"><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.lecName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.conName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.videoId}</td>
@@ -390,46 +410,9 @@
 <script src="js/chapter.js"></script>
 <script src="js/formActive.js"></script>
 <script src="js/contentProcess.js"></script>
-<script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.page-link.pgn').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            let pageNo = this.getAttribute('data-page');
-            updateTable(pageNo);
-        });
-    });
-
-    function updateTable(pageNo) {
-        // 페이지 이동 요청을 서버에 전송
-        fetch('/content?page=' + pageNo, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.text();
-        })
-        .then(data => {
-            // 새로운 페이지 HTML에서 tbody 부분만 추출
-            let tableBodyHtml = (new DOMParser().parseFromString(data, 'text/html')).querySelector('#tableBody').innerHTML;
-            // 현재 페이지의 tbody를 업데이트
-            document.querySelector('#tableBody').innerHTML = tableBodyHtml;
-            // 페이지 이동 후 스크롤 맨 위로 이동
-            window.scrollTo(0, 0);
-        })
-        .catch(error => console.error('Error:', error));
-    }
-});
+<script src="js/paging.js"></script>
 
 
-
-
-</script>
 
 </body>
 </html>

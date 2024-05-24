@@ -125,8 +125,10 @@
         IF(SECOND(SEC_TO_TIME(con_play_time)) > 0, CONCAT(SECOND(SEC_TO_TIME(con_play_time)), '초'), '')
         ) AS duration_time
         FROM contents_manage
+        ORDER BY con_num DESC
         LIMIT #{start}, #{listSize}
     </select>
+
 
 
 
