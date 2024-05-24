@@ -163,7 +163,7 @@
                         <ul class="pagination">
                             <c:forEach var="pgn" items="${pgnList}">
                                 <li class="page-item">
-                                    <a class="page-link pgn" data-page="${pgn.pageNo}">
+                                    <a class="page-link pgn" data-page="${pgn.pageNo}" style="color: #323232;">
                                         <c:choose>
                                             <c:when test="${pgn.curPage}">
                                                 <u>${pgn.display}</u>

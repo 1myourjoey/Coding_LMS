@@ -57,7 +57,7 @@ public class ContentController {
         if (loggedInUser == null) {
             return "redirect:/login";
         }
-        model.addAttribute("paging",contentService.paging(pageNo,5));
+        model.addAttribute("paging",contentService.paging(pageNo,10));
         model.addAttribute("pgnList",contentService.getPagination(pageNo));
         model.addAttribute("msgList",contentService.getMsgList(pageNo));
 
