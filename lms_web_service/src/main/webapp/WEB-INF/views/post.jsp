@@ -12,9 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/styles.css">
-   <a href="/">
+
        <img src="/img/lms.png" class="logo-img" alt="로고 이미지">
-   </a>
+
 
      <style>
 
@@ -286,7 +286,16 @@
         <div class="con text-align-center">
 
           <ul class="menu-bar__box">
-            <li><a href="/">HOME</a></li>
+            <li>
+                <c:choose>
+                    <c:when test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+                        <a href="indexadmin">HOME</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/">HOME</a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
             <li><a href="/sugangReg">수강신청</a></li>
              <li><a href="/sugangList">수강목록</a></li>
             <li><a href="/boardlistuser">자료실</a></li>
