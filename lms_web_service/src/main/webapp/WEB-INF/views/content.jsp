@@ -20,11 +20,23 @@
         <link rel="stylesheet" href="css/content.css">
 
 <style>
+/* 테이블 전체의 너비 설정 */
 #myTable {
-    width: 100%; /* 원하는 너비로 지정 */
-    height: 400px; /* 원하는 높이로 지정 */
-    overflow: auto; /* 필요에 따라 스크롤을 추가합니다. */
+    width: 100%;
 }
+
+/* 길이가 너무 긴 셀에 대한 처리 */
+#myTable td {
+    max-width: 200px; /* 셀의 최대 너비 설정 */
+    white-space: nowrap; /* 텍스트가 셀을 넘어가지 않고 한 줄에 표시되도록 설정 */
+    overflow: hidden; /* 셀 내부의 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 셀 내용이 넘칠 경우 '...'으로 대체하여 표시 */
+}
+
+.checkbox-cell {
+    width: 4%; /* 또는 원하는 크기로 지정 */
+}
+
 
 </style>
 </head>
@@ -109,7 +121,7 @@
                 <table class="table table-striped table-bordered table-hover" id="myTable" style="margin-top:5px";>
                     <thead class="table-light">
                     <tr>
-                        <th scope="col"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
+                        <th scope="col" class="checkbox-cell"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()"></th>
                         <th scope="col" style="text-align: center;">교과목</th>
                         <th scope="col" style="text-align: center;">콘텐츠명</th>
                         <th scope="col" style="text-align: center;">Youtube연동번호</th>
@@ -120,9 +132,9 @@
                     <tbody id="tableBody">
                         <c:choose>
                             <c:when test="${empty selectSearch}">
-                                <c:forEach var="contents" items="${contentList}" varStatus="loop">
+                                <c:forEach var="contents" items="${paging}" varStatus="loop">
                                     <tr>
-                                        <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
+                                        <td class="checkbox-cell"><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.lecName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.conName}</td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.videoId}</td>
@@ -144,9 +156,27 @@
                         </c:choose>
                     </tbody>
 
-
-
                 </table>
+
+
+                    <div class="container" style="width: 250px; text-align: center;">
+                        <ul class="pagination">
+                            <c:forEach var="pgn" items="${pgnList}">
+                                <li class="page-item">
+                                    <a class="page-link pgn" data-page="${pgn.pageNo}" style="color: #323232;">
+                                        <c:choose>
+                                            <c:when test="${pgn.curPage}">
+                                                <u>${pgn.display}</u>
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pgn.display}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
 
             </div>
 
@@ -380,6 +410,9 @@
 <script src="js/chapter.js"></script>
 <script src="js/formActive.js"></script>
 <script src="js/contentProcess.js"></script>
+<script src="js/paging.js"></script>
+
+
 
 </body>
 </html>
