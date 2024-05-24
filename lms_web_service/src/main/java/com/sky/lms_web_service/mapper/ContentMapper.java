@@ -25,7 +25,7 @@ public interface ContentMapper {
     List<Contents_Manage> selectContentsByLectureName(String lecName);
 
     List<Contents_Manage> selectList(int start, int listSize);
-    List<Contents_Manage> paging(int id, int start, int listSize);
+    List<Contents_Manage> paging(int start, int listSize);
 
 
 }

@@ -111,8 +111,8 @@ public class ContentService {
     public ArrayList<Contents_Manage> getMsgList(int pageNo) {
         return (ArrayList<Contents_Manage>) contentMapper.selectList((pageNo - 1) * listSize, listSize);
     }
-    public List<Contents_Manage> paging(int id, int start, int listSize) {
-        return (ArrayList<Contents_Manage>) contentMapper.paging(id, (start - 1) * listSize, listSize);
+    public List<Contents_Manage> paging(int start, int listSize) {
+        return contentMapper.paging((start - 1) * listSize, listSize);
     }
 
 

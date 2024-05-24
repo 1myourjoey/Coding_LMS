@@ -46,8 +46,10 @@ public class ContentController {
         //model.addAttribute("chapters", chapters);
         return "contents_List";
     }
+
+
     @GetMapping("content")
-    public String content(Model model, HttpServletRequest request){
+    public String content(Model model, HttpServletRequest request,@RequestParam(defaultValue = "1", name = "page") int pageNo){
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -55,12 +57,20 @@ public class ContentController {
         if (loggedInUser == null) {
             return "redirect:/login";
         }
+        model.addAttribute("paging",contentService.paging(pageNo,10));
+        model.addAttribute("pgnList",contentService.getPagination(pageNo));
+        model.addAttribute("msgList",contentService.getMsgList(pageNo));
 
         model.addAttribute("contentList",contentService.selectAll());
         model.addAttribute("formatTime",contentService.formatTime());
         model.addAttribute("lectureList",lectureService.lectureList());
+
         return "content";
+
     }
+
+
+
 
     @PostMapping("/insertContent")
     public String insertContent(Contents_Manage contentsManage){

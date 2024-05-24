@@ -19,14 +19,6 @@
         <link rel="stylesheet" href="css/modal.css">
         <link rel="stylesheet" href="css/content.css">
 
-<style>
-#myTable {
-    width: 100%; /* 원하는 너비로 지정 */
-    height: 400px; /* 원하는 높이로 지정 */
-    overflow: auto; /* 필요에 따라 스크롤을 추가합니다. */
-}
-
-</style>
 </head>
 <body>
 
@@ -120,7 +112,7 @@
                     <tbody id="tableBody">
                         <c:choose>
                             <c:when test="${empty selectSearch}">
-                                <c:forEach var="contents" items="${contentList}" varStatus="loop">
+                                <c:forEach var="contents" items="${paging}" varStatus="loop">
                                     <tr>
                                         <td><input type="checkbox" onclick="handleClick('${contents.conNum}')"></td>
                                         <td onclick="handleClick('${contents.conNum}'); selectChapter('${contents.conNum}'); return false;">${contents.lecName}</td>
@@ -144,9 +136,27 @@
                         </c:choose>
                     </tbody>
 
-
-
                 </table>
+
+
+                    <div class="container" style="width: 250px; text-align: center;">
+                        <ul class="pagination">
+                            <c:forEach var="pgn" items="${pgnList}">
+                                <li class="page-item">
+                                    <a class="page-link pgn" data-page="${pgn.pageNo}">
+                                        <c:choose>
+                                            <c:when test="${pgn.curPage}">
+                                                <u>${pgn.display}</u>
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pgn.display}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
 
             </div>
 
@@ -380,6 +390,46 @@
 <script src="js/chapter.js"></script>
 <script src="js/formActive.js"></script>
 <script src="js/contentProcess.js"></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.page-link.pgn').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            let pageNo = this.getAttribute('data-page');
+            updateTable(pageNo);
+        });
+    });
+
+    function updateTable(pageNo) {
+        // 페이지 이동 요청을 서버에 전송
+        fetch('/content?page=' + pageNo, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            // 새로운 페이지 HTML에서 tbody 부분만 추출
+            let tableBodyHtml = (new DOMParser().parseFromString(data, 'text/html')).querySelector('#tableBody').innerHTML;
+            // 현재 페이지의 tbody를 업데이트
+            document.querySelector('#tableBody').innerHTML = tableBodyHtml;
+            // 페이지 이동 후 스크롤 맨 위로 이동
+            window.scrollTo(0, 0);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+
+
+
+
+</script>
 
 </body>
 </html>
