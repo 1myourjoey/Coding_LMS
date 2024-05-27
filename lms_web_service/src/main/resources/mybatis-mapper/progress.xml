@@ -6,11 +6,12 @@
 <mapper namespace="com.sky.lms_web_service.mapper.ProgressMapper">
 
     <insert id="saveVideoProgress" parameterType="com.sky.lms_web_service.dto.Section_Progress">
-        INSERT INTO section_progress (conNum, lecNum, userNo, learningTime, fnlS, maxS)
+        INSERT INTO section_progress (con_num, lec_num, user_no, learning_time, fnl_s, max_s)
         VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime}, #{fnlS}, #{maxS})
     </insert>
 
-    <select id="getVideoProgress" resultType="java.util.Map">
-        SELECT learningTime, fnlS, maxS FROM section_progress WHERE conNum = #{conNum}
-    </select>
+    <insert id="saveLastWatchedTime" parameterType="com.sky.lms_web_service.dto.Section_Progress">
+        INSERT INTO section_progress (conNum, lecNum, userNo, learningTime)
+        VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime})
+    </insert>
 </mapper>
