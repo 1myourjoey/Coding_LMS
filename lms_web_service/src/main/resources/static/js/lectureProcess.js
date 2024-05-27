@@ -121,6 +121,7 @@ $(document).ready(function() {
 
                             // 삭제 후 업데이트된 목록을 불러옵니다.
                             appendNewLecture();
+                            $('#lectureSearch')[0].reset();
                         },
                         error: function(xhr, status, error) {
                             // 요청이 실패했을 때의 처리

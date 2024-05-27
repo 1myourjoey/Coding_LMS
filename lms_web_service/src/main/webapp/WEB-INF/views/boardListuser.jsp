@@ -358,7 +358,7 @@ html {
               <ul class="menu-bar__box">
                 <li><a href="/">HOME</a></li>
                 <li><a href="/sugangReg">수강신청</a></li>
-                <li><a href="/content">교육과정</a></li>
+                <li><a href="/sugangList">수강목록</a></li>
                 <li><a href="/boardlistuser">자료실</a></li>
                 <li><a href="/post">공지사항</a></li>
                 <li><a href="/qna/openQnaList.do">Q&A</a></li>
@@ -403,6 +403,15 @@ html {
            </c:if>
            </tbody>
        </table>
+
+<c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+    <div class="text-right" style="margin-left: 1400px;">
+        <a href="/board/openBoardWrite.do" class="btn" id="btn_q" style="background-color: #323232; color: white;">
+            등록
+        </a>
+    </div>
+</c:if>
+
 
     <nav aria-label="Page navigation">
            <ul class="pagination justify-content-center">

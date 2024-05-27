@@ -233,25 +233,34 @@
           right: 20px;
           font-weight: bold;
           margin-right: 100px;
-        }
-    </style>
-</head>
-<body>
+            }
+        </style>
+    </head>
+    <body>
 
-   <a href="/logout" class="logout-link">로그아웃</a> <!-- 로그아웃 링크 추가 -->
-        <nav class="menu-bar con-min-width">
-            <div class="con text-align-center">
+       <a href="/logout" class="logout-link">로그아웃</a> <!-- 로그아웃 링크 추가 -->
+            <nav class="menu-bar con-min-width">
+                <div class="con text-align-center">
 
-              <ul class="menu-bar__box">
-                <li><a href="/">HOME</a></li>
-                <li><a href="/sugangReg">수강신청</a></li>
-                <li><a href="/content">교육과정</a></li>
-                <li><a href="/board/openBoardList.do">자료실</a></li>
-                <li><a href="/post">공지사항</a></li>
-                <li><a href="/qna/openQnaList.do">Q&A</a></li>
-              </ul>
-            </div>
-          </nav>
+                  <ul class="menu-bar__box">
+                    <li>
+                     <c:choose>
+                     <c:when test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+                     <a href="/indexadmin">HOME</a>
+                     </c:when>
+                     <c:otherwise>
+                      <a href="/">HOME</a>
+                     </c:otherwise>
+                      </c:choose>
+                      </li>
+                    <li><a href="/sugangReg">수강신청</a></li>
+                    <li><a href="/sugangList">수강목록</a></li>
+                    <li><a href="/board/openBoardList.do">자료실</a></li>
+                    <li><a href="/post">공지사항</a></li>
+                    <li><a href="/qna/openQnaList.do">Q&A</a></li>
+                  </ul>
+                </div>
+              </nav>
 
 
 <!-- 자료실 테이블 -->
@@ -296,9 +305,14 @@
 </section>
 
 <!-- 글쓰기 버튼 -->
-<div style="margin-top: 20px; text-align: right; padding-right: 380px;">
-    <a href="/board/openBoardWrite.do" class="btn btn-dark" style="color: #ffffff;">글 쓰기</a>
-</div>
+<c:if test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+    <div class="text-right" style="margin-left: 1400px;">
+        <a href="/board/openBoardWrite.do" class="btn" id="btn_q" style="background-color: #323232; color: white;">
+            등록
+        </a>
+    </div>
+</c:if>
+
 
 
  <nav aria-label="Page navigation">

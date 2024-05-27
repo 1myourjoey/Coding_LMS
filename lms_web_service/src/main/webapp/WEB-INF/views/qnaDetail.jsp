@@ -300,15 +300,25 @@
 
 </head>
 <body>
-<a href="/">
+
                <img src="/img/lms.png" class="logo-img" alt="로고 이미지">
-           </a>
+
 <a href="/logout" class="logout-link">로그아웃</a> <!-- 로그아웃 링크 추가 -->
     <nav class="menu-bar con-min-width">
         <div class="con text-align-center">
 
           <ul class="menu-bar__box">
-            <li><a href="/">HOME</a></li>
+
+            <li>
+                <c:choose>
+                    <c:when test="${sessionScope.loggedInUser != null && sessionScope.loggedInUser.adminYn eq 'Y'}">
+                        <a href="/indexadmin">HOME</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/">HOME</a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
             <li><a href="/sugangReg">수강신청</a></li>
             <li><a href="/sugangList">수강목록</a></li>
             <li><a href="/boardlistuser">자료실</a></li>

@@ -183,3 +183,14 @@
         .tabs input[type="radio"]:checked + label {
             border-bottom: 1px solid white;
         }
+
+        .search-button,
+        .select-button {
+            background: #323232;
+            color: white;
+            font-weight: bold;
+        }
+        .search-button:hover,
+        .select-button:hover {
+            background: #404040;
+        }
