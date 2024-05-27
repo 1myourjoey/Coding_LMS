@@ -24,11 +24,10 @@ public interface ContentMapper {
     List<Contents_Manage> findAllVideos();
     List<Contents_Manage> selectContentsByLectureName(String lecName);
 
-<<<<<<< HEAD
+
     List<Contents_Manage> selectList(int start, int listSize);
     List<Contents_Manage> paging(int start, int listSize);
 
 
-=======
->>>>>>> yunyongsu
+
 }
