@@ -76,6 +76,7 @@ public class ContentService {
         return contentMapper.selectContentsByLectureName(lecName);
     }
 
+<<<<<<< HEAD
 
 
     public ArrayList<Pagination> getPagination(int pageNo) {
@@ -122,4 +123,6 @@ public class ContentService {
 
 
 
+=======
+>>>>>>> yunyongsu
 }

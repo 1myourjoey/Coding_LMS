@@ -47,6 +47,8 @@
             SELECT * FROM chapter WHERE chap_num = #{chapNum}
         ]]>
     </select>
-
+    <select id="selectChapterByConNum" parameterType="String" resultType="com.sky.lms_web_service.dto.Chapter">
+        SELECT * FROM chapter WHERE con_num = #{conNum}
+    </select>
 
 </mapper>
