@@ -11,5 +11,5 @@ import java.util.Map;
 @Mapper
 public interface ProgressMapper {
     void saveVideoProgress(Section_Progress sectionProgress);
-    void saveLastWatchedTime(Section_Progress sectionProgress);
+    String selectPreviousLearningTime(int userNo, String conNum);
 }

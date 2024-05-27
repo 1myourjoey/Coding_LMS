@@ -4,6 +4,7 @@ package com.sky.lms_web_service.service;
 
 import com.sky.lms_web_service.dto.Contents_Manage;
 import com.sky.lms_web_service.dto.Pagination;
+import com.sky.lms_web_service.dto.Section_Progress;
 import com.sky.lms_web_service.mapper.ContentMapper;
 import com.sky.lms_web_service.mapper.LectureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,19 +66,17 @@ public class ContentService {
         return contentMapper.selectSearch(conName, lecName);
     }
 
-    public List<Contents_Manage> getContentsByLecNum(String lecNum) {
-        return lectureMapper.getContentsByLecNum(lecNum);
-    }
-
-    public List<Contents_Manage> findAllVideos() {
-        return contentMapper.findAllVideos();
-    }
     public List<Contents_Manage> getContentsByLectureName(String lecName) {
         return contentMapper.selectContentsByLectureName(lecName);
     }
 
-<<<<<<< HEAD
+    public Integer getPreviousConNum(int lecNum, int conNum) {
+        return contentMapper.getPreviousConNum(lecNum, conNum);
+    }
 
+    public Integer getNextConNum(int lecNum, int conNum) {
+        return contentMapper.getNextConNum(lecNum, conNum);
+    }
 
     public ArrayList<Pagination> getPagination(int pageNo) {
         ArrayList<Pagination> pgnList = new ArrayList<>();
@@ -116,13 +115,4 @@ public class ContentService {
         return contentMapper.paging((start - 1) * listSize, listSize);
     }
 
-
-
-
-
-
-
-
-=======
->>>>>>> yunyongsu
 }

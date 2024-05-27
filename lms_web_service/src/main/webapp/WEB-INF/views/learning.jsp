@@ -34,14 +34,14 @@
             <div id="player-container">
                 <div id="conName">${contents.conName}</div>
                 <div id="player"></div>
-                <div id="player-control" style="">
+                <div id="player-control">
                     <div style="display: flex; align-items: center; margin-right: 10px;">
-                        <button class="preButton" onclick="moveContent(-1)">
+                        <button class="preButton">
                             <img src="/img/skip-start-fill.png" class="arrow-image">
                             이전 강의</button>
                     </div>
                     <div style="display: flex; align-items: center;">
-                        <button class="nextButton" onclick="moveContent(1)">다음 강의
+                        <button class="nextButton">다음 강의
                             <img src="/img/skip-end-fill.png" class="arrow-image">
                         </button>
                     </div>
@@ -49,45 +49,64 @@
             </div>
         </div>
         <script>
-            
-            // 2. This code loads the IFrame Player API code asynchronously.
-            var tag = document.createElement('script');
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            // 해당 강의의 videoId를 가져와서 YouTube 플레이어에 설정합니다.
-            let player;
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('player', {
-                    height: '600',
-                    width: '1000',
-                    videoId: "${contents.videoId}",
-                    playerVars: {
-                        'autoplay': 1,
-                        'mute':1,
-                        'modestbranding': 1, // YouTube 로고 숨기기
-                        'rel': 0, //관련 영상 숨기기
-                        'loop': 0, //동영상은 1번만 재생
-                    },
-                    events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
-                    }
-                });
-            }
-            function onPlayerReady(event) {
-                event.target.playVideo();
-            }
-
-            function onPlayerStateChange(event) {
-                if (event.data === YT.PlayerState.PLAYING) {
-                    // 재생 중 상태에서 추가 동작을 정의
+                var player;
+                var previousLearningTime;
+                // YouTube API 준비 완료 시 실행되는 함수
+                function onYouTubeIframeAPIReady() {
+                    player = new YT.Player('player', {
+                        height: '600',
+                        width: '1000',
+                        videoId: "${contents.videoId}",
+                        playerVars: {
+                            'modestbranding': 1,
+                            'rel': 0,
+                            'loop': 0,
+                            'autoplay': 0,
+                        },
+                        events: {
+                            'onReady': onPlayerReady,
+                        }
+                    });
                 }
-            }
 
-            $(document).ready(function () {
+                function onPlayerReady(event) {
+                    event.target.playVideo();
+                    // 플레이어가 준비된 후에 이전 학습 시간을 가져와서 플레이어를 초기화합니다.
+                    getPreviousLearningTime();
+                }
+
+                function getPreviousLearningTime() {
+                    var conNum = "${contents.conNum}";
+                    var userNo = "${userNo}";
+
+                    // AJAX 요청을 통해 이전 학습 시간을 가져옴
+                    $.ajax({
+                        type: "GET",
+                        url: "/get-previous-learning-time",
+                        data: {
+                            conNum: conNum,
+                            userNo: userNo
+                        },
+                        dataType: 'json', // JSON 형식으로 데이터를 받음
+                        success: function(response) {
+                            previousLearningTime = parseInt(response.learningTime);
+                            if (!isNaN(previousLearningTime)) {
+                                player.seekTo(previousLearningTime);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error occurred while getting previous learning time:", error);
+                        }
+                    });
+                }
+
+                $(document).ready(function () {
+
                 $('.chapterItem').click(function () {
                     var startTimeString = $(this).data('start-time'); // 챕터 시작 시간을 문자열로 가져옴
                     var startTimeInSeconds = convertTimeToSeconds(startTimeString); // 초로 변환
@@ -95,29 +114,62 @@
                 });
 
                 // 시간을 초로 변환하는 함수
-                function convertTimeToSeconds(timeString) {
-                    var parts = timeString.split(':');
-                    return (+parts[0]) * 3600 + (+parts[1])
-                        * 60 + (+parts[2]);
-                }
+                    function convertTimeToSeconds(timeString) {
+                        var parts = timeString.split(':');
+                        return (+parts[0]) * 3600 + (+parts[1]) * 60 + (+parts[2]);
+                    }
+                    $('.preButton').click(function () {
+                        var previousConNum = "${previousConNum}";
+                        if (previousConNum) {
+                            navigateToContent(previousConNum);
+                        } else {
+                            alert("이전 강의가 없습니다.");
+                        }
+                    });
+
+                    $('.nextButton').click(function () {
+                        var nextConNum = "${nextConNum}";
+                        if (nextConNum) {
+                            navigateToContent(nextConNum);
+                        } else {
+                            alert("다음 강의가 없습니다.");
+                        }
+                    });
+
+                    function navigateToContent(conNum) {
+                        var userNo = "${userNo}";
+                        var lecNum = "${contents.lecNum}";
+
+                        window.location.href = "/learning?conNum=" + conNum + "&lecNum=" + lecNum + "&userNo=" + userNo;
+                    }
             });
 
-            function moveContent(direction) {
-                // 현재 인덱스 가져오기
-                var currentIndex = parseInt('${index}');
-                // 전체 콘텐츠의 길이 가져오기
-                var contentsLength = parseInt('${contentsLength}');
-                // 새로운 인덱스 계산
-                var newIndex = currentIndex + direction;
-                // 새로운 인덱스가 유효한지 확인
-                if (newIndex >= 0 && newIndex < contentsLength) {
-                    // 이동할 페이지 URL 생성
-                    var newContent = JSON.parse('${contents}'); // JSON 문자열을 파싱하여 JavaScript 객체로 변환
-                    var url = "/learning?index=" + newIndex + "&videoId=" + newContent[newIndex].videoId + "&conNum=" + newContent[newIndex].conNum + "&lecName=" + newContent[newIndex].lecName + "&userNo=${userNo}";
-                    // 새로운 URL로 이동
-                    window.location.href = url;
-                }
+                $(window).on("beforeunload", function() {
+                var currentTime = Math.floor(player.getCurrentTime());
+                var conNum = "${contents.conNum}";
+                var lecNum = "${contents.lecNum}";
+                var userNo = "${userNo}";
+                var maxS = "${contents.conPlayTime}";
+                // AJAX 요청을 비동기적으로 변경
+                $.ajax({
+                type: "POST",
+                url: "/save-progress",
+                data: {
+                learningTime: currentTime,
+                conNum: conNum,
+                lecNum: lecNum,
+                userNo: userNo,
+                maxS: maxS
+            },
+                async: true, // 비동기적 요청으로 변경
+                success: function(response) {
+                console.log("Progress saved successfully");
+            },
+                error: function(xhr, status, error) {
+                console.error("Error occurred while saving progress:", error);
             }
+            });
+            });
         </script>
     </div>
 </div>

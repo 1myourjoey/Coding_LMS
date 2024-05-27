@@ -32,8 +32,6 @@ public class ContentController {
     private ChapterService chapterService;
     @Autowired
     private ProgressService progressService;
-    @Autowired
-    private HttpSession httpSession;
 
     @GetMapping("/")
     public String main(){
@@ -41,7 +39,7 @@ public class ContentController {
     }
 
     @GetMapping("/contents_List")
-    public String ShowvContentList(HttpServletRequest request, Model model, String lecName) {
+    public String ShowvContentList(HttpServletRequest request, Model model, String lecName, String conNum) {
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -50,28 +48,41 @@ public class ContentController {
             return "redirect:/login";
         }
 
+        int userNo = (int) request.getSession().getAttribute("userNo");
+
         List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
         Map<String, List<Chapter>> contentChapters = new HashMap<>();
 
         for (Contents_Manage content : contents) {
             List<Chapter> chapters = chapterService.findAllChapters(content.getConNum());
             contentChapters.put(content.getConNum(), chapters);
-        }
 
+            // 총 길이와 시청한 시간을 이용해 진행률 계산
+            String maxSStr = content.getConPlayTime(); // 총 길이 (초 단위)
+            String learningTimeStr = progressService.getPreviousLearningTime(userNo, content.getConNum()); // 사용자의 시청 시간 (초 단위)
+
+            try {
+                double maxS = Double.parseDouble(maxSStr);
+                double learningTime = Double.parseDouble(learningTimeStr);
+
+                double progress = (learningTime / maxS) * 100;
+                content.setProgress(Double.parseDouble(String.format("%.1f", progress))); // 진행률을 콘텐츠 객체에 설정
+            } catch (NumberFormatException e) {
+                content.setProgress(0); // 변환 실패 시 진행률을 0으로 설정
+            }
+        }
         model.addAttribute("contents", contents);
         model.addAttribute("contentChapters", contentChapters);
         return "contents_List";
     }
 
-<<<<<<< HEAD
-=======
     @GetMapping("/learning")
     public String Showvlearning(Model model, String conNum, HttpServletRequest request,int index, String lecName) {
         List<Chapter> chapters = chapterService.selectChapterByConNum(conNum);
         List<Contents_Manage> content = contentService.getContentsByLectureName(lecName);
-
         int contentsLength = content.size();
         int userNo = (int) request.getSession().getAttribute("userNo");
+
 
         model.addAttribute("userNo", userNo);
         model.addAttribute("contents", contentService.selectContent(conNum));
@@ -81,14 +92,44 @@ public class ContentController {
         model.addAttribute("content", content);
         return "learning";
     }
+    @PostMapping("/save-progress")
+    public ResponseEntity<String> saveProgress(@RequestParam String learningTime,
+                                               @RequestParam String conNum,
+                                               @RequestParam String lecNum,
+                                               @RequestParam int userNo,
+                                               @RequestParam String maxS) {
+        Section_Progress progress = new Section_Progress();
+        progress.setLearningTime(learningTime);
+        progress.setConNum(conNum);
+        progress.setMaxS(maxS);
+        progress.setLecNum(lecNum);
+        progress.setUserNo(userNo);
 
-    @PostMapping("/saveLastWatchedTime")
-    @ResponseBody
-    public String saveLastWatchedTime(@RequestBody Section_Progress sectionProgress) {
-        progressService.saveLastWatchedTime(sectionProgress);
-        return "마지막 시청 시간이 성공적으로 저장되었습니다.";
+        // 진행률을 데이터베이스에 저장하는 로직 호출
+        progressService.saveVideoProgress(progress);
+
+        return ResponseEntity.ok("Progress saved successfully");
     }
->>>>>>> yunyongsu
+    @GetMapping("/get-previous-learning-time")
+    @ResponseBody
+    public String getPreviousLearningTime(@RequestParam int userNo,
+                                          @RequestParam String conNum) {
+        String previousLearningTime = progressService.getPreviousLearningTime(userNo,conNum);
+        return "{\"learningTime\": \"" + previousLearningTime + "\"}";
+    }
+
+    @GetMapping
+    public String getLearningPage(@RequestParam("conNum") int conNum, @RequestParam("lecNum") int lecNum, @RequestParam("userNo") int userNo, Model model) {
+        // 다른 로직 수행
+
+        Integer previousConNum = contentService.getPreviousConNum(lecNum, conNum);
+        Integer nextConNum = contentService.getNextConNum(lecNum, conNum);
+
+        model.addAttribute("previousConNum", previousConNum);
+        model.addAttribute("nextConNum", nextConNum);
+        // 나머지 로직
+        return "learning";
+    }
 
     @GetMapping("content")
     public String content(Model model, HttpServletRequest request,@RequestParam(defaultValue = "1", name = "page") int pageNo){

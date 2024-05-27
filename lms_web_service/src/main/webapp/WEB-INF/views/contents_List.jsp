@@ -9,7 +9,36 @@
     <link href="https://assets.codepen.io/344846/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .progress-bar-container {
+        position: relative;
+        width: 150px;
+        height: 20px;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        overflow: hidden;
+    }
 
+    .progress-bar {
+        height: 100%;
+        background-color: #4caf50;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .progress-text {
+        width: 150px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        color: black;
+    }
+</style>
 </head>
 <body class="bg-white text-black">
 <div class="h-screen flex overflow-hidden text-sm bg-white text-black">
@@ -25,7 +54,7 @@
         <table>
             <thead>
             <tr class="text-black-400">
-                <th colspan="8" class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800" style="align-content: center">차시 목록</th>
+                <th colspan="7" class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800" style="align-content: center">차시 목록</th>
             </tr>
             </thead>
             <tbody class="text-black-600 dark:text-black-100">
@@ -33,7 +62,6 @@
             <c:forEach items="${contents}" var="content" varStatus="loop">
                 <tr class="videoItem" data-videoId="${content.videoId}">
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800"><img src="${content.thumbUrl}" alt="thumbnail" class="thumbnail"></td>
-                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">${content.conNum}</td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">${content.conName}</td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">${content.description}</td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
@@ -44,15 +72,11 @@
                             </c:forEach>
                         </ul>
                     </td>
-                    <td id="progress_${loop.index}" class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
-                    <c:choose>
-                        <c:when test="${not empty progressData[content.conNum]}">
-                            ${progressData[content.conNum]}%
-                        </c:when>
-                        <c:otherwise>
-                            0%
-                        </c:otherwise>
-                    </c:choose>
+                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${content.progress}%;"></div>
+                        </div>
+                        <div class="progress-text">${content.progress}%</div>
                     </td>
                     <!-- 학습하기 버튼 -->
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 align-center" style="width: 200px;">
@@ -62,7 +86,6 @@
                             <input type="hidden" name="conNum" value="${content.conNum}">
                             <input type="hidden" name="lecName" value="${content.lecName}">
                             <input type="hidden" name="userNo" value="${userNo}">
-                            <input type="hidden" name="contentsLength" value="${content.length}">
                             <!-- 챕터 목록은 JSON 형식의 문자열로 전달합니다. -->
                             <input type="hidden" name="chapters" value='<c:out value="${contentChapters[content.conNum]}" />'>
                             <button type="submit" class="btn btn-primary">학습하기</button>
@@ -77,7 +100,16 @@
         </table>
 
         <script>
-            //비디오 목록과 챕터 목록을 script에서 사용하기 위한 배열 선언.
+            var totalVideoTime = parseFloat('${maxS}');
+            var userLearningTime = parseFloat('${learningTime}');
+
+            // 진행률 계산
+            var progress = (userLearningTime / totalVideoTime) * 100;
+
+            // 진행률을 표시할 요소를 선택하고 표시합니다.
+            var progressBar = $('#progress-bar');
+            progressBar.css('width', progress + '%');
+
             window.contents = [
                 <c:forEach items="${contents}" var="content" varStatus="loop">
                 {

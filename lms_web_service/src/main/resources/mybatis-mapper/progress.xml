@@ -6,12 +6,17 @@
 <mapper namespace="com.sky.lms_web_service.mapper.ProgressMapper">
 
     <insert id="saveVideoProgress" parameterType="com.sky.lms_web_service.dto.Section_Progress">
-        INSERT INTO section_progress (con_num, lec_num, user_no, learning_time, fnl_s, max_s)
-        VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime}, #{fnlS}, #{maxS})
+        INSERT INTO section_progress (con_num, lec_num, user_no, learning_time, max_s)
+        VALUES (#{conNum}, #{lecNum}, #{userNo}, ROUND(#{learningTime}, 2), #{maxS})
+            ON DUPLICATE KEY UPDATE
+              learning_time = ROUND(#{learningTime}, 2)
     </insert>
 
-    <insert id="saveLastWatchedTime" parameterType="com.sky.lms_web_service.dto.Section_Progress">
-        INSERT INTO section_progress (conNum, lecNum, userNo, learningTime)
-        VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime})
-    </insert>
+    <select id="selectPreviousLearningTime" resultType="String">
+        SELECT learning_time
+        FROM section_progress
+        WHERE user_no = #{userNo}
+          AND con_num = #{conNum}
+    </select>
+
 </mapper>

@@ -22,7 +22,9 @@ public class ProgressService {
 		progressMapper.saveVideoProgress(sectionProgress);
 	}
 
-	public void saveLastWatchedTime(Section_Progress sectionProgress) {
-		progressMapper.saveLastWatchedTime(sectionProgress);
+
+	public String getPreviousLearningTime(int userNo, String conNum) {
+		return progressMapper.selectPreviousLearningTime(userNo, conNum);
 	}
+
 }
