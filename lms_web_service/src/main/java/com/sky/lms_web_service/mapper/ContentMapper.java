@@ -23,4 +23,5 @@ public interface ContentMapper {
     List<Contents_Manage> selectSearch(@Param("conName") String conName, @Param("lecName") String lecName);
     List<Contents_Manage> findAllVideos();
     List<Contents_Manage> selectContentsByLectureName(String lecName);
+
 }

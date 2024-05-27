@@ -11,8 +11,7 @@
     </insert>
 
     <insert id="saveLastWatchedTime" parameterType="com.sky.lms_web_service.dto.Section_Progress">
-        INSERT INTO section_progress (conNum, lecNum, userNo, learningTime, maxS)
-        VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime}, #{maxS})
-            ON DUPLICATE KEY UPDATE learningTime = #{learningTime}, maxS = #{maxS}
+        INSERT INTO section_progress (conNum, lecNum, userNo, learningTime)
+        VALUES (#{conNum}, #{lecNum}, #{userNo}, #{learningTime})
     </insert>
 </mapper>

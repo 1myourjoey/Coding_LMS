@@ -64,19 +64,21 @@ public class ContentController {
     }
 
     @GetMapping("/learning")
-    public String Showvlearning(Model model, String lecName) {
-        List<Contents_Manage> contents = contentService.getContentsByLectureName(lecName);
-        Map<String, List<Chapter>> contentChapters = new HashMap<>();
+    public String Showvlearning(Model model, String conNum, HttpServletRequest request,int index, String lecName) {
+        List<Chapter> chapters = chapterService.selectChapterByConNum(conNum);
+        List<Contents_Manage> content = contentService.getContentsByLectureName(lecName);
 
-        for (Contents_Manage content : contents) {
-            List<Chapter> chapters = chapterService.findAllChapters(content.getConNum());
-            contentChapters.put(content.getConNum(), chapters);
-        }
-        model.addAttribute("contents", contents);
-        model.addAttribute("contentChapters", contentChapters);
+        int contentsLength = content.size();
+        int userNo = (int) request.getSession().getAttribute("userNo");
+
+        model.addAttribute("userNo", userNo);
+        model.addAttribute("contents", contentService.selectContent(conNum));
+        model.addAttribute("chapters", chapters);
+        model.addAttribute("index", index);
+        model.addAttribute("contentsLength", contentsLength);
+        model.addAttribute("content", content);
         return "learning";
     }
-
 
     @PostMapping("/saveLastWatchedTime")
     @ResponseBody

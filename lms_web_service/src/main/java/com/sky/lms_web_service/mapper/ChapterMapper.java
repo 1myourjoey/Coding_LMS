@@ -16,4 +16,6 @@ public interface ChapterMapper {
     void deleteChapter(String chapNum);
     Chapter selectChapter(String chapNum);
     Chapter getContentByNum(String chapNum);
+    List<Chapter> selectChapterByConNum(String conNum);
+
 }

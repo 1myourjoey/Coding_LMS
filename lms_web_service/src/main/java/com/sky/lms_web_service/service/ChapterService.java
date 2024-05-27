@@ -20,6 +20,10 @@ public class ChapterService {
         return chapterMapper.selectChapter(chapNum);
     }
 
+    public List<Chapter> selectChapterByConNum(String conNum){
+        return chapterMapper.selectChapterByConNum(conNum);
+    }
+
     public void insertOrUpdateChapter(Chapter chapter){
         Chapter existingContent = chapterMapper.getContentByNum(chapter.getChapNum());
 

@@ -22,7 +22,7 @@
             </div>
         </div>
         <div> <br> </div>
-        <table class="text-left">
+        <table>
             <thead>
             <tr class="text-black-400">
                 <th colspan="8" class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800" style="align-content: center">차시 목록</th>
@@ -44,7 +44,7 @@
                             </c:forEach>
                         </ul>
                     </td>
-                  <  <td id="progress_${loop.index}" class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                    <td id="progress_${loop.index}" class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
                     <c:choose>
                         <c:when test="${not empty progressData[content.conNum]}">
                             ${progressData[content.conNum]}%
@@ -53,10 +53,20 @@
                             0%
                         </c:otherwise>
                     </c:choose>
-                </td>
+                    </td>
                     <!-- 학습하기 버튼 -->
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 align-center" style="width: 200px;">
-                    <button class="btn btn-primary" onclick="window.location.href='/learning?index=${loop.index}'">학습하기</button>
+                        <form action="/learning" method="GET">
+                            <input type="hidden" name="index" value="${loop.index}">
+                            <input type="hidden" name="videoId" value="${content.videoId}">
+                            <input type="hidden" name="conNum" value="${content.conNum}">
+                            <input type="hidden" name="lecName" value="${content.lecName}">
+                            <input type="hidden" name="userNo" value="${userNo}">
+                            <input type="hidden" name="contentsLength" value="${content.length}">
+                            <!-- 챕터 목록은 JSON 형식의 문자열로 전달합니다. -->
+                            <input type="hidden" name="chapters" value='<c:out value="${contentChapters[content.conNum]}" />'>
+                            <button type="submit" class="btn btn-primary">학습하기</button>
+                        </form>
                     </td>
                     <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 align-center" style="width: 200px;">
                         <button class="btn btn-primary" onclick="openPopup(${loop.index},${userNo})">학습하기(팝업)</button>
@@ -86,14 +96,10 @@
                 </c:forEach>
             ];
             var currentVideoId;
-            var player;
             // 팝업 창 열기 함수
             function openPopup(index, userNo) {
                 //팝업창 안에서 사용할 객체들 선언.
-                console.log(userNo);
                 currentVideoId = window.contents[index].videoId
-                var conNum = window.contents[index].conNum;
-                var lecNum = window.contents[index].lecNum;
                 var conName = window.contents[index].conName;
                 var chapters = window.contents[index].chapters;
                 // YouTube 동영상을 표시할 URL 생성
@@ -130,6 +136,26 @@
                 popup.document.write(controlsHtml);
                 popup.document.write('</div>');
                 popup.document.write('</div>');
+
+                function detectVideoTime() {
+                    // YouTube 동영상의 iframe 요소 가져오기
+                    var iframe = popup.document.getElementById('player');
+
+                    // iframe이 로드되었고 YouTube 플레이어가 준비되었는지 확인
+                    if (iframe && iframe.contentWindow && iframe.contentWindow.document.getElementById('player')) {
+                        // YouTube 동영상의 현재 시간 가져오기
+                        var currentTime = iframe.contentWindow.document.getElementById('player').getCurrentTime();
+
+                        // 콘솔에 현재 재생 시간 출력
+                        console.log('현재 재생 시간: ' + currentTime);
+                    }
+
+                    // 1초마다 재생 시간 감지 함수 호출
+                    setTimeout(detectVideoTime, 1000);
+                }
+                // 재생 시간 감지 함수 호출
+                detectVideoTime();
+
             }
 
             // 시간을 초 단위로 변환
@@ -180,26 +206,6 @@
                         chapterList.innerHTML += '<div class="chapterItem" style="border: 1px solid #ddd; background-color: #ffffff; height: 70px; padding: 8px; margin-bottom: 10px; border-radius: 10px; cursor: pointer;" onclick="opener.seekToChapter(\'' + chapters[i].chapStartTime + '\')">' + chapters[i].chapName + ' (' + chapters[i].chapStartTime + ')</div>';
                     }
                 }
-            }
-            // 팝업 창이 닫힐 때 실행되는 함수
-            window.onunload = function() {
-                // 현재 동영상의 시간을 가져와서 저장
-                var iframe = popup.document.getElementsByTagName('iframe')[0];
-                var currentTime = getYouTubeVideoCurrentTime(iframe);
-                saveLastWatchedTime(userNo, conNum, lecNum, currentTime);
-            }
-
-            // YouTube 동영상의 현재 재생 시간을 추정하는 함수
-            function getYouTubeVideoCurrentTime(iframe) {
-                // YouTube 동영상의 URL에서 "t" 매개변수로 현재 시간을 추출하여 재생 시간을 추정
-                var urlParams = new URLSearchParams(iframe.src.split('?')[1]);
-                var currentTime = urlParams.get('t');
-                if (currentTime) {
-                    currentTime = parseInt(currentTime);
-                } else {
-                    currentTime = 0; // 시간이 지정되지 않았을 때는 0으로 설정
-                }
-                return currentTime;
             }
         </script>
 </body>

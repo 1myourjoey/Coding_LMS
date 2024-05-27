@@ -70,4 +70,5 @@ public class ContentService {
     public List<Contents_Manage> getContentsByLectureName(String lecName) {
         return contentMapper.selectContentsByLectureName(lecName);
     }
+
 }
