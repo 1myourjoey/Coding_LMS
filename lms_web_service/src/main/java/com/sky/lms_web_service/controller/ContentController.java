@@ -76,6 +76,10 @@ public class ContentController {
         return "contents_List";
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> afee6b4098378d08bd54c73fc6dd41644214012b
     @GetMapping("/learning")
     public String Showvlearning(Model model, String conNum, HttpServletRequest request,int index, String lecName) {
         List<Chapter> chapters = chapterService.selectChapterByConNum(conNum);
@@ -130,6 +134,10 @@ public class ContentController {
         // 나머지 로직
         return "learning";
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> afee6b4098378d08bd54c73fc6dd41644214012b
 
     @GetMapping("content")
     public String content(Model model, HttpServletRequest request,@RequestParam(defaultValue = "1", name = "page") int pageNo){
