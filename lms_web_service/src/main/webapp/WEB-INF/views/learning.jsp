@@ -118,31 +118,9 @@
                         var parts = timeString.split(':');
                         return (+parts[0]) * 3600 + (+parts[1]) * 60 + (+parts[2]);
                     }
-                    $('.preButton').click(function () {
-                        var previousConNum = "${previousConNum}";
-                        if (previousConNum) {
-                            navigateToContent(previousConNum);
-                        } else {
-                            alert("이전 강의가 없습니다.");
-                        }
+
                     });
 
-                    $('.nextButton').click(function () {
-                        var nextConNum = "${nextConNum}";
-                        if (nextConNum) {
-                            navigateToContent(nextConNum);
-                        } else {
-                            alert("다음 강의가 없습니다.");
-                        }
-                    });
-
-                    function navigateToContent(conNum) {
-                        var userNo = "${userNo}";
-                        var lecNum = "${contents.lecNum}";
-
-                        window.location.href = "/learning?conNum=" + conNum + "&lecNum=" + lecNum + "&userNo=" + userNo;
-                    }
-            });
 
                 $(window).on("beforeunload", function() {
                 var currentTime = Math.floor(player.getCurrentTime());

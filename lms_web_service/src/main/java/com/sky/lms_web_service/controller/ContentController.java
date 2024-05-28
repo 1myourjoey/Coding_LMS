@@ -39,7 +39,7 @@ public class ContentController {
     }
 
     @GetMapping("/contents_List")
-    public String ShowvContentList(HttpServletRequest request, Model model, String lecName, String conNum) {
+    public String ShowContentList(HttpServletRequest request, Model model, String lecName, String conNum) {
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -61,14 +61,20 @@ public class ContentController {
             String maxSStr = content.getConPlayTime(); // 총 길이 (초 단위)
             String learningTimeStr = progressService.getPreviousLearningTime(userNo, content.getConNum()); // 사용자의 시청 시간 (초 단위)
 
-            try {
-                double maxS = Double.parseDouble(maxSStr);
-                double learningTime = Double.parseDouble(learningTimeStr);
+            if (maxSStr != null && learningTimeStr != null) {
+                try {
+                    double maxS = Double.parseDouble(maxSStr);
+                    double learningTime = Double.parseDouble(learningTimeStr);
+                    System.out.println("maxSStr: " + maxSStr);
+                    System.out.println("learningTimeStr: " + learningTimeStr);
 
-                double progress = (learningTime / maxS) * 100;
-                content.setProgress(Double.parseDouble(String.format("%.1f", progress))); // 진행률을 콘텐츠 객체에 설정
-            } catch (NumberFormatException e) {
-                content.setProgress(0); // 변환 실패 시 진행률을 0으로 설정
+                    double progress = (learningTime / maxS) * 100;
+                    content.setProgress(Double.parseDouble(String.format("%.1f", progress))); // 진행률을 콘텐츠 객체에 설정
+                } catch (NumberFormatException e) {
+                    content.setProgress(0); // 변환 실패 시 진행률을 0으로 설정
+                }
+            } else {
+                content.setProgress(0); // maxSStr 또는 learningTimeStr이 null일 경우 진행률을 0으로 설정
             }
         }
         model.addAttribute("contents", contents);
@@ -119,18 +125,6 @@ public class ContentController {
         return "{\"learningTime\": \"" + previousLearningTime + "\"}";
     }
 
-    @GetMapping
-    public String getLearningPage(@RequestParam("conNum") int conNum, @RequestParam("lecNum") int lecNum, @RequestParam("userNo") int userNo, Model model) {
-        // 다른 로직 수행
-
-        Integer previousConNum = contentService.getPreviousConNum(lecNum, conNum);
-        Integer nextConNum = contentService.getNextConNum(lecNum, conNum);
-
-        model.addAttribute("previousConNum", previousConNum);
-        model.addAttribute("nextConNum", nextConNum);
-        // 나머지 로직
-        return "learning";
-    }
 
 
     @GetMapping("content")
