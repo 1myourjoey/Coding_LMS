@@ -38,12 +38,15 @@
         font-size: 15px;
         color: black;
     }
+
+
+
 </style>
 </head>
 <body class="bg-white text-black">
-<div class="h-screen flex overflow-hidden text-sm bg-white text-black">
+<div class="h-screen flex text-sm bg-white text-black">
     <%@ include file="/WEB-INF/views/layout/Left_Side_bar.jsp"%>
-    <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <div class="flex-grow h-full flex flex-col">
         <%@include file="/WEB-INF/views/layout/header.jsp"%>
         <div class="">
             <div class="flex items-center space-x-3 sm:mt-7 mt-4">
@@ -51,6 +54,7 @@
             </div>
         </div>
         <div> <br> </div>
+
         <table>
             <thead>
             <tr class="text-black-400">
