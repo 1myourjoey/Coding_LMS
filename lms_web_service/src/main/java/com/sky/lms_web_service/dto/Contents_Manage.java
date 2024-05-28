@@ -23,5 +23,5 @@ public class Contents_Manage {
     String lecName;
     String thumbUrl;
     String videoId;
-
+    double progress;
 }

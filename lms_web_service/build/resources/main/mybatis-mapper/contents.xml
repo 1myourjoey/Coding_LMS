@@ -129,7 +129,16 @@
         LIMIT #{start}, #{listSize}
     </select>
 
+    <select id="getPreviousConNum" parameterType="map" resultType="int">
+        SELECT MAX(conNum)
+        FROM Contents_Manage
+        WHERE lecNum = #{lecNum} AND conNum <![CDATA[ < ]]> #{conNum}
+    </select>
 
-
-
+    <!-- 현재 강의 번호보다 큰 가장 작은 강의 번호 (다음 강의) 가져오기 -->
+    <select id="getNextConNum" parameterType="map" resultType="int">
+        SELECT MIN(conNum)
+        FROM Contents_Manage
+        WHERE lecNum = #{lecNum} AND conNum > #{conNum}
+    </select>
 </mapper>
