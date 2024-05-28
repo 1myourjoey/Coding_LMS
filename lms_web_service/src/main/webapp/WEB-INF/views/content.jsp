@@ -413,7 +413,5 @@
 <script src="js/contentProcess.js"></script>
 <script src="js/paging.js"></script>
 
-
-
 </body>
 </html>
