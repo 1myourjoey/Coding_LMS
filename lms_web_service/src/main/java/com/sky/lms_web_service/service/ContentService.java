@@ -74,6 +74,11 @@ public class ContentService {
     public Integer getPreviousConNum(int lecNum, int conNum) {
         return contentMapper.getPreviousConNum(lecNum, conNum);
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> main
 
     public Integer getNextConNum(int lecNum, int conNum) {
         return contentMapper.getNextConNum(lecNum, conNum);
