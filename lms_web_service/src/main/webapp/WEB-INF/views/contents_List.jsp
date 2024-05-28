@@ -68,7 +68,8 @@
                         <ul class="chapter-list">
                             <!-- 챕터 정보를 표시할 리스트 -->
                             <c:forEach items="${contentChapters[content.conNum]}" var="chapter">
-                                <li class="chapter-item">${chapter.chapName} (${chapter.chapStartTime})</li>
+                                <li class="chapter-item">${chapter.chapName}</li>
+                                <li>(${chapter.chapStartTime})</li>
                             </c:forEach>
                         </ul>
                     </td>
