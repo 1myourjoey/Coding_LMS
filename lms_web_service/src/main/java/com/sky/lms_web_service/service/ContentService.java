@@ -76,7 +76,6 @@ public class ContentService {
     }
 
 
-
     public Integer getNextConNum(int lecNum, int conNum) {
         return contentMapper.getNextConNum(lecNum, conNum);
     }
