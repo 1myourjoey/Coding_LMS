@@ -26,8 +26,8 @@
             <div id="chapter-container">
                 <div id="chapter-title">챕터 목록</div>
                 <div id="chapterList">
-                    <c:forEach items="${chapters}" var="chapter">
-                        <div class="chapterItem" data-start-time="${chapter.chapStartTime}">${chapter.serealNum} ${chapter.chapName} (${chapter.chapStartTime})</div>
+                    <c:forEach items="${chapters}" var="chapter" varStatus="loop" >
+                        <div class="chapterItem" data-start-time="${chapter.chapStartTime}">${loop.index + 1} ${chapter.chapName} (${chapter.chapStartTime})</div>
                     </c:forEach>
                 </div>
             </div>
