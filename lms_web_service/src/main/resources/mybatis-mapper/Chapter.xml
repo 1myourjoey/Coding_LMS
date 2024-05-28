@@ -8,6 +8,7 @@
     <select id="findAllChapters" resultType="com.sky.lms_web_service.dto.Chapter">
         SELECT * FROM chapter
         WHERE con_num = #{conNum}
+        ORDER BY chap_start_time ASC
     </select>
 
 
@@ -48,7 +49,9 @@
         ]]>
     </select>
     <select id="selectChapterByConNum" parameterType="String" resultType="com.sky.lms_web_service.dto.Chapter">
-        SELECT * FROM chapter WHERE con_num = #{conNum}
+        SELECT * FROM chapter
+        WHERE con_num = #{conNum}
+        ORDER BY chap_start_time ASC
     </select>
 
 </mapper>
