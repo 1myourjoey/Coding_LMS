@@ -70,12 +70,12 @@ public class ContentService {
         return contentMapper.selectContentsByLectureName(lecName);
     }
 
-<<<<<<< HEAD
+
     public Integer getPreviousConNum(int lecNum, int conNum) {
         return contentMapper.getPreviousConNum(lecNum, conNum);
     }
-=======
->>>>>>> afee6b4098378d08bd54c73fc6dd41644214012b
+
+
 
     public Integer getNextConNum(int lecNum, int conNum) {
         return contentMapper.getNextConNum(lecNum, conNum);
@@ -118,8 +118,5 @@ public class ContentService {
         return contentMapper.paging((start - 1) * listSize, listSize);
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> afee6b4098378d08bd54c73fc6dd41644214012b
 }
