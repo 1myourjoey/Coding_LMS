@@ -21,8 +21,6 @@ GitHub Code
 
 </aside>
 
-[LMS프로젝트 (1).mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/db257cdd-fce2-46bc-a699-339a83e26b37/2c7dd515-d130-4493-94d2-aeba97578505/LMS%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_(1).mp4)
-
 ## 🛠️ 사용 기술 및 라이브러리
 
 - 언어 : java (11), HTML/CSS, ajax
